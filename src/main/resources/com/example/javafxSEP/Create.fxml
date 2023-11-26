@@ -12,7 +12,7 @@
       <TextField fx:id="hoursSpentField" layoutX="56.0" layoutY="200.0" promptText="Hours Spent" />
       <TextField fx:id="monthsField" layoutX="56.0" layoutY="250.0" promptText="Months: 9" />
       <TextField fx:id="completedField" layoutX="56.0" layoutY="301.0" promptText="Completed: False" />
-      <Button fx:id="createButton" layoutX="56.0" layoutY="348.0" mnemonicParsing="false" text="Confirm" />
+      <Button fx:id="createButton" layoutX="56.0" layoutY="348.0" mnemonicParsing="false" onAction="#createButtonOnAction" text="Confirm" />
       <Button fx:id="cancelButton" layoutX="153.0" layoutY="348.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Cancel" />
    </children>
 </AnchorPane>

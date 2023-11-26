@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -47,8 +48,14 @@ public class AppController {
         try {
             // Load the FXML file for CreateController
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Create.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller and set the reference to AppController
+            CreateController createController = loader.getController();
+            createController.setAppController(this);
+
             Stage stage = new Stage();
-            Scene scene = new Scene(loader.load());
+            Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.showAndWait();
         } catch (IOException e) {
