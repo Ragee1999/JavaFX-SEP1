@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class CreateController {
+    // ATTRIBUTES
     @FXML
     private TextField ownerField;
     @FXML
@@ -23,15 +24,16 @@ public class CreateController {
     @FXML
     private Button cancelButton;
 
-    private AppController appController; //reference to AppController
+    //Declaration that References to the AppController
+    private AppController appController;
 
     public void setAppController(AppController appController) {
-        this.appController = appController;
+        this.appController = appController; // This is where the reference is set
     }
 
     @FXML
     public void createButtonOnAction() {
-        // NEED TO ADD SOME CRAZY ERRORHANDLING - CURRENTLY ONLY THE CORRECT VALUE TYPES WILL WORK, String String int int int boolean
+        // NOTE TO ME: NEED TO ADD SOME CRAZY ERRORHANDLING/CODE - CURRENTLY ONLY THE CORRECT VALUE TYPES WILL WORK, String String int int int boolean
 
         String owner = ownerField.getText();
         String projectType = projectTypeField.getText();
@@ -47,12 +49,13 @@ public class CreateController {
         double priceValue = Double.parseDouble(price);
 
 
-        ProjectList newProject = new ProjectList(owner, projectType, completedValue, hoursSpentValue, monthsValue, priceValue);
-        appController.addProject(newProject);
+        ProjectList newProject = new ProjectList(owner, projectType, completedValue, hoursSpentValue, monthsValue, priceValue); // creates a ProjectList object with the new values
+        appController.addProject(newProject); // This adds the newProject to the appController (Main UI)
 
+        //Closes the CreateController after adding newProject
         Stage stage = (Stage) createButton.getScene().getWindow();
         stage.close();
-        System.out.println("Projected added and closed popup");
+        System.out.println("Closed the pop-up window");
     }
 
 
@@ -63,5 +66,4 @@ public class CreateController {
         System.out.println("Cancel successful");
         stage.close();
     }
-
 }

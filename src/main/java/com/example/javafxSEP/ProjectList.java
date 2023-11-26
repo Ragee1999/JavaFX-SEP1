@@ -1,7 +1,7 @@
 package com.example.javafxSEP;
 import javafx.beans.property.*;
 
-// field
+    // field
     public class ProjectList {
         private final StringProperty owner;
         private final StringProperty projectType;
@@ -10,7 +10,7 @@ import javafx.beans.property.*;
         private final IntegerProperty months;
         private final DoubleProperty price;
 
-//Constructor
+    //Constructor
         public ProjectList(String owner, String projectType, boolean completed, int hoursSpent, int months, double price) {
             this.owner = new SimpleStringProperty(owner);
             this.projectType = new SimpleStringProperty(projectType);
@@ -20,6 +20,10 @@ import javafx.beans.property.*;
             this.price = new SimpleDoubleProperty(price);
         }
 
+    // The attributes/data can be bound to UI components, which allows them to synchronize
+    // Currently we are only using unidirectional binding, which means we only update into the projectList that updates the UI, not other way around
+    // We can make it bidirectional once we implement a proper JSON system.
+    // Properties are good for binding the UI and the DATA
         public StringProperty ownerProperty() {
             return owner;
         }
@@ -42,6 +46,9 @@ import javafx.beans.property.*;
         public ProjectList(){
             this(null,null,false,0,0,0);
         }
+
+    // WORK IN PROGRESS BELOW
+    // Probably have to implement proper getter and setters including defaults later
 
     public String getOwner() {
         return owner.get();

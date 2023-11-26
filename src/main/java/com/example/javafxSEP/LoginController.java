@@ -9,10 +9,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class LoginController {
+
+    // USERNAME: bob
+    // PASSWORD: via
 
     @FXML
     private Button loginButton;
@@ -24,22 +26,26 @@ public class LoginController {
     private PasswordField passwordPasswordField;
 
     public void loginButtonOnAction() throws IOException {
-        Stage stage = (Stage) loginButton.getScene().getWindow();
+        Stage stage = (Stage) loginButton.getScene().getWindow(); // Here we retrieve the stage related to the loginButton
+        // So all login actions will happen in this login window
 
-        if (!usernameTextfield.getText().isBlank() && !passwordPasswordField.getText().isBlank()) {
+        if (!usernameTextfield.getText().isBlank() && !passwordPasswordField.getText().isBlank()) { // If both name and pass fields are not blank code will continue
             if (validateLogin()) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));  // relative path --> no directory needed here
-                    Parent root = loader.load();
-                    Scene scene = new Scene(root, 800, 550);
-                    stage.setScene(scene);
-                    stage.centerOnScreen();
+                    Parent root = loader.load(); // Retrieves the root UI Component through the FXML file
+                    Scene scene = new Scene(root, 800, 550); // sets scene based on the width and height
+                    stage.setScene(scene); // Sets the scene
+                    stage.centerOnScreen(); // Centers the AppController to the login screen
             } else {
-                loginMessageLabel.setText("Wrong, try again!");
+                loginMessageLabel.setText("Wrong, try again!");  // Wrong password and name
             }
         } else {
-            loginMessageLabel.setText("Enter name & password");
+            loginMessageLabel.setText("Enter name & password"); // If user forgot to input message in either textFields
         }
     }
+
+
+    // Simple login logic. If password and names match, validateLogin becomes true.
     public boolean validateLogin() {
         String username = usernameTextfield.getText();
         String password = passwordPasswordField.getText();
