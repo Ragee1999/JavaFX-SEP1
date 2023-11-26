@@ -38,5 +38,29 @@ import javafx.beans.property.*;
         public DoubleProperty priceProperty() {
             return price;
         }
+
+        public ProjectList(){
+            this(null,null,false,0,0,0);
+        }
+
+    public String getOwner() {
+        return owner.get();
     }
+    public String getProjectType() {
+        return projectType.get();
+    }
+    public boolean isCompleted() {
+        return completed.get();
+    }
+    public int getHoursSpent() {
+        return hoursSpent.get();
+    }
+    public int getMonths() {
+        return months.get();
+    }
+    public double getPrice() {
+        return price.get();
+    }
+}
+
 

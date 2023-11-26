@@ -12,59 +12,61 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.AppController">
-   <children>
-      <Button fx:id="createNewProject" layoutX="249.0" layoutY="25.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Create new project" />
-      <Button layoutX="430.0" layoutY="25.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Ongoing projects" />
-      <Button layoutX="612.0" layoutY="25.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Completed projects" />
-      <ImageView fitHeight="41.0" fitWidth="200.0" layoutX="26.0" layoutY="22.0">
-         <image>
-            <Image url="@../../../Images/bobfx.png" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" layoutX="52.0" layoutY="89.0" prefHeight="17.0" prefWidth="96.0" text="Search function">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <TextField layoutX="39.0" layoutY="126.0" promptText="search by name or char" />
-      <Button layoutX="188.0" layoutY="126.0" mnemonicParsing="false" text="Search" />
-      <Line endX="700.0" fill="BLACK" layoutX="100.0" layoutY="74.0" startX="-100.0" />
-      <Button layoutX="372.0" layoutY="86.0" mnemonicParsing="false" text="Residential" />
-      <Button layoutX="459.0" layoutY="86.0" mnemonicParsing="false" text="Commercial" />
-      <Button layoutX="557.0" layoutY="86.0" mnemonicParsing="false" text="Industrial" />
-      <Button layoutX="637.0" layoutY="86.0" mnemonicParsing="false" text="Road construction" />
-      <Label alignment="CENTER" layoutX="265.0" layoutY="89.0" prefHeight="17.0" prefWidth="96.0" text="Project types:">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label>
-      <Button layoutX="653.0" layoutY="126.0" mnemonicParsing="false" text="Search" />
-      <TextField layoutX="593.0" layoutY="126.0" prefHeight="25.0" prefWidth="60.0" promptText="1000000" />
-      <TextField layoutX="499.0" layoutY="126.0" prefHeight="25.0" prefWidth="60.0" promptText="0" />
-      <Label alignment="CENTER" layoutX="568.0" layoutY="129.0" prefHeight="19.0" prefWidth="22.0" text="to">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <Label alignment="CENTER" layoutX="395.0" layoutY="129.0" prefHeight="19.0" prefWidth="103.0" text="search by price:">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <AnchorPane layoutX="1.0" layoutY="173.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="800.0">
-         <children>
-            <TableView fx:id="projectList" layoutX="5.0" prefHeight="369.0" prefWidth="792.0">
-              <columns>
-                <TableColumn fx:id="ownerCol" prefWidth="134.0" text="Owner" />
-                <TableColumn fx:id="projectTypeCol" prefWidth="136.0" text="Projecttype" />
-                  <TableColumn fx:id="priceCol" prefWidth="139.0" text="Price DKK" />
-                  <TableColumn fx:id="hoursSpentCol" prefWidth="82.0" text="Hours Spent" />
-                  <TableColumn fx:id="monthsCol" prefWidth="84.0" text="Months" />
-                  <TableColumn fx:id="completedCol" prefWidth="76.0" text="Completed" />
-                  <TableColumn fx:id="editCol" minWidth="0.0" prefWidth="60.0" text="Edit" />
-                  <TableColumn fx:id="removeCol" prefWidth="65.0" text="Remove" />
-              </columns>
-            </TableView>
-         </children></AnchorPane>
-   </children>
+    <children>
+        <Button fx:id="createNewProject" layoutX="249.0" layoutY="25.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Create new project" />
+        <Button layoutX="430.0" layoutY="25.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Ongoing projects" />
+        <Button layoutX="612.0" layoutY="25.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="160.0" text="Completed projects" />
+        <ImageView fitHeight="41.0" fitWidth="200.0" layoutX="26.0" layoutY="22.0">
+            <image>
+                <Image url="@../../../Images/bobfx.png" />
+            </image>
+        </ImageView>
+        <Label alignment="CENTER" layoutX="52.0" layoutY="89.0" prefHeight="17.0" prefWidth="96.0" text="Search function">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <TextField layoutX="39.0" layoutY="126.0" promptText="search by name or char" />
+        <Button layoutX="188.0" layoutY="126.0" mnemonicParsing="false" text="Search" />
+        <Line endX="700.0" fill="BLACK" layoutX="100.0" layoutY="74.0" startX="-100.0" />
+        <Button layoutX="372.0" layoutY="86.0" mnemonicParsing="false" text="Residential" />
+        <Button layoutX="459.0" layoutY="86.0" mnemonicParsing="false" text="Commercial" />
+        <Button layoutX="557.0" layoutY="86.0" mnemonicParsing="false" text="Industrial" />
+        <Button layoutX="637.0" layoutY="86.0" mnemonicParsing="false" text="Road construction" />
+        <Label alignment="CENTER" layoutX="265.0" layoutY="89.0" prefHeight="17.0" prefWidth="96.0" text="Project types:">
+            <font>
+                <Font name="System Bold" size="13.0" />
+            </font>
+        </Label>
+        <Button layoutX="653.0" layoutY="126.0" mnemonicParsing="false" text="Search" />
+        <TextField layoutX="593.0" layoutY="126.0" prefHeight="25.0" prefWidth="60.0" promptText="1000000" />
+        <TextField layoutX="499.0" layoutY="126.0" prefHeight="25.0" prefWidth="60.0" promptText="0" />
+        <Label alignment="CENTER" layoutX="568.0" layoutY="129.0" prefHeight="19.0" prefWidth="22.0" text="to">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <Label alignment="CENTER" layoutX="395.0" layoutY="129.0" prefHeight="19.0" prefWidth="103.0" text="search by price:">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <AnchorPane layoutX="1.0" layoutY="173.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="377.0" prefWidth="800.0">
+            <children>
+                <TableView fx:id="projectList" layoutX="5.0" prefHeight="369.0" prefWidth="792.0">
+                    <columns>
+                        <TableColumn fx:id="ownerCol" prefWidth="134.0" text="Owner" />
+                        <TableColumn fx:id="projectTypeCol" prefWidth="136.0" text="Projecttype" />
+                        <TableColumn fx:id="priceCol" prefWidth="139.0" text="Price DKK" />
+                        <TableColumn fx:id="hoursSpentCol" prefWidth="82.0" text="Hours Spent" />
+                        <TableColumn fx:id="monthsCol" prefWidth="84.0" text="Months" />
+                        <TableColumn fx:id="completedCol" prefWidth="76.0" text="Completed" />
+                        <TableColumn fx:id="editCol" minWidth="0.0" prefWidth="60.0" text="Edit" />
+                        <TableColumn fx:id="removeCol" prefWidth="65.0" text="Remove" />
+                    </columns>
+                </TableView>
+            </children>
+        </AnchorPane>
+      <Button fx:id="deleteButton" layoutX="724.0" layoutY="126.0" mnemonicParsing="false" onAction="#deleteData" text="Delete" />
+    </children>
 </AnchorPane>

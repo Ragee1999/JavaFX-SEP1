@@ -1,5 +1,6 @@
 package com.example.javafxSEP;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import java.io.IOException;
+
 
 public class AppController {
 
@@ -36,14 +38,18 @@ public class AppController {
     private TableColumn<ProjectList, Integer> monthsCol;
 
     @FXML
-    private Button createNewProject;
+    private TableColumn<ProjectList, Button> removeCol; //need to work on a better delete function by having icons
 
+    @FXML
+    private Button createNewProject;
 
     @FXML
     private void initialize() {
+        ObservableList<ProjectList> data = FXCollections.observableArrayList();
         initializeProjectTable();
         createNewProject.setOnAction(event -> openCreateController()); // createNewProject button clicked and openCreateController method is called
     }
+
     private void openCreateController() {
         try {
             // Load the FXML file for CreateController
@@ -64,6 +70,7 @@ public class AppController {
     }
 
     private void initializeProjectTable() {
+
         ObservableList<ProjectList> data = FXCollections.observableArrayList
                 (
                         new ProjectList("Bob1", "Industrial", true, 200, 3, 150000.0),
@@ -92,6 +99,19 @@ public class AppController {
         priceCol.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         monthsCol.setCellValueFactory(cellData -> cellData.getValue().monthsProperty().asObject());
     }
+
+   @FXML
+   private void deleteData(ActionEvent deleteEvent) {
+       System.out.println("Delete button clicked");
+
+       TableView.TableViewSelectionModel<ProjectList> selectionModel = projectList.getSelectionModel();
+       ObservableList<ProjectList> selectedItems = selectionModel.getSelectedItems();
+
+       for (ProjectList selectedItem : selectedItems) {
+           projectList.getItems().remove(selectedItem);
+           ProjectTestStorage.saveData(selectedItem);
+       }
+   }
 
     public void addProject(ProjectList newProject) {
         ObservableList<ProjectList> data = projectList.getItems();

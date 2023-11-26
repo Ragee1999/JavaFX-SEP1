@@ -23,44 +23,42 @@ public class CreateController {
     @FXML
     private Button cancelButton;
 
-    private AppController appController;
+    private AppController appController; //reference to AppController
 
     public void setAppController(AppController appController) {
         this.appController = appController;
     }
-    public CreateController() {
-    }
-        @FXML
-        public void createButtonOnAction() {
-            String owner = ownerField.getText();
-            String projectType = projectTypeField.getText();
-            String completed = completedField.getText();
-            String hoursSpent = hoursSpentField.getText();
-            String price = priceField.getText();
-            String months = monthsField.getText();
 
-            // Convert String values to appropriate types
-            boolean completedValue = Boolean.parseBoolean(completed);
-            int hoursSpentValue = Integer.parseInt(hoursSpent);
-            int monthsValue = Integer.parseInt(months);
-            double priceValue = Double.parseDouble(price);
+    @FXML
+    public void createButtonOnAction() {
+        // NEED TO ADD SOME CRAZY ERRORHANDLING - CURRENTLY ONLY THE CORRECT VALUE TYPES WILL WORK, String String int int int boolean
 
-            // Create a new project
-            ProjectList newProject = new ProjectList(owner, projectType, completedValue, hoursSpentValue, monthsValue, priceValue);
+        String owner = ownerField.getText();
+        String projectType = projectTypeField.getText();
+        String price = priceField.getText();
+        String hoursSpent = hoursSpentField.getText();
+        String months = monthsField.getText();
+        String completed = completedField.getText();
 
-            // Assuming you have access to the AppController instance, you can add the new project
-            appController.addProject(newProject);
+        // Convert String values to right types
+        boolean completedValue = Boolean.parseBoolean(completed);
+        int hoursSpentValue = Integer.parseInt(hoursSpent);
+        int monthsValue = Integer.parseInt(months);
+        double priceValue = Double.parseDouble(price);
 
-            // Close the CreateController window
-            Stage stage = (Stage) createButton.getScene().getWindow();
-            stage.close();
-            System.out.println("testing close confirm + add project?");
+
+        ProjectList newProject = new ProjectList(owner, projectType, completedValue, hoursSpentValue, monthsValue, priceValue);
+        appController.addProject(newProject);
+
+        Stage stage = (Stage) createButton.getScene().getWindow();
+        stage.close();
+        System.out.println("Projected added and closed popup");
     }
 
 
     // Cancel by clicking the cancel button and  the CreateController closes
     @FXML
-    public void cancelButtonOnAction(){
+    public void cancelButtonOnAction() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         System.out.println("Cancel successful");
         stage.close();
