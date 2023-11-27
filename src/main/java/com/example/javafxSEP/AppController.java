@@ -81,6 +81,7 @@ public class AppController {
         }
     }
 
+    // Instead of using sample data I probably need to implement this into the Json to test.
     private void initializeProjectTable() {
 
         ObservableList<ProjectList> data = FXCollections.observableArrayList
