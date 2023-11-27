@@ -6,4 +6,6 @@ module com.example.javafxSEP {
 
     opens com.example.javafxSEP to javafx.fxml;
     exports com.example.javafxSEP;
+    exports com.example.javafxSEP.TestClasses;
+    opens com.example.javafxSEP.TestClasses to javafx.fxml;
 }

@@ -1,4 +1,4 @@
-package com.example.javafxSEP;
+package com.example.javafxSEP.TestClasses;
 import javafx.beans.property.*;
 
     // field
