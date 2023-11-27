@@ -4,8 +4,9 @@ module com.example.javafxSEP {
     requires com.fasterxml.jackson.databind;
 
 
+
     opens com.example.javafxSEP to javafx.fxml;
     exports com.example.javafxSEP;
     exports com.example.javafxSEP.TestClasses;
-    opens com.example.javafxSEP.TestClasses to javafx.fxml;
+    opens com.example.javafxSEP.TestClasses to javafx.fxml, com.fasterxml.jackson.databind;
 }

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class Main extends Application { // Main is a subclass(inherits from parent) of application, and that is a class from the framework of JavaFX
