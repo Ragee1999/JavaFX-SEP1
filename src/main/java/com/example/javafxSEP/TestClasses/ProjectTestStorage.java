@@ -1,4 +1,4 @@
-package com.example.javafxSEP;
+package com.example.javafxSEP.TestClasses;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

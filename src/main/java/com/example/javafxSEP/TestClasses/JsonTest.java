@@ -1,4 +1,5 @@
-package com.example.javafxSEP;
+package com.example.javafxSEP.TestClasses;
+import com.example.javafxSEP.TestClasses.ProjectList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonTest {
