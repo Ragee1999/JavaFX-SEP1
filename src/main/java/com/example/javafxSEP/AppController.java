@@ -2,8 +2,6 @@ package com.example.javafxSEP;
 
 import com.example.javafxSEP.TestClasses.ProjectList;
 import com.example.javafxSEP.TestClasses.ProjectTestStorage;
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
@@ -19,12 +17,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 
 public class AppController {
 
-    // @FXML MEANS IT IS INITIALIZED/INJECTED THROUGH THE FXML FILE INTO THIS CONTROLLER
+    // @FXML MEANS IT IS INITIALIZED/INJECTED THROUGH THE FXML FILE INTO THIS
+    // CONTROLLER
 
     @FXML
     private TableView<ProjectList> projectList;
@@ -42,27 +39,36 @@ public class AppController {
     private TableColumn<ProjectList, Integer> monthsCol;
 
     @FXML
-    private Button createNewProject; // The button is initialized with the createNewProject button, all buttons can have a specific id, this would be the ID
+    private Button createNewProject; // The button is initialized with the createNewProject button, all buttons can
+                                     // have a specific id, this would be the ID
 
     // FREDERIK
     @FXML
     private TextField searchField;
+    private Search searchUtility;
 
-    // when you run a private void initialize() you initially put code in here that you want to only be run after all the
+    // when you run a private void initialize() you initially put code in here that
+    // you want to only be run after all the
     // FXML components have been loaded and right before the scene is shown.
-    // This is because these methods needs to be run in certain periods and require different setups
+    // This is because these methods needs to be run in certain periods and require
+    // different setups
     // The ProjectList needs to be loaded/updated regularly
-    // InitializeProjectTable is just a sampleData for testing, but it will be applied with default settings in the FUTURE
-    // The createNewProject is a buttonEvent that opens a new UI for creating new Projects
+    // InitializeProjectTable is just a sampleData for testing, but it will be
+    // applied with default settings in the FUTURE
+    // The createNewProject is a buttonEvent that opens a new UI for creating new
+    // Projects
 
     @FXML
     private void initialize() {
-        createNewProject.setOnAction(event -> openCreateController()); // createNewProject button clicked and openCreateController method is called
-        // initializeProjectTable();   Sample Data to be replaced with JSON
+        createNewProject.setOnAction(event -> openCreateController()); // createNewProject button clicked and
+                                                                       // openCreateController method is called
+        // initializeProjectTable(); Sample Data to be replaced with JSON
         // ObservableList<ProjectList> data = FXCollections.observableArrayList();
         ObservableList<ProjectList> data = ProjectTestStorage.loadData(); // Load data from JSON
 
-        // This entire section is the property settings for all the current values, need to update here + ProjectList Class if we want to create new values for projects.
+        // This entire section is the property settings for all the current values, need
+        // to update here + ProjectList Class if we want to create new values for
+        // projects.
         projectList.setItems(data);
         ownerCol.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
         projectTypeCol.setCellValueFactory(cellData -> cellData.getValue().projectTypeProperty());
@@ -70,6 +76,8 @@ public class AppController {
         hoursSpentCol.setCellValueFactory(cellData -> cellData.getValue().hoursSpentProperty().asObject());
         priceCol.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         monthsCol.setCellValueFactory(cellData -> cellData.getValue().monthsProperty().asObject());
+
+        this.searchUtility = new Search();
     }
 
     private void openCreateController() {
@@ -78,12 +86,16 @@ public class AppController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Create.fxml"));
             Parent root = loader.load();
 
-
-            CreateController createController = loader.getController(); // Declares the variable createController and gets the CreateController
-            createController.setAppController(this);  // This sets communication between the createController and the AppController
-            // The reason we did this is that AppController is the main controller of our application, and they need information from the AppController
-            // This essentially means the CreateController now has access to update data onto the AppController and vice Versa
-            // One example of this is how the createController need to add the new projects into the UI in the AppController
+            CreateController createController = loader.getController(); // Declares the variable createController and
+                                                                        // gets the CreateController
+            createController.setAppController(this); // This sets communication between the createController and the
+                                                     // AppController
+            // The reason we did this is that AppController is the main controller of our
+            // application, and they need information from the AppController
+            // This essentially means the CreateController now has access to update data
+            // onto the AppController and vice Versa
+            // One example of this is how the createController need to add the new projects
+            // into the UI in the AppController
 
             // Creates the CreateController GUI
             Stage stage = new Stage();
@@ -94,7 +106,6 @@ public class AppController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void deleteData(ActionEvent deleteEvent) {
@@ -111,14 +122,28 @@ public class AppController {
     }
 
     public void addProject(ProjectList newProject) {
-        ObservableList<ProjectList> data = projectList.getItems(); // This is everything we can see in the current APP UI
+        ObservableList<ProjectList> data = projectList.getItems(); // This is everything we can see in the current APP
+                                                                   // UI
         data.add(newProject); // Adds the new project to the projectList
         projectList.setItems(data); // Adds and updates the data to the actual UI
-        ProjectTestStorage.saveData(newProject);  // saves the new project in the JSON file
+        ProjectTestStorage.saveData(newProject); // saves the new project in the JSON file
         System.out.println("AppController: saved to UI and added to JSON");
     }
 
     // FREDERIK
+    // @FXML
+    // private void searchButtonClicked(ActionEvent event) {
+    // String searchText = searchField.getText();
+    // ObservableList<ProjectList> data = ProjectTestStorage.loadData();
+
+    // if (searchText.isEmpty()) {
+    // projectList.setItems(data);
+    // } else {
+    // ObservableList<ProjectList> filteredData = Search.searchByOwner(data,
+    // searchText);
+    // projectList.setItems(filteredData);
+    // }
+    // }
     @FXML
     private void searchButtonClicked(ActionEvent event) {
         String searchText = searchField.getText();
@@ -127,7 +152,7 @@ public class AppController {
         if (searchText.isEmpty()) {
             projectList.setItems(data);
         } else {
-            ObservableList<ProjectList> filteredData = Search.searchByOwner(data, searchText);
+            ObservableList<ProjectList> filteredData = searchUtility.searchByOwner(data, searchText);
             projectList.setItems(filteredData);
         }
     }
