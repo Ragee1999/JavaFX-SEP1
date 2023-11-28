@@ -131,6 +131,8 @@ public class AppController {
     }
 
     // FREDERIK
+
+    // OLD VERSION
     // @FXML
     // private void searchButtonClicked(ActionEvent event) {
     // String searchText = searchField.getText();
@@ -144,6 +146,8 @@ public class AppController {
     // projectList.setItems(filteredData);
     // }
     // }
+
+    // NEW VERSION
     @FXML
     private void searchButtonClicked(ActionEvent event) {
         String searchText = searchField.getText();
