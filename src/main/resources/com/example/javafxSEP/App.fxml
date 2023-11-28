@@ -28,8 +28,8 @@
                 <Font name="System Bold" size="13.0" />
             </font>
         </Label>
-        <TextField layoutX="39.0" layoutY="126.0" promptText="search by name or char" />
-        <Button layoutX="188.0" layoutY="126.0" mnemonicParsing="false" text="Search" />
+        <TextField fx:id="searchField" layoutX="39.0" layoutY="126.0" promptText="Search by owner" />
+        <Button layoutX="188.0" layoutY="126.0" mnemonicParsing="false" text="Search" onAction="#searchButtonClicked" />
         <Line endX="700.0" fill="BLACK" layoutX="100.0" layoutY="74.0" startX="-100.0" />
         <Button layoutX="372.0" layoutY="86.0" mnemonicParsing="false" text="Residential" />
         <Button layoutX="459.0" layoutY="86.0" mnemonicParsing="false" text="Commercial" />

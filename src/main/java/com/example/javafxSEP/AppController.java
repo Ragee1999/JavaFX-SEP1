@@ -2,6 +2,8 @@ package com.example.javafxSEP;
 
 import com.example.javafxSEP.TestClasses.ProjectList;
 import com.example.javafxSEP.TestClasses.ProjectTestStorage;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
@@ -11,11 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class AppController {
@@ -40,6 +44,9 @@ public class AppController {
     @FXML
     private Button createNewProject; // The button is initialized with the createNewProject button, all buttons can have a specific id, this would be the ID
 
+    // FREDERIK
+    @FXML
+    private TextField searchField;
 
     // when you run a private void initialize() you initially put code in here that you want to only be run after all the
     // FXML components have been loaded and right before the scene is shown.
@@ -109,5 +116,19 @@ public class AppController {
         projectList.setItems(data); // Adds and updates the data to the actual UI
         ProjectTestStorage.saveData(newProject);  // saves the new project in the JSON file
         System.out.println("AppController: saved to UI and added to JSON");
+    }
+
+    // FREDERIK
+    @FXML
+    private void searchButtonClicked(ActionEvent event) {
+        String searchText = searchField.getText();
+        ObservableList<ProjectList> data = ProjectTestStorage.loadData();
+
+        if (searchText.isEmpty()) {
+            projectList.setItems(data);
+        } else {
+            ObservableList<ProjectList> filteredData = Search.searchByOwner(data, searchText);
+            projectList.setItems(filteredData);
+        }
     }
 }
