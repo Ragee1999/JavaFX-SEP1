@@ -20,7 +20,7 @@ import java.util.List;
 
 public class AppController {
 
-    // @FXML MEANS IT IS INITIALIZED/INJECTED THROUGH THE FXML FILE
+    // @FXML MEANS IT IS INITIALIZED/INJECTED THROUGH THE FXML FILE INTO THIS CONTROLLER
 
     @FXML
     private TableView<ProjectList> projectList;
@@ -36,12 +36,6 @@ public class AppController {
     private TableColumn<ProjectList, Boolean> completedCol;
     @FXML
     private TableColumn<ProjectList, Integer> monthsCol;
-
-
-    // need to work on an advanced/better delete function maybe by having trashcan icons that indicate delete
-    @FXML
-    private TableColumn<ProjectList, Button> removeCol;  //not used currently
-
 
     @FXML
     private Button createNewProject; // The button is initialized with the createNewProject button, all buttons can have a specific id, this would be the ID
@@ -69,7 +63,6 @@ public class AppController {
         hoursSpentCol.setCellValueFactory(cellData -> cellData.getValue().hoursSpentProperty().asObject());
         priceCol.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         monthsCol.setCellValueFactory(cellData -> cellData.getValue().monthsProperty().asObject());
-
     }
 
     private void openCreateController() {

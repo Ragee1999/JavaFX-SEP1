@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -57,16 +59,23 @@
                     <columns>
                         <TableColumn fx:id="ownerCol" prefWidth="134.0" text="Owner" />
                         <TableColumn fx:id="projectTypeCol" prefWidth="136.0" text="Projecttype" />
-                        <TableColumn fx:id="priceCol" prefWidth="139.0" text="Price DKK" />
+                        <TableColumn fx:id="priceCol" prefWidth="139.0" text="Price in $" />
                         <TableColumn fx:id="hoursSpentCol" prefWidth="82.0" text="Hours Spent" />
                         <TableColumn fx:id="monthsCol" prefWidth="84.0" text="Months" />
                         <TableColumn fx:id="completedCol" prefWidth="76.0" text="Completed" />
                         <TableColumn fx:id="editCol" minWidth="0.0" prefWidth="60.0" text="Edit" />
-                        <TableColumn fx:id="removeCol" prefWidth="65.0" text="Remove" />
                     </columns>
                 </TableView>
             </children>
         </AnchorPane>
       <Button fx:id="deleteButton" layoutX="724.0" layoutY="126.0" mnemonicParsing="false" onAction="#deleteData" text="Delete" />
+      <MenuButton layoutX="266.0" layoutY="121.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="127.0" text="Add new Project">
+        <items>
+            <MenuItem mnemonicParsing="false" text="Residential" />
+          <MenuItem mnemonicParsing="false" text="Commercial" />
+          <MenuItem mnemonicParsing="false" text="Industrial" />
+            <MenuItem mnemonicParsing="false" text="Road Construction" />
+        </items>
+      </MenuButton>
     </children>
 </AnchorPane>
