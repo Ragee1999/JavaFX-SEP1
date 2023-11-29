@@ -43,9 +43,20 @@ public class AppController {
                                      // have a specific id, this would be the ID
 
     // FREDERIK
+    // Search by owner
     @FXML
     private TextField searchField;
+    @FXML
+    private Button searchByOwnerButton;
     private Search searchUtility;
+
+    // Search by price
+    @FXML
+    private TextField minPriceField;
+    @FXML
+    private TextField maxPriceField;;
+    @FXML
+    private Button searchByPriceButton;
 
     // when you run a private void initialize() you initially put code in here that
     // you want to only be run after all the
@@ -148,6 +159,7 @@ public class AppController {
     // }
 
     // NEW VERSION
+    // Search by owner
     @FXML
     private void searchButtonClicked(ActionEvent event) {
         String searchText = searchField.getText();
@@ -158,6 +170,28 @@ public class AppController {
         } else {
             ObservableList<ProjectList> filteredData = searchUtility.searchByOwner(data, searchText);
             projectList.setItems(filteredData);
+        }
+    }
+
+    // Search by price
+    @FXML
+    private void searchByPriceButtonClicked(ActionEvent event) {
+        try {
+            // double minPrice = Double.parseDouble(minPriceField.getText());
+            // double maxPrice = Double.parseDouble(maxPriceField.getText());
+
+            // If the minPriceField is empty, set minPrice to 0.0
+            double minPrice = minPriceField.getText().isEmpty() ? Double.MIN_VALUE : Double.parseDouble(minPriceField.getText());
+            // If the maxPriceField is empty, set maxPrice to Double.MAX_VALUE
+            double maxPrice = maxPriceField.getText().isEmpty() ? Double.MAX_VALUE : Double.parseDouble(maxPriceField.getText());
+
+            ObservableList<ProjectList> data = ProjectTestStorage.loadData();
+
+            ObservableList<ProjectList> filteredData = searchUtility.searchByPriceRange(data, minPrice, maxPrice);
+            projectList.setItems(filteredData);
+        } catch (NumberFormatException e) {
+            // Handle invalid input in price fields
+            System.out.println("Invalid price input");
         }
     }
 }

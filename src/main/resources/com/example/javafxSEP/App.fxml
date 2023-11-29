@@ -29,7 +29,7 @@
             </font>
         </Label>
         <TextField fx:id="searchField" layoutX="39.0" layoutY="126.0" promptText="Search by owner" />
-        <Button layoutX="188.0" layoutY="126.0" mnemonicParsing="false" text="Search" onAction="#searchButtonClicked" />
+        <Button fx:id="searchByOwnerButton" layoutX="188.0" layoutY="126.0" mnemonicParsing="false" onAction="#searchButtonClicked" text="Search" />
         <Line endX="700.0" fill="BLACK" layoutX="100.0" layoutY="74.0" startX="-100.0" />
         <Button layoutX="372.0" layoutY="86.0" mnemonicParsing="false" text="Residential" />
         <Button layoutX="459.0" layoutY="86.0" mnemonicParsing="false" text="Commercial" />
@@ -40,9 +40,9 @@
                 <Font name="System Bold" size="13.0" />
             </font>
         </Label>
-        <Button layoutX="653.0" layoutY="126.0" mnemonicParsing="false" text="Search" />
-        <TextField layoutX="593.0" layoutY="126.0" prefHeight="25.0" prefWidth="60.0" promptText="1000000" />
-        <TextField layoutX="499.0" layoutY="126.0" prefHeight="25.0" prefWidth="60.0" promptText="0" />
+        <Button id="searchByPriceButton" layoutX="653.0" layoutY="126.0" mnemonicParsing="false" text="Search" onAction="#searchByPriceButtonClicked"  />
+        <TextField fx:id="maxPriceField" layoutX="593.0" layoutY="126.0" prefHeight="25.0" prefWidth="60.0" promptText="1000000" />
+        <TextField fx:id="minPriceField" layoutX="499.0" layoutY="126.0" prefHeight="25.0" prefWidth="60.0" promptText="0" />
         <Label alignment="CENTER" layoutX="568.0" layoutY="129.0" prefHeight="19.0" prefWidth="22.0" text="to">
             <font>
                 <Font size="13.0" />
