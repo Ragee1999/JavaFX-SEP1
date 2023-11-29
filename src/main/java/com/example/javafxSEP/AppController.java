@@ -46,17 +46,17 @@ public class AppController {
     // Search by owner
     @FXML
     private TextField searchField;
-    @FXML
-    private Button searchByOwnerButton;
-    private Search searchUtility;
+    // @FXML
+    // private Button searchByOwnerButton;
+    private SearchController searchUtility;
 
     // Search by price
     @FXML
     private TextField minPriceField;
     @FXML
     private TextField maxPriceField;;
-    @FXML
-    private Button searchByPriceButton;
+    // @FXML
+    // private Button searchByPriceButton;
 
     // when you run a private void initialize() you initially put code in here that
     // you want to only be run after all the
@@ -88,7 +88,21 @@ public class AppController {
         priceCol.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         monthsCol.setCellValueFactory(cellData -> cellData.getValue().monthsProperty().asObject());
 
-        this.searchUtility = new Search();
+        // Search
+        this.searchUtility = new SearchController();
+
+        // Add a listener to the searchField for 'search by owner'
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchByOwner();
+        });
+
+        // Add listeners to the price fields for 'search by price'
+        minPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchByPrice();
+        });
+        maxPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchByPrice();
+        });
     }
 
     private void openCreateController() {
@@ -143,25 +157,34 @@ public class AppController {
 
     // FREDERIK
 
-    // OLD VERSION
-    // @FXML
-    // private void searchButtonClicked(ActionEvent event) {
-    // String searchText = searchField.getText();
-    // ObservableList<ProjectList> data = ProjectTestStorage.loadData();
-
-    // if (searchText.isEmpty()) {
-    // projectList.setItems(data);
-    // } else {
-    // ObservableList<ProjectList> filteredData = Search.searchByOwner(data,
-    // searchText);
-    // projectList.setItems(filteredData);
-    // }
-    // }
-
-    // NEW VERSION
     // Search by owner
-    @FXML
-    private void searchButtonClicked(ActionEvent event) {
+    /*
+     * @FXML
+     * private void searchButtonClicked(ActionEvent event) {
+     * // Retrieve the text entered in the searchField.
+     * String searchText = searchField.getText();
+     * // Load the full list of ProjectList objects from storage.
+     * ObservableList<ProjectList> data = ProjectTestStorage.loadData();
+     * 
+     * // Check if the search field is empty.
+     * if (searchText.isEmpty()) {
+     * // If search field is empty, display all items in the projectList TableView.
+     * projectList.setItems(data);
+     * } else {
+     * // If search field is not empty, perform a search based on the entered text.
+     * // The searchUtility.searchByOwner method filters the data based on the
+     * // searchText.
+     * ObservableList<ProjectList> filteredData = searchUtility.searchByOwner(data,
+     * searchText);
+     * 
+     * // Update the projectList TableView to display only the items that match the
+     * // search criteria.
+     * projectList.setItems(filteredData);
+     * }
+     * }
+     */
+
+    private void searchByOwner() {
         // Retrieve the text entered in the searchField.
         String searchText = searchField.getText();
         // Load the full list of ProjectList objects from storage.
@@ -173,25 +196,59 @@ public class AppController {
             projectList.setItems(data);
         } else {
             // If search field is not empty, perform a search based on the entered text.
-            // The searchUtility.searchByOwner method filters the data based on the searchText.
+            // The searchUtility.searchByOwner method filters the data based on the
+            // searchText.
             ObservableList<ProjectList> filteredData = searchUtility.searchByOwner(data, searchText);
 
-            // Update the projectList TableView to display only the items that match the search criteria.
+            // Update the projectList TableView to display only the items that match the
+            // search criteria.
             projectList.setItems(filteredData);
         }
     }
 
     // Search by price
-    @FXML
-    private void searchByPriceButtonClicked(ActionEvent event) {
+    /*
+     * @FXML
+     * private void searchByPriceButtonClicked(ActionEvent event) {
+     * try {
+     * // double minPrice = Double.parseDouble(minPriceField.getText());
+     * // double maxPrice = Double.parseDouble(maxPriceField.getText());
+     * 
+     * // If the minPriceField is empty, set minPrice to 0.0
+     * double minPrice = minPriceField.getText().isEmpty() ? Double.MIN_VALUE
+     * : Double.parseDouble(minPriceField.getText());
+     * // If the maxPriceField is empty, set maxPrice to Double.MAX_VALUE
+     * double maxPrice = maxPriceField.getText().isEmpty() ? Double.MAX_VALUE
+     * : Double.parseDouble(maxPriceField.getText());
+     * 
+     * // Load the full list of ProjectList objects from storage.
+     * ObservableList<ProjectList> data = ProjectTestStorage.loadData();
+     * 
+     * // Filter the data based on the price range.
+     * ObservableList<ProjectList> filteredData =
+     * searchUtility.searchByPriceRange(data, minPrice, maxPrice);
+     * 
+     * // Update the projectList TableView to display only the items that match the
+     * // search criteria.
+     * projectList.setItems(filteredData);
+     * } catch (NumberFormatException e) {
+     * // Handle invalid input in price fields
+     * System.out.println("Invalid price input");
+     * }
+     * }
+     */
+
+    private void searchByPrice() {
         try {
             // double minPrice = Double.parseDouble(minPriceField.getText());
             // double maxPrice = Double.parseDouble(maxPriceField.getText());
 
             // If the minPriceField is empty, set minPrice to 0.0
-            double minPrice = minPriceField.getText().isEmpty() ? Double.MIN_VALUE : Double.parseDouble(minPriceField.getText());
+            double minPrice = minPriceField.getText().isEmpty() ? Double.MIN_VALUE
+                    : Double.parseDouble(minPriceField.getText());
             // If the maxPriceField is empty, set maxPrice to Double.MAX_VALUE
-            double maxPrice = maxPriceField.getText().isEmpty() ? Double.MAX_VALUE : Double.parseDouble(maxPriceField.getText());
+            double maxPrice = maxPriceField.getText().isEmpty() ? Double.MAX_VALUE
+                    : Double.parseDouble(maxPriceField.getText());
 
             // Load the full list of ProjectList objects from storage.
             ObservableList<ProjectList> data = ProjectTestStorage.loadData();
@@ -199,7 +256,8 @@ public class AppController {
             // Filter the data based on the price range.
             ObservableList<ProjectList> filteredData = searchUtility.searchByPriceRange(data, minPrice, maxPrice);
 
-            // Update the projectList TableView to display only the items that match the search criteria.
+            // Update the projectList TableView to display only the items that match the
+            // search criteria.
             projectList.setItems(filteredData);
         } catch (NumberFormatException e) {
             // Handle invalid input in price fields
