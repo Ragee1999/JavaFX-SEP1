@@ -23,16 +23,24 @@ public class SearchModel {
 
         // Stream the data and filter based on whether the owner's name contains the searchText.
         // The filter operation checks each element in the list, making it a linear time operation: O(n).
+        // Convert the collection 'data' into a stream for processing
         return data.stream()
+                // Convert the owner's name of each project to lowercase and check if it contains the search text
                 .filter(project -> project.getOwner().toLowerCase().contains(lowerSearchText))
+                // Keep only the projects that match the filter condition
                 .collect(Collectors.toList());
     }
 
     // The overall time complexity of the searchByOwner method is O(n) where n is the number of elements in the data list.
 
     public List<ProjectList> searchByPriceRange(List<ProjectList> data, double minPrice, double maxPrice) {
+        // Convert the collection 'data' into a stream for processing
         return data.stream()
+                // Check if the project's price is greater than or equal to the minimum price
+                // and less than or equal to the maximum price
                 .filter(project -> project.getPrice() >= minPrice && project.getPrice() <= maxPrice)
+                // Keep only the projects that match the filter condition
+                // Collect the filtered projects into a new List and return it
                 .collect(Collectors.toList());
     }
 }

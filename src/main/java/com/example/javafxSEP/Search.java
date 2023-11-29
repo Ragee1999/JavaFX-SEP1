@@ -39,7 +39,10 @@ public class Search {
 
     // Search by price (minPrice and maxPrice) and return an ObservableList
     public ObservableList<ProjectList> searchByPriceRange(ObservableList<ProjectList> data, double minPrice, double maxPrice) {
+        // Call the searchByPriceRange method of SearchModel and store the results in a list.
         List<ProjectList> searchResults = searchModel.searchByPriceRange(data, minPrice, maxPrice);
+
+        // Convert the list of search results into an ObservableList for use with JavaFX components.
         return FXCollections.observableArrayList(searchResults);
     }
 }

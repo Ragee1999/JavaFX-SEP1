@@ -162,13 +162,21 @@ public class AppController {
     // Search by owner
     @FXML
     private void searchButtonClicked(ActionEvent event) {
+        // Retrieve the text entered in the searchField.
         String searchText = searchField.getText();
+        // Load the full list of ProjectList objects from storage.
         ObservableList<ProjectList> data = ProjectTestStorage.loadData();
 
+        // Check if the search field is empty.
         if (searchText.isEmpty()) {
+            // If search field is empty, display all items in the projectList TableView.
             projectList.setItems(data);
         } else {
+            // If search field is not empty, perform a search based on the entered text.
+            // The searchUtility.searchByOwner method filters the data based on the searchText.
             ObservableList<ProjectList> filteredData = searchUtility.searchByOwner(data, searchText);
+
+            // Update the projectList TableView to display only the items that match the search criteria.
             projectList.setItems(filteredData);
         }
     }
@@ -185,9 +193,13 @@ public class AppController {
             // If the maxPriceField is empty, set maxPrice to Double.MAX_VALUE
             double maxPrice = maxPriceField.getText().isEmpty() ? Double.MAX_VALUE : Double.parseDouble(maxPriceField.getText());
 
+            // Load the full list of ProjectList objects from storage.
             ObservableList<ProjectList> data = ProjectTestStorage.loadData();
 
+            // Filter the data based on the price range.
             ObservableList<ProjectList> filteredData = searchUtility.searchByPriceRange(data, minPrice, maxPrice);
+
+            // Update the projectList TableView to display only the items that match the search criteria.
             projectList.setItems(filteredData);
         } catch (NumberFormatException e) {
             // Handle invalid input in price fields
