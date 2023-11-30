@@ -2,50 +2,73 @@ package com.example.javafxSEP.TestClasses;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.*;
 
 
 public class ProjectList {
     // These JavaFX properties allows for binding the data with the UI components.
-    private StringProperty owner;
+    private StringProperty projectName;
     private StringProperty projectType;
-    private BooleanProperty completed;
+    private StringProperty trueFalse;
     private IntegerProperty hoursSpent;
-    private IntegerProperty months;
+    private IntegerProperty timeline;
     private DoubleProperty price;
+    private IntegerProperty kitchens;
+    private IntegerProperty otherRooms;
+    private IntegerProperty bathrooms;
+    private StringProperty buildType;
+    private IntegerProperty projectSize;
 
-    @JsonCreator //annotation for the constructor, it means these properties can be created and deserialized with the jackson library
-    public ProjectList(
+    @JsonCreator
+    // annotation for the constructor, it means these properties can be created and deserialized with the jackson library
+    public ProjectList
+            (
             // Basically this constructor creates these instances from the JSON Data like giving the owner a name
-            @JsonProperty("owner") String owner,
+            @JsonProperty("projectName") String projectName,
             @JsonProperty("projectType") String projectType,
-            @JsonProperty("completed") boolean completed,
+            @JsonProperty("trueFalse") String trueFalse,
             @JsonProperty("hoursSpent") int hoursSpent,
-            @JsonProperty("months") int months,
-            @JsonProperty("price") double price)
+            @JsonProperty("timeline") int timeline,
+            @JsonProperty("price") double price,
+            @JsonProperty("kitchens") int kitchens,
+            @JsonProperty("otherRooms") int otherRooms,
+            @JsonProperty("bathrooms") int bathrooms,
+            @JsonProperty("buildType") String buildType,
+            @JsonProperty("projectSize") int projectSize
+            )
+
+
     {
         // this is the initialize section where properties are given default values or set values
-        this.owner = new SimpleStringProperty(owner);
+        this.projectName = new SimpleStringProperty(projectName);
         this.projectType = new SimpleStringProperty(projectType);
-        this.completed = new SimpleBooleanProperty(completed);
+        this.trueFalse = new SimpleStringProperty(trueFalse);
         this.hoursSpent = new SimpleIntegerProperty(hoursSpent);
-        this.months = new SimpleIntegerProperty(months);
+        this.timeline = new SimpleIntegerProperty(timeline);
         this.price = new SimpleDoubleProperty(price);
+        this.kitchens = new SimpleIntegerProperty(kitchens);
+        this.otherRooms = new SimpleIntegerProperty(otherRooms);
+        this.bathrooms = new SimpleIntegerProperty(bathrooms);
+        this.buildType = new SimpleStringProperty(buildType);
+        this.projectSize = new SimpleIntegerProperty(projectSize);
 
-        //This is deserialization, so it is able to load the json.file from the start of application and then making it into the ProjectList as objects
+        //  This is deserialization, so it is able to load the json.file from the start of application and then making it into the ProjectList as objects
         // This code does not serialize, that happens in the writeData in the ProjectTestStorage class
     }
 
-    public String getOwner() {
-        return owner.get();
+    public String getProjectName() {
+        return projectName.get();
     }
 
-    public StringProperty ownerProperty() {
-        return owner;
+    public StringProperty projectNameProperty() {
+        return projectName;
     }
 
-    public void setOwner(String owner) {
-        this.owner.set(owner);
+    public void setProjectName(String projectName) {
+        this.projectName.set(projectName);
     }
 
     public String getProjectType() {
@@ -60,16 +83,16 @@ public class ProjectList {
         this.projectType.set(projectType);
     }
 
-    public boolean isCompleted() {
-        return completed.get();
+    public String getTrueFalse() {
+        return trueFalse.get();
     }
 
-    public BooleanProperty completedProperty() {
-        return completed;
+    public StringProperty trueFalseProperty() {
+        return trueFalse;
     }
 
-    public void setCompleted(boolean completed) {
-        this.completed.set(completed);
+    public void setTrueFalse(String trueFalse) {
+        this.trueFalse.set(trueFalse);
     }
 
     public int getHoursSpent() {
@@ -84,16 +107,16 @@ public class ProjectList {
         this.hoursSpent.set(hoursSpent);
     }
 
-    public int getMonths() {
-        return months.get();
+    public int getTimeline() {
+        return timeline.get();
     }
 
-    public IntegerProperty monthsProperty() {
-        return months;
+    public IntegerProperty timelineProperty() {
+        return timeline;
     }
 
-    public void setMonths(int months) {
-        this.months.set(months);
+    public void setTimeline(int timeline) {
+        this.timeline.set(timeline);
     }
 
     public double getPrice() {
@@ -107,6 +130,65 @@ public class ProjectList {
     public void setPrice(double price) {
         this.price.set(price);
     }
-}
 
+    public int getKitchens() {
+        return kitchens.get();
+    }
+
+    public IntegerProperty kitchensProperty() {
+        return kitchens;
+    }
+
+    public void setKitchens(int kitchens) {
+        this.kitchens.set(kitchens);
+    }
+
+    public int getOtherRooms() {
+        return otherRooms.get();
+    }
+
+    public IntegerProperty otherRoomsProperty() {
+        return otherRooms;
+    }
+
+    public void setOtherRooms(int otherRooms) {
+        this.otherRooms.set(otherRooms);
+    }
+
+    public int getBathrooms() {
+        return bathrooms.get();
+    }
+
+    public IntegerProperty bathroomsProperty() {
+        return bathrooms;
+    }
+
+    public void setBathrooms(int bathrooms) {
+        this.bathrooms.set(bathrooms);
+    }
+
+    public String getBuildType() {
+        return buildType.get();
+    }
+
+    public StringProperty buildTypeProperty() {
+        return buildType;
+    }
+
+    public void setBuildType(String buildType) {
+        this.buildType.set(buildType);
+    }
+
+    public int getProjectSize() {
+        return projectSize.get();
+    }
+
+    public IntegerProperty projectSizeProperty() {
+        return projectSize;
+    }
+
+    public void setProjectSize(int projectSize) {
+        this.projectSize.set(projectSize);
+    }
+}
 

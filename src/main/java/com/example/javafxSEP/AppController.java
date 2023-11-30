@@ -8,9 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -25,7 +23,7 @@ public class AppController {
     @FXML
     private TableView<ProjectList> projectList;
     @FXML
-    private TableColumn<ProjectList, String> ownerCol;
+    private TableColumn<ProjectList, String> nameCol;
     @FXML
     private TableColumn<ProjectList, String> projectTypeCol;
     @FXML
@@ -33,12 +31,18 @@ public class AppController {
     @FXML
     private TableColumn<ProjectList, Double> priceCol;
     @FXML
-    private TableColumn<ProjectList, Boolean> completedCol;
+    private TableColumn<ProjectList, String> completedCol;
     @FXML
-    private TableColumn<ProjectList, Integer> monthsCol;
+    private TableColumn<ProjectList, Integer> timelineCol;
 
     @FXML
-    private Button createNewProject; // The button is initialized with the createNewProject button, all buttons can have a specific id, this would be the ID
+    private MenuItem addResidential;
+   /* @FXML
+    private MenuItem addCommercial;
+    @FXML
+    private MenuItem addIndustrial;
+    @FXML
+    private MenuItem addRoadConstruction; */
 
 
     // when you run a private void initialize() you initially put code in here that you want to only be run after all the
@@ -50,35 +54,39 @@ public class AppController {
 
     @FXML
     private void initialize() {
-        createNewProject.setOnAction(event -> openCreateController()); // createNewProject button clicked and openCreateController method is called
+        // AddNewProject Menu bar clicked and their individual controller method is called.
+        addResidential.setOnAction(event -> AddResidential());
+      /*  addCommercial.setOnAction(event -> AddCommercial());
+        addIndustrial.setOnAction(event -> AddIndustrial());
+        addRoadConstruction.setOnAction(event -> AddRoadConstruction()); */
+
+
         // initializeProjectTable();   Sample Data to be replaced with JSON
         // ObservableList<ProjectList> data = FXCollections.observableArrayList();
         ObservableList<ProjectList> data = ProjectTestStorage.loadData(); // Load data from JSON
 
         // This entire section is the property settings for all the current values, need to update here + ProjectList Class if we want to create new values for projects.
         projectList.setItems(data);
-        ownerCol.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
+        nameCol.setCellValueFactory(cellData -> cellData.getValue().projectNameProperty());
         projectTypeCol.setCellValueFactory(cellData -> cellData.getValue().projectTypeProperty());
-        completedCol.setCellValueFactory(cellData -> cellData.getValue().completedProperty());
         hoursSpentCol.setCellValueFactory(cellData -> cellData.getValue().hoursSpentProperty().asObject());
         priceCol.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-        monthsCol.setCellValueFactory(cellData -> cellData.getValue().monthsProperty().asObject());
+        timelineCol.setCellValueFactory(cellData -> cellData.getValue().timelineProperty().asObject());
+        completedCol.setCellValueFactory(cellData -> cellData.getValue().trueFalseProperty());
     }
 
-    private void openCreateController() {
+    private void AddResidential() {
         try {
-            // Load the FXML file for CreateController
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Create.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addResidential.fxml"));
             Parent root = loader.load();
 
+            ResidentialController residentialController = loader.getController(); // Declares the variable residentialController and gets the ResidentialController
+            residentialController.setAppController(this);  // This sets communication between the residential and the AppController
+            //  The reason we did this is that AppController is the main controller of our application, and other classes need information from the AppController
+            // This essentially means the ResidentialController now has access to update data onto the AppController and vice Versa
+            // Our example of this is how the residentialController need to add the new projects into the UI in the AppController
 
-            CreateController createController = loader.getController(); // Declares the variable createController and gets the CreateController
-            createController.setAppController(this);  // This sets communication between the createController and the AppController
-            // The reason we did this is that AppController is the main controller of our application, and they need information from the AppController
-            // This essentially means the CreateController now has access to update data onto the AppController and vice Versa
-            // One example of this is how the createController need to add the new projects into the UI in the AppController
-
-            // Creates the CreateController GUI
+            // Creates the Residential.fxml
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -87,7 +95,6 @@ public class AppController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void deleteData(ActionEvent deleteEvent) {
@@ -111,3 +118,57 @@ public class AppController {
         System.out.println("AppController: saved to UI and added to JSON");
     }
 }
+
+  /*  private void AddCommercial() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addCommercial.fxml"));
+            Parent root = loader.load();
+
+            CommercialController commercialController = loader.getController();
+            commercialController.setAppController(this);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void AddIndustrial() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addIndustrial.fxml"));
+            Parent root = loader.load();
+
+            IndustrialController industrialController= loader.getController();
+            industrialController.setAppController(this);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void AddRoadConstruction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addRoadConstruction.fxml"));
+            Parent root = loader.load();
+
+            RoadConstructionController roadConstructionController = loader.getController();
+            roadConstructionController.setAppController(this);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    } */
+
+
+

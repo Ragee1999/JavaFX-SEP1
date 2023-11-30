@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ResidentialController">
+   <children>
+      <TextField fx:id="projectNameField" layoutX="35.0" layoutY="79.0" />
+      <TextField fx:id="priceField" layoutX="35.0" layoutY="139.0" />
+      <TextField fx:id="bathroomsField" layoutX="215.0" layoutY="139.0" />
+      <TextField fx:id="timelineField" layoutX="35.0" layoutY="199.0" />
+      <TextField fx:id="kitchensField" layoutX="215.0" layoutY="199.0" />
+      <TextField fx:id="hoursSpentField" layoutX="35.0" layoutY="259.0" />
+      <Button fx:id="createButton" layoutX="133.0" layoutY="367.0" mnemonicParsing="false" onAction="#createButtonOnAction" text="Create" />
+      <Button fx:id="cancelButton" layoutX="215.0" layoutY="367.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Cancel" />
+      <TextField fx:id="otherRoomsField" layoutX="215.0" layoutY="259.0" />
+      <TextField fx:id="projectSizeField" layoutX="35.0" layoutY="319.0" />
+      <Label fx:id="projectTypeLabel" layoutX="143.0" layoutY="21.0" text="Residential project">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="choiceBoxTrueFalse" layoutX="215.0" layoutY="79.0" prefWidth="150.0" />
+      <Label layoutX="42.0" layoutY="56.0" prefHeight="17.0" prefWidth="135.0" text="Project name:" />
+      <Label layoutX="42.0" layoutY="115.0" prefHeight="17.0" prefWidth="135.0" text="Price in dollars" />
+      <Label layoutX="42.0" layoutY="175.0" prefHeight="17.0" prefWidth="135.0" text="Timeline in months" />
+      <Label layoutX="42.0" layoutY="235.0" prefHeight="17.0" prefWidth="135.0" text="Hours spent" />
+      <Label layoutX="42.0" layoutY="294.0" prefHeight="17.0" prefWidth="135.0" text="Project size" />
+      <Label layoutX="222.0" layoutY="56.0" prefHeight="17.0" prefWidth="135.0" text="Completed" />
+      <Label layoutX="222.0" layoutY="115.0" prefHeight="17.0" prefWidth="135.0" text="Bathrooms" />
+      <Label layoutX="222.0" layoutY="175.0" prefHeight="17.0" prefWidth="135.0" text="Kitchens" />
+      <Label layoutX="222.0" layoutY="235.0" prefHeight="17.0" prefWidth="159.0" text="Other rooms with plumbing" />
+      <Label layoutX="222.0" layoutY="294.0" prefHeight="17.0" prefWidth="135.0" text="Build type" />
+      <ChoiceBox fx:id="buildTypeField" layoutX="215.0" layoutY="319.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>

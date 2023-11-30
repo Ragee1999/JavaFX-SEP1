@@ -44,7 +44,6 @@ public class LoginController {
         }
     }
 
-
     // Simple login logic. If password and names match, validateLogin becomes true.
     public boolean validateLogin() {
         String username = usernameTextfield.getText();

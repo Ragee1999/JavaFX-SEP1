@@ -70,10 +70,8 @@ public class ProjectTestStorage {
 
     // this is the initial project list in case we don't have any starter data
     private static ObservableList<ProjectList> getInitialProjects() {
-        List<ProjectList> initialProjects = List.of(
-                new ProjectList("Bob2", "Industrial", true, 200, 3, 150000.0),
-                new ProjectList("Bob3", "Industrial", true, 200, 3, 150000.0)
-        );
+        ProjectList residentialProject = new ProjectList("resi", "Residential", "True", 1, 2, 3, 5, 6,2, "New",4);
+       List<ProjectList> initialProjects = List.of(residentialProject);
         writeInitialData(initialProjects); // this just writes the data into JSON
         return FXCollections.observableArrayList(initialProjects); // returns the observable list, so we can see it in the UI
     }
