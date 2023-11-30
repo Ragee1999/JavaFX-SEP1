@@ -8,6 +8,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.*;
 
 
+
 public class ProjectList {
     // These JavaFX properties allows for binding the data with the UI components.
     private StringProperty projectName;
@@ -21,6 +22,9 @@ public class ProjectList {
     private IntegerProperty bathrooms;
     private StringProperty buildType;
     private IntegerProperty projectSize;
+    private StringProperty buildingUsage;
+    private final IntegerProperty floors;
+
 
     @JsonCreator
     // annotation for the constructor, it means these properties can be created and deserialized with the jackson library
@@ -37,9 +41,10 @@ public class ProjectList {
             @JsonProperty("otherRooms") int otherRooms,
             @JsonProperty("bathrooms") int bathrooms,
             @JsonProperty("buildType") String buildType,
-            @JsonProperty("projectSize") int projectSize
+            @JsonProperty("projectSize") int projectSize,
+            @JsonProperty("floors") int floors,
+            @JsonProperty("buildUsage") String buildingUsage
             )
-
 
     {
         // this is the initialize section where properties are given default values or set values
@@ -54,10 +59,13 @@ public class ProjectList {
         this.bathrooms = new SimpleIntegerProperty(bathrooms);
         this.buildType = new SimpleStringProperty(buildType);
         this.projectSize = new SimpleIntegerProperty(projectSize);
+        this.floors = new SimpleIntegerProperty(floors);
+        this.buildingUsage = new SimpleStringProperty(buildingUsage);
 
         //  This is deserialization, so it is able to load the json.file from the start of application and then making it into the ProjectList as objects
         // This code does not serialize, that happens in the writeData in the ProjectTestStorage class
     }
+
 
     public String getProjectName() {
         return projectName.get();
@@ -189,6 +197,26 @@ public class ProjectList {
 
     public void setProjectSize(int projectSize) {
         this.projectSize.set(projectSize);
+    }
+
+    public String getBuildingUsage() {
+        return buildingUsage.get();
+    }
+
+    public StringProperty buildingUsageProperty() {
+        return buildingUsage;
+    }
+
+    public void setBuildingUsage(String buildingUsage) {
+        this.buildingUsage.set(buildingUsage);
+    }
+
+    public int getFloors() {
+        return floors.get();
+    }
+
+    public IntegerProperty floorsProperty() {
+        return floors;
     }
 }
 

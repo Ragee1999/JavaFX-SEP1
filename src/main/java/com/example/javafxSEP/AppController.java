@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,12 +38,8 @@ public class AppController {
 
     @FXML
     private MenuItem addResidential;
-   /* @FXML
+    @FXML
     private MenuItem addCommercial;
-    @FXML
-    private MenuItem addIndustrial;
-    @FXML
-    private MenuItem addRoadConstruction; */
 
 
     // when you run a private void initialize() you initially put code in here that you want to only be run after all the
@@ -56,9 +53,7 @@ public class AppController {
     private void initialize() {
         // AddNewProject Menu bar clicked and their individual controller method is called.
         addResidential.setOnAction(event -> AddResidential());
-      /*  addCommercial.setOnAction(event -> AddCommercial());
-        addIndustrial.setOnAction(event -> AddIndustrial());
-        addRoadConstruction.setOnAction(event -> AddRoadConstruction()); */
+        addCommercial.setOnAction(event -> AddCommercial());
 
 
         // initializeProjectTable();   Sample Data to be replaced with JSON
@@ -96,6 +91,24 @@ public class AppController {
         }
     }
 
+
+    private void AddCommercial() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addCommercial.fxml"));
+            Parent root = loader.load();
+
+            CommercialController commercialController = loader.getController();
+            commercialController.setAppController(this);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void deleteData(ActionEvent deleteEvent) {
         System.out.println("Delete button clicked");
@@ -119,56 +132,6 @@ public class AppController {
     }
 }
 
-  /*  private void AddCommercial() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addCommercial.fxml"));
-            Parent root = loader.load();
-
-            CommercialController commercialController = loader.getController();
-            commercialController.setAppController(this);
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void AddIndustrial() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addIndustrial.fxml"));
-            Parent root = loader.load();
-
-            IndustrialController industrialController= loader.getController();
-            industrialController.setAppController(this);
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void AddRoadConstruction() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("addRoadConstruction.fxml"));
-            Parent root = loader.load();
-
-            RoadConstructionController roadConstructionController = loader.getController();
-            roadConstructionController.setAppController(this);
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    } */
 
 
 
