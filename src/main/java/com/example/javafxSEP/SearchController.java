@@ -18,9 +18,9 @@ public class SearchController {
     }
 
     // Method to search by owner and return an ObservableList
-    public ObservableList<ProjectList> searchByOwner(ObservableList<ProjectList> data, String searchText) {
+    public ObservableList<ProjectList> searchByProjectName(ObservableList<ProjectList> data, String searchText) {
         // Call the searchByOwner method of SearchModel and store the results in a list.
-        List<ProjectList> searchResults = searchModel.searchByOwner(data, searchText);
+        List<ProjectList> searchResults = searchModel.searchByProjectName(data, searchText);
 
         // Convert the list of search results into an ObservableList for use with JavaFX
         // components.
