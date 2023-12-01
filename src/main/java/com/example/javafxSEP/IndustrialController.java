@@ -7,16 +7,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class CommercialController {
+public class IndustrialController {
 
     // ATTRIBUTES
 
     @FXML
-    private TextField floorsField;
+    private TextField facilitySizeField;
     @FXML
-    private TextField buildingUsageField;
-    @FXML
-    private TextField projectSizeField;
+    private TextField facilityUsageField;
     @FXML
     private TextField projectNameField;
     @FXML
@@ -39,37 +37,34 @@ public class CommercialController {
         this.appController = appController; // This is where the reference is set
     }
 
-    private void setDefaultValues2() {
-        timelineField.setText("18");
-        floorsField.setText("1");
+    private void setDefaultValues3() {
+        timelineField.setText("30");
         choiceBoxTrueFalse.setValue("False");
     }
 
     @FXML
     private void initialize() {
         choiceBoxTrueFalse.getItems().addAll("True", "False");
-        setDefaultValues2();
+        setDefaultValues3();
     }
 
     @FXML
     public void createButtonOnAction() {
 
-        String projectType = "Commercial";
+        String projectType = "Industrial";
         String projectName = projectNameField.getText();
         String price = priceField.getText();
         String hoursSpent = hoursSpentField.getText();
         String timeline = timelineField.getText();
-        String floors = floorsField.getText();
-        String projectSize = projectSizeField.getText();
-        String buildingUsage = buildingUsageField.getText();
+        String facilitySize = facilitySizeField.getText();
+        String facilityUsage = facilityUsageField.getText();
         String trueFalse = choiceBoxTrueFalse.getValue();
 
         // Convert String values to the right types
         int hoursSpentValue = Integer.parseInt(hoursSpent);
         int timelineValue = Integer.parseInt(timeline);
         double priceValue = Double.parseDouble(price);
-        int projectSizeValue = Integer.parseInt(projectSize);
-        int floorsValue = Integer.parseInt(floors);
+        int facilitySizeValue = Integer.parseInt(facilitySize);
 
         ProjectList newProject = new ProjectList(
                 projectName,
@@ -82,11 +77,11 @@ public class CommercialController {
                 0,
                 0,
                 "",
-                projectSizeValue,
-                floorsValue,
-                buildingUsage,
-                "",
                 0,
+                0,
+                "",
+                facilityUsage,
+                facilitySizeValue,
                 0,
                 0,
                 0,

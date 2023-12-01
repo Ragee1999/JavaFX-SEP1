@@ -23,7 +23,16 @@ public class ProjectList {
     private StringProperty buildType;
     private IntegerProperty projectSize;
     private StringProperty buildingUsage;
-    private final IntegerProperty floors;
+    private IntegerProperty floors;
+    private StringProperty facilityUsage;
+    private IntegerProperty facilitySize;
+    private IntegerProperty length;
+    private IntegerProperty width;
+    private IntegerProperty bridges;
+    private IntegerProperty tunnels;
+    private StringProperty environmental;
+    private StringProperty geographical;
+
 
 
     @JsonCreator
@@ -43,7 +52,15 @@ public class ProjectList {
             @JsonProperty("buildType") String buildType,
             @JsonProperty("projectSize") int projectSize,
             @JsonProperty("floors") int floors,
-            @JsonProperty("buildUsage") String buildingUsage
+            @JsonProperty("buildUsage") String buildingUsage,
+            @JsonProperty("facilityUsage") String facilityUsage,
+            @JsonProperty("facilitySize") int facilitySize,
+            @JsonProperty("length") int length,
+            @JsonProperty("width") int width,
+            @JsonProperty("bridges") int bridges,
+            @JsonProperty("tunnels") int tunnels,
+            @JsonProperty("environmental") String environmental,
+            @JsonProperty("geographical") String geographical
             )
 
     {
@@ -61,6 +78,14 @@ public class ProjectList {
         this.projectSize = new SimpleIntegerProperty(projectSize);
         this.floors = new SimpleIntegerProperty(floors);
         this.buildingUsage = new SimpleStringProperty(buildingUsage);
+        this.facilityUsage = new SimpleStringProperty(facilityUsage);
+        this.facilitySize = new SimpleIntegerProperty(facilitySize);
+        this.length = new SimpleIntegerProperty(length);
+        this.width= new SimpleIntegerProperty(width);
+        this.bridges = new SimpleIntegerProperty(bridges);
+        this.tunnels = new SimpleIntegerProperty(tunnels);
+        this.environmental = new SimpleStringProperty(environmental);
+        this.geographical = new SimpleStringProperty(geographical);
 
         //  This is deserialization, so it is able to load the json.file from the start of application and then making it into the ProjectList as objects
         // This code does not serialize, that happens in the writeData in the ProjectTestStorage class
@@ -217,6 +242,102 @@ public class ProjectList {
 
     public IntegerProperty floorsProperty() {
         return floors;
+    }
+
+    public String getFacilityUsage() {
+        return facilityUsage.get();
+    }
+
+    public StringProperty facilityUsageProperty() {
+        return facilityUsage;
+    }
+
+    public void setFacilityUsage(String facilityUsage) {
+        this.facilityUsage.set(facilityUsage);
+    }
+
+    public int getFacilitySize() {
+        return facilitySize.get();
+    }
+
+    public IntegerProperty facilitySizeProperty() {
+        return facilitySize;
+    }
+
+    public void setFacilitySize(int facilitySize) {
+        this.facilitySize.set(facilitySize);
+    }
+
+    public int getLength() {
+        return length.get();
+    }
+
+    public IntegerProperty lengthProperty() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length.set(length);
+    }
+
+    public int getWidth() {
+        return width.get();
+    }
+
+    public IntegerProperty widthProperty() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width.set(width);
+    }
+
+    public int getBridges() {
+        return bridges.get();
+    }
+
+    public IntegerProperty bridgesProperty() {
+        return bridges;
+    }
+
+    public void setBridges(int bridges) {
+        this.bridges.set(bridges);
+    }
+
+    public int getTunnels() {
+        return tunnels.get();
+    }
+
+    public IntegerProperty tunnelsProperty() {
+        return tunnels;
+    }
+
+    public void setTunnels(int tunnels) {
+        this.tunnels.set(tunnels);
+    }
+
+    public String getEnvironmental() {
+        return environmental.get();
+    }
+
+    public StringProperty environmentalProperty() {
+        return environmental;
+    }
+
+    public void setEnvironmental(String environmental) {
+        this.environmental.set(environmental);
+    }
+
+    public String getGeographical() {
+        return geographical.get();
+    }
+
+    public StringProperty geographicalProperty() {
+        return geographical;
+    }
+
+    public void setGeographical(String geographical) {
+        this.geographical.set(geographical);
     }
 }
 

@@ -33,7 +33,7 @@ public class LoginController {
             if (validateLogin()) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("App.fxml"));  // relative path --> no directory needed here
                     Parent root = loader.load(); // Retrieves the root UI Component through the FXML file
-                    Scene scene = new Scene(root, 800, 550); // sets scene based on the width and height
+                    Scene scene = new Scene(root);
                     stage.setScene(scene); // Sets the scene
                     stage.centerOnScreen(); // Centers the AppController to the login screen
             } else {

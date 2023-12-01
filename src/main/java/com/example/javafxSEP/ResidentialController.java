@@ -102,6 +102,14 @@ public class ResidentialController {
                 buildType,
                 projectSizeValue,
                 0,
+                "",
+                "",
+                0,
+                0,
+                0,
+                0,
+                0,
+                "",
                 ""
                 );
 
