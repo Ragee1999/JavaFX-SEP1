@@ -1,32 +1,33 @@
 package com.example.javafxSEP;
 
 import com.example.javafxSEP.TestClasses.ProjectList;
-import com.example.javafxSEP.TestClasses.ProjectTestStorage;
+import com.example.javafxSEP.TestClasses.FileReader;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class AppController {
 
-    // @FXML MEANS IT IS INITIALIZED/INJECTED THROUGH THE FXML FILE INTO THIS
-    // CONTROLLER
+    // @FXML MEANS IT IS INITIALIZED/INJECTED THROUGH THE FXML FILE INTO THIS CONTROLLER
 
     @FXML
     private TableView<ProjectList> projectList;
     @FXML
-    private TableColumn<ProjectList, String> ownerCol;
+    private TableColumn<ProjectList, String> nameCol;
     @FXML
     private TableColumn<ProjectList, String> projectTypeCol;
     @FXML
@@ -34,95 +35,82 @@ public class AppController {
     @FXML
     private TableColumn<ProjectList, Double> priceCol;
     @FXML
-    private TableColumn<ProjectList, Boolean> completedCol;
+    private TableColumn<ProjectList, String> completedCol;
     @FXML
-    private TableColumn<ProjectList, Integer> monthsCol;
+    private TableColumn<ProjectList, Integer> timelineCol;
+
+
+    private ProjectFilterController filterController; // the attribute for ProjectFilterController class
+    @FXML
+    Button residentialSort;
+    @FXML
+    Button industrialSort;
+    @FXML
+    Button roadConstructionSort;
+    @FXML
+    Button commercialSort;
+    @FXML
+    Button showAllSort;
+    @FXML
+    Button ongoingSort;
+    @FXML
+    Button completedSort;
 
     @FXML
-    private Button createNewProject; // The button is initialized with the createNewProject button, all buttons can
-                                     // have a specific id, this would be the ID
-
-    // FREDERIK
-    // Search by owner
+    private MenuItem addResidential;
     @FXML
-    private TextField searchField;
-    // @FXML
-    // private Button searchByOwnerButton;
-    private SearchController searchUtility;
-
-    // Search by price
+    private MenuItem addCommercial;
     @FXML
-    private TextField minPriceField;
+    private MenuItem addIndustrial;
     @FXML
-    private TextField maxPriceField;;
-    // @FXML
-    // private Button searchByPriceButton;
+    private MenuItem addRoadConstruction;
 
-    // when you run a private void initialize() you initially put code in here that
-    // you want to only be run after all the
+
+    // when you run a private void initialize() you initially put code in here that you want to only be run after all the
     // FXML components have been loaded and right before the scene is shown.
-    // This is because these methods needs to be run in certain periods and require
-    // different setups
+    // This is because these methods needs to be run in certain periods and require different setups
     // The ProjectList needs to be loaded/updated regularly
-    // InitializeProjectTable is just a sampleData for testing, but it will be
-    // applied with default settings in the FUTURE
-    // The createNewProject is a buttonEvent that opens a new UI for creating new
-    // Projects
+    // InitializeProjectTable is just a sampleData for testing, but it will be applied with default settings in the FUTURE
+    // The createNewProject is a buttonEvent that opens a new UI for creating new Projects
 
     @FXML
     private void initialize() {
-        createNewProject.setOnAction(event -> openCreateController()); // createNewProject button clicked and
-                                                                       // openCreateController method is called
-        // initializeProjectTable(); Sample Data to be replaced with JSON
-        // ObservableList<ProjectList> data = FXCollections.observableArrayList();
-        ObservableList<ProjectList> data = ProjectTestStorage.loadData(); // Load data from JSON
 
-        // This entire section is the property settings for all the current values, need
-        // to update here + ProjectList Class if we want to create new values for
-        // projects.
+        filterController = new ProjectFilterController(this);
+        filterController.initializeFilterButtons();
+
+        projectList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        // AddNewProject Menu bar clicked and their individual controller method is called.
+        addResidential.setOnAction(event -> AddResidential());
+        addCommercial.setOnAction(event -> AddCommercial());
+        addIndustrial.setOnAction(event -> AddIndustrial());
+        addRoadConstruction.setOnAction(event -> AddRoadConstruction());
+
+        ObservableList<ProjectList> data = FileReader.loadData(); // Load data from JSON
+
+        // This entire section is the property settings for all the current values, need to update here + ProjectList Class if we want to create new values for projects.
         projectList.setItems(data);
-        ownerCol.setCellValueFactory(cellData -> cellData.getValue().ownerProperty());
+        nameCol.setCellValueFactory(cellData -> cellData.getValue().projectNameProperty());
         projectTypeCol.setCellValueFactory(cellData -> cellData.getValue().projectTypeProperty());
-        completedCol.setCellValueFactory(cellData -> cellData.getValue().completedProperty());
         hoursSpentCol.setCellValueFactory(cellData -> cellData.getValue().hoursSpentProperty().asObject());
         priceCol.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
-        monthsCol.setCellValueFactory(cellData -> cellData.getValue().monthsProperty().asObject());
-
-        // Search
-        this.searchUtility = new SearchController();
-
-        // Add a listener to the searchField for 'search by owner'
-        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchByOwner();
-        });
-
-        // Add listeners to the price fields for 'search by price'
-        minPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchByPrice();
-        });
-        maxPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchByPrice();
-        });
+        timelineCol.setCellValueFactory(cellData -> cellData.getValue().timelineProperty().asObject());
+        completedCol.setCellValueFactory(cellData -> cellData.getValue().trueFalseProperty());
     }
 
-    private void openCreateController() {
+    private void AddResidential() {
         try {
-            // Load the FXML file for CreateController
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Create.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addResidential.fxml"));
             Parent root = loader.load();
 
-            CreateController createController = loader.getController(); // Declares the variable createController and
-                                                                        // gets the CreateController
-            createController.setAppController(this); // This sets communication between the createController and the
-                                                     // AppController
-            // The reason we did this is that AppController is the main controller of our
-            // application, and they need information from the AppController
-            // This essentially means the CreateController now has access to update data
-            // onto the AppController and vice Versa
-            // One example of this is how the createController need to add the new projects
-            // into the UI in the AppController
+            ResidentialController residentialController = loader.getController(); // Declares the variable residentialController and gets the ResidentialController
+            residentialController.setAppController(this);  // This sets communication between the residential and the AppController
+            //  The reason we did this is that AppController is the main controller of our application, and other classes need information from the AppController
+            // This essentially means the ResidentialController now has access to update data onto the AppController and vice Versa
+            // Our example of this is how the residentialController need to add the new projects into the UI in the AppController
 
-            // Creates the CreateController GUI
+            // Creates the Residential.fxml
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -132,136 +120,128 @@ public class AppController {
         }
     }
 
+
+    private void AddCommercial() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addCommercial.fxml"));
+            Parent root = loader.load();
+
+            CommercialController commercialController = loader.getController();
+            commercialController.setAppController(this);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void AddIndustrial() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addIndustrial.fxml"));
+            Parent root = loader.load();
+
+            IndustrialController industrialController = loader.getController();
+            industrialController.setAppController(this);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void AddRoadConstruction() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addRoadConstruction.fxml"));
+            Parent root = loader.load();
+
+            RoadConstructionController roadConstructionController = loader.getController();
+            roadConstructionController.setAppController(this);
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+            ;
+        }
+    }
+
     @FXML
     private void deleteData(ActionEvent deleteEvent) {
         System.out.println("Delete button clicked");
 
-        TableView.TableViewSelectionModel<ProjectList> selectionModel = projectList.getSelectionModel();
-        ObservableList<ProjectList> selectedItems = selectionModel.getSelectedItems();
-        List<ProjectList> updatedProjectList = new ArrayList<>(projectList.getItems());
-        updatedProjectList.removeAll(selectedItems);
-        projectList.getItems().setAll(updatedProjectList);
-        ProjectTestStorage.saveData(updatedProjectList);
-        System.out.println("Successfully removed from ui and saved in json");
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION); //JAVAFX has an inbuilt alert system if you want to click yes or cancel
+        confirmation.setTitle("Confirmation");
+        confirmation.setHeaderText("Confirm delete!");
+        confirmation.setContentText("Do you want to delete the project?");
 
+        confirmation.showAndWait().ifPresent
+                (response -> {
+                    if (response == ButtonType.OK) {
+                        TableView.TableViewSelectionModel<ProjectList> selectionModel = projectList.getSelectionModel();
+                        ObservableList<ProjectList> selectedItems = selectionModel.getSelectedItems();
+                        List<ProjectList> updatedProjectList = new ArrayList<>(projectList.getItems());
+                        updatedProjectList.removeAll(selectedItems);
+                        projectList.getItems().setAll(updatedProjectList);
+                        FileReader.saveData(updatedProjectList);
+                        System.out.println("Successfully removed from ui and saved in json");
+                    } else {
+                        System.out.println("Deletion cancel");
+                    }
+                });
     }
 
     public void addProject(ProjectList newProject) {
-        ObservableList<ProjectList> data = projectList.getItems(); // This is everything we can see in the current APP
-                                                                   // UI
+        ObservableList<ProjectList> data = projectList.getItems(); // This is everything we can see in the current APP UI
         data.add(newProject); // Adds the new project to the projectList
         projectList.setItems(data); // Adds and updates the data to the actual UI
-        ProjectTestStorage.saveData(newProject); // saves the new project in the JSON file
+        FileReader.saveData(newProject);  // saves the new project in the JSON file
         System.out.println("AppController: saved to UI and added to JSON");
     }
 
-    // FREDERIK
+    // Project filter based on project type - CHECK ProjectFilterController class
 
-    // Search by owner
-    /*
-     * @FXML
-     * private void searchButtonClicked(ActionEvent event) {
-     * // Retrieve the text entered in the searchField.
-     * String searchText = searchField.getText();
-     * // Load the full list of ProjectList objects from storage.
-     * ObservableList<ProjectList> data = ProjectTestStorage.loadData();
-     * 
-     * // Check if the search field is empty.
-     * if (searchText.isEmpty()) {
-     * // If search field is empty, display all items in the projectList TableView.
-     * projectList.setItems(data);
-     * } else {
-     * // If search field is not empty, perform a search based on the entered text.
-     * // The searchUtility.searchByOwner method filters the data based on the
-     * // searchText.
-     * ObservableList<ProjectList> filteredData = searchUtility.searchByOwner(data,
-     * searchText);
-     * 
-     * // Update the projectList TableView to display only the items that match the
-     * // search criteria.
-     * projectList.setItems(filteredData);
-     * }
-     * }
-     */
+    public void updateProjectTypeFilter(String selectedProjectType) {
+        ObservableList<ProjectList> data = FileReader.loadData(); // Load all projects from JSON
+        ObservableList<ProjectList> filteredData = FXCollections.observableArrayList();
 
-    private void searchByOwner() {
-        // Retrieve the text entered in the searchField.
-        String searchText = searchField.getText();
-        // Load the full list of ProjectList objects from storage.
-        ObservableList<ProjectList> data = ProjectTestStorage.loadData();
-
-        // Check if the search field is empty.
-        if (searchText.isEmpty()) {
-            // If search field is empty, display all items in the projectList TableView.
-            projectList.setItems(data);
-        } else {
-            // If search field is not empty, perform a search based on the entered text.
-            // The searchUtility.searchByOwner method filters the data based on the
-            // searchText.
-            ObservableList<ProjectList> filteredData = searchUtility.searchByOwner(data, searchText);
-
-            // Update the projectList TableView to display only the items that match the
-            // search criteria.
-            projectList.setItems(filteredData);
+        for (ProjectList project : data) {
+            if (project.getProjectType().equalsIgnoreCase(selectedProjectType)) {
+                filteredData.add(project);
+            }
         }
+
+        projectList.setItems(filteredData); // Update the UI with filtered data
     }
 
-    // Search by price
-    /*
-     * @FXML
-     * private void searchByPriceButtonClicked(ActionEvent event) {
-     * try {
-     * // double minPrice = Double.parseDouble(minPriceField.getText());
-     * // double maxPrice = Double.parseDouble(maxPriceField.getText());
-     * 
-     * // If the minPriceField is empty, set minPrice to 0.0
-     * double minPrice = minPriceField.getText().isEmpty() ? Double.MIN_VALUE
-     * : Double.parseDouble(minPriceField.getText());
-     * // If the maxPriceField is empty, set maxPrice to Double.MAX_VALUE
-     * double maxPrice = maxPriceField.getText().isEmpty() ? Double.MAX_VALUE
-     * : Double.parseDouble(maxPriceField.getText());
-     * 
-     * // Load the full list of ProjectList objects from storage.
-     * ObservableList<ProjectList> data = ProjectTestStorage.loadData();
-     * 
-     * // Filter the data based on the price range.
-     * ObservableList<ProjectList> filteredData =
-     * searchUtility.searchByPriceRange(data, minPrice, maxPrice);
-     * 
-     * // Update the projectList TableView to display only the items that match the
-     * // search criteria.
-     * projectList.setItems(filteredData);
-     * } catch (NumberFormatException e) {
-     * // Handle invalid input in price fields
-     * System.out.println("Invalid price input");
-     * }
-     * }
-     */
 
-    private void searchByPrice() {
-        try {
-            // double minPrice = Double.parseDouble(minPriceField.getText());
-            // double maxPrice = Double.parseDouble(maxPriceField.getText());
+    public void updateStatusFilter(String selectedStatus) {
+        ObservableList<ProjectList> data = FileReader.loadData(); // Load all projects from JSON
+        ObservableList<ProjectList> filteredData = FXCollections.observableArrayList();
 
-            // If the minPriceField is empty, set minPrice to 0.0
-            double minPrice = minPriceField.getText().isEmpty() ? Double.MIN_VALUE
-                    : Double.parseDouble(minPriceField.getText());
-            // If the maxPriceField is empty, set maxPrice to Double.MAX_VALUE
-            double maxPrice = maxPriceField.getText().isEmpty() ? Double.MAX_VALUE
-                    : Double.parseDouble(maxPriceField.getText());
-
-            // Load the full list of ProjectList objects from storage.
-            ObservableList<ProjectList> data = ProjectTestStorage.loadData();
-
-            // Filter the data based on the price range.
-            ObservableList<ProjectList> filteredData = searchUtility.searchByPriceRange(data, minPrice, maxPrice);
-
-            // Update the projectList TableView to display only the items that match the
-            // search criteria.
-            projectList.setItems(filteredData);
-        } catch (NumberFormatException e) {
-            // Handle invalid input in price fields
-            System.out.println("Invalid price input");
+        for (ProjectList project : data) {
+            if (project.getTrueFalse().equalsIgnoreCase(selectedStatus)) {
+                filteredData.add(project);
+            }
         }
+
+        projectList.setItems(filteredData); // Update the UI with filtered data
+    }
+
+
+    public void showAllProjects() {
+        ObservableList<ProjectList> data = FileReader.loadData(); // Load JSON
+        projectList.setItems(data); // Update UI with all projects
     }
 }
+
+
+
+
