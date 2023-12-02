@@ -215,7 +215,8 @@ public class AppController {
     private void deleteData(ActionEvent deleteEvent) {
         System.out.println("Delete button clicked");
 
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION); // JAVAFX has an inbuilt alert system if you want
+                                                                      // to click yes or cancel
         confirmation.setTitle("Confirmation");
         confirmation.setHeaderText("Confirm delete!");
         confirmation.setContentText("Do you want to delete the project?");
@@ -291,6 +292,16 @@ public class AppController {
     public void showAllProjects() {
         ObservableList<ProjectList> data = FileReader.loadData(); // Load JSON
         projectList.setItems(data); // Update UI with all projects
+
+        // When the 'Show All' button is clicked, clear the TextFields for search and
+        // price range
+        searchField.setText("");
+        minPriceField.setText("");
+        maxPriceField.setText("");
+
+        // Load all projects from JSON and set them to the TableView
+        allProjects = FileReader.loadData();
+        projectList.setItems(allProjects);
     }
 
     // Search by project name
