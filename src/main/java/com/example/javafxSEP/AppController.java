@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AppController {
 
@@ -61,7 +60,9 @@ public class AppController {
     @FXML
     private MenuItem addRoadConstruction;
 
-    // Search by owner
+    private ObservableList<ProjectList> allProjects = FXCollections.observableArrayList();
+
+    // Search by project name
     @FXML
     private TextField searchField;
     private SearchController searchUtility;
@@ -115,7 +116,7 @@ public class AppController {
 
         // Add a listener to the searchField for 'search by owner'
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
-            searchByOwner();
+            searchByProjectName();
         });
 
         // Add listeners to the price fields for 'search by price'
@@ -125,6 +126,10 @@ public class AppController {
         maxPriceField.textProperty().addListener((observable, oldValue, newValue) -> {
             searchByPrice();
         });
+
+        // Load data from JSON
+        allProjects = FileReader.loadData();
+        projectList.setItems(allProjects);
     }
 
     private void AddResidential() {
@@ -210,25 +215,40 @@ public class AppController {
     private void deleteData(ActionEvent deleteEvent) {
         System.out.println("Delete button clicked");
 
-        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION); // JAVAFX has an inbuilt alert system if you want
-                                                                      // to click yes or cancel
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
         confirmation.setTitle("Confirmation");
         confirmation.setHeaderText("Confirm delete!");
         confirmation.setContentText("Do you want to delete the project?");
 
         confirmation.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
-                TableView.TableViewSelectionModel<ProjectList> selectionModel = projectList.getSelectionModel();
-                ObservableList<ProjectList> selectedItems = selectionModel.getSelectedItems();
-                List<ProjectList> updatedProjectList = new ArrayList<>(projectList.getItems());
-                updatedProjectList.removeAll(selectedItems);
-                projectList.getItems().setAll(updatedProjectList);
-                FileReader.saveData(updatedProjectList);
-                System.out.println("Successfully removed from ui and saved in json");
+                ObservableList<ProjectList> selectedProjects = projectList.getSelectionModel().getSelectedItems();
+
+                // Remove selected projects from the allProjects list
+                allProjects.removeAll(selectedProjects);
+
+                // Reapply the current filters
+                applyCurrentFilters();
+
+                // Save the updated allProjects list to JSON
+                FileReader.saveData(new ArrayList<>(allProjects));
+                System.out.println("Successfully removed from UI and saved in JSON");
             } else {
-                System.out.println("Deletion cancel");
+                System.out.println("Deletion canceled");
             }
         });
+    }
+
+    private void applyCurrentFilters() {
+        // Check if any filter is active and apply it
+        if (!searchField.getText().isEmpty()) {
+            searchByProjectName();
+        } else if (!minPriceField.getText().isEmpty() || !maxPriceField.getText().isEmpty()) {
+            searchByPrice();
+        } else {
+            // If no filters are active, just set the TableView to allProjects
+            projectList.setItems(allProjects);
+        }
     }
 
     public void addProject(ProjectList newProject) {
@@ -273,51 +293,37 @@ public class AppController {
         projectList.setItems(data); // Update UI with all projects
     }
 
-    private void searchByOwner() {
-        // Retrieve the text entered in the searchField.
+    // Search by project name
+    private void searchByProjectName() {
+        // Retrieve the search text from the searchField
         String searchText = searchField.getText();
-        // Load the full list of ProjectList objects from storage.
-        ObservableList<ProjectList> data = FileReader.loadData();
 
-        // Check if the search field is empty.
         if (searchText.isEmpty()) {
-            // If search field is empty, display all items in the projectList TableView.
-            projectList.setItems(data);
+            // If the search text is empty, display all projects
+            projectList.setItems(allProjects);
         } else {
-            // If search field is not empty, perform a search based on the entered text.
-            // The searchUtility.searchByOwner method filters the data based on the
-            // searchText.
-            ObservableList<ProjectList> filteredData = searchUtility.searchByProjectName(data, searchText);
-
-            // Update the projectList TableView to display only the items that match the
-            // search criteria.
-            projectList.setItems(filteredData);
+            // Otherwise, display only the projects that match the search text
+            projectList.setItems(allProjects.filtered(project -> project.getProjectName().contains(searchText)));
         }
     }
 
+    // Search by price
     private void searchByPrice() {
         try {
-            // double minPrice = Double.parseDouble(minPriceField.getText());
-            // double maxPrice = Double.parseDouble(maxPriceField.getText());
-
-            // If the minPriceField is empty, set minPrice to 0.0
+            // Retrieve the minPrice and maxPrice from the price fields
             double minPrice = minPriceField.getText().isEmpty() ? Double.MIN_VALUE
                     : Double.parseDouble(minPriceField.getText());
-            // If the maxPriceField is empty, set maxPrice to Double.MAX_VALUE
             double maxPrice = maxPriceField.getText().isEmpty() ? Double.MAX_VALUE
                     : Double.parseDouble(maxPriceField.getText());
 
-            // Load the full list of ProjectList objects from storage.
-            ObservableList<ProjectList> data = FileReader.loadData();
-
-            // Filter the data based on the price range.
-            ObservableList<ProjectList> filteredData = searchUtility.searchByPriceRange(data, minPrice, maxPrice);
+            // Filter the data based on the price range from allProjects.
+            ObservableList<ProjectList> filteredData = searchUtility.searchByPriceRange(allProjects, minPrice,
+                    maxPrice);
 
             // Update the projectList TableView to display only the items that match the
             // search criteria.
             projectList.setItems(filteredData);
         } catch (NumberFormatException e) {
-            // Handle invalid input in price fields
             System.out.println("Invalid price input");
         }
     }
