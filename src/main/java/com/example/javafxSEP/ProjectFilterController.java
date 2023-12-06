@@ -9,7 +9,6 @@ public class ProjectFilterController {
     }
 
     public void initializeFilterButtons() {
-        // Add event handlers for each filter button
         appController.residentialSort.setOnAction(event -> updateProjectTypeFilter("Residential"));
         appController.commercialSort.setOnAction(event -> updateProjectTypeFilter("Commercial"));
         appController.industrialSort.setOnAction(event -> updateProjectTypeFilter("Industrial"));

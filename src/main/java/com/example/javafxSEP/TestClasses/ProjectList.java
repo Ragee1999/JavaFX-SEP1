@@ -339,5 +339,6 @@ public class ProjectList {
     public void setGeographical(String geographical) {
         this.geographical.set(geographical);
     }
+
 }
 

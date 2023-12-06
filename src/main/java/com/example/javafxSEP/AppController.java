@@ -130,7 +130,67 @@ public class AppController {
         // Load data from JSON
         allProjects = FileReader.loadData();
         projectList.setItems(allProjects);
+
+
+        // double click to view a project type model
+
+        projectList.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                viewByDoubleClick();
+            }
+        });
+
     }
+
+    private void viewByDoubleClick() {
+        ProjectList selectedProject = projectList.getSelectionModel().getSelectedItem();
+        if (selectedProject != null) {
+            showEditView(selectedProject);
+        }
+    }
+
+    public void editProject(ProjectList originalProject, ProjectList editedProject) {
+        ObservableList<ProjectList> data = projectList.getItems();
+
+        int index = data.indexOf(originalProject);
+
+        if (index != -1) {
+            // Replace the previous project with the newly edited project
+            data.set(index, editedProject);
+
+            // Update the UI by save data method
+            projectList.setItems(data);
+            FileReader.saveData(editedProject);  // Update the data in the JSON file
+            System.out.println("AppController: saved to UI and updated in JSON");
+        }
+    }
+
+    private void showEditView(ProjectList selectedProject) {
+        String projectType = selectedProject.getProjectType();
+        switch (projectType) {
+            case "Commercial":
+                viewCommercial(selectedProject);
+                break;
+        }
+    }
+
+    private void viewCommercial(ProjectList selectedProject) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewCommercial.fxml"));
+            Parent root = loader.load();
+
+            ViewCommercial viewCommercial = loader.getController();
+            viewCommercial.setAppController(this); // reference to App
+            viewCommercial.loadProjectData(selectedProject); // Gets the selected project
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void AddResidential() {
         try {
@@ -138,10 +198,10 @@ public class AppController {
             Parent root = loader.load();
 
             ResidentialController residentialController = loader.getController(); // Declares the variable
-                                                                                  // residentialController and gets the
-                                                                                  // ResidentialController
+            // residentialController and gets the
+            // ResidentialController
             residentialController.setAppController(this); // This sets communication between the residential and the
-                                                          // AppController
+            // AppController
             // The reason we did this is that AppController is the main controller of our
             // application, and other classes need information from the AppController
             // This essentially means the ResidentialController now has access to update
@@ -207,7 +267,6 @@ public class AppController {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-            ;
         }
     }
 
@@ -216,7 +275,7 @@ public class AppController {
         System.out.println("Delete button clicked");
 
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION); // JAVAFX has an inbuilt alert system if you want
-                                                                      // to click yes or cancel
+        // to click yes or cancel
         confirmation.setTitle("Confirmation");
         confirmation.setHeaderText("Confirm delete!");
         confirmation.setContentText("Do you want to delete the project?");
@@ -254,7 +313,7 @@ public class AppController {
 
     public void addProject(ProjectList newProject) {
         ObservableList<ProjectList> data = projectList.getItems(); // This is everything we can see in the current APP
-                                                                   // UI
+        // UI
         data.add(newProject); // Adds the new project to the projectList
         projectList.setItems(data); // Adds and updates the data to the actual UI
         FileReader.saveData(newProject); // saves the new project in the JSON file
@@ -338,4 +397,6 @@ public class AppController {
             System.out.println("Invalid price input");
         }
     }
+
+
 }
