@@ -7,17 +7,21 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-
-public class ViewCommercial {
+public class ViewRoadConstruction {
 
     // ATTRIBUTES
-
     @FXML
-    private TextField floorsField;
+    private TextField tunnelsField;
     @FXML
-    private TextField buildingUsageField;
+    private TextField bridgesField;
     @FXML
-    private TextField projectSizeField;
+    private TextField environmentalField;
+    @FXML
+    private TextField geographicalField;
+    @FXML
+    private TextField lengthField;
+    @FXML
+    private TextField widthField;
     @FXML
     private TextField projectNameField;
     @FXML
@@ -33,7 +37,7 @@ public class ViewCommercial {
     @FXML
     private Button editButton;
 
-    // Declaration that References to the AppController
+    //Declaration that References to the AppController
     private AppController appController;
 
     public void setAppController(AppController appController) {
@@ -41,16 +45,18 @@ public class ViewCommercial {
     }
 
 
-
     public void loadProjectData(ProjectList selectedProject)
     {
         projectNameField.setText(selectedProject.getProjectName());
         priceField.setText(String.valueOf(selectedProject.getPrice()));
-        floorsField.setText(String.valueOf(selectedProject.getFloors()));
-        projectSizeField.setText(String.valueOf(selectedProject.getProjectSize()));
-        buildingUsageField.setText(selectedProject.getBuildingUsage());
         hoursSpentField.setText(String.valueOf(selectedProject.getHoursSpent()));
         timelineField.setText(String.valueOf(selectedProject.getTimeline()));
+        lengthField.setText(String.valueOf(selectedProject.getLength()));
+        widthField.setText(String.valueOf(selectedProject.getWidth()));
+        bridgesField.setText(String.valueOf(selectedProject.getBridges()));
+        tunnelsField.setText(String.valueOf(selectedProject.getTunnels()));
+        environmentalField.setText(String.valueOf(selectedProject.getEnvironmental()));
+        geographicalField.setText(String.valueOf(selectedProject.getGeographical()));
 
         choiceBoxTrueFalse.getItems().addAll("True", "False");
         // adds the option to choose between true and false in the choice box
@@ -63,9 +69,12 @@ public class ViewCommercial {
     public void editButtonOnAction(ProjectList selectedProject) {
         String editedProjectName = projectNameField.getText();
         double editedPrice = Double.parseDouble(priceField.getText());
-        int editedFloors = Integer.parseInt(floorsField.getText());
-        int editedProjectSize = Integer.parseInt(projectSizeField.getText());
-        String editedBuildingUsage = buildingUsageField.getText();
+        int editedLength = Integer.parseInt(lengthField.getText());
+        int editedWidth = Integer.parseInt(widthField.getText());
+        int editedBridges = Integer.parseInt(bridgesField.getText());
+        int editedTunnels = Integer.parseInt(tunnelsField.getText());
+        String editedEnvironmental = environmentalField.getText();
+        String editedGeographical = geographicalField.getText();
         int editedHoursSpent = Integer.parseInt(hoursSpentField.getText());
         int editedTimeline = Integer.parseInt(timelineField.getText());
         String editedTrueFalse = choiceBoxTrueFalse.getValue();
@@ -73,7 +82,7 @@ public class ViewCommercial {
 
         ProjectList editedProject = new ProjectList(
                 editedProjectName,
-                "Commercial",
+                "Road Construction",
                 editedTrueFalse,
                 editedHoursSpent,
                 editedTimeline,
@@ -82,19 +91,18 @@ public class ViewCommercial {
                 0,
                 0,
                 "",
-                editedProjectSize,
-                editedFloors,
-                editedBuildingUsage,
-                "",
-                0,
-                0,
-                0,
                 0,
                 0,
                 "",
-                ""
+                "",
+                0,
+                editedLength,
+                editedWidth,
+                editedBridges,
+                editedTunnels,
+                editedEnvironmental,
+                editedGeographical
         );
-
 
         // Update the project
         appController.editProject(selectedProject, editedProject);
@@ -106,7 +114,7 @@ public class ViewCommercial {
     }
 
 
-        // Cancel/close by clicking the cancel button
+    // Cancel/close by clicking the cancel button
     @FXML
     public void cancelButtonOnAction() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();

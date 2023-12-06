@@ -7,19 +7,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-
-public class ViewCommercial {
+public class ViewResidential {
 
     // ATTRIBUTES
 
     @FXML
-    private TextField floorsField;
+    private TextField kitchensField;
     @FXML
-    private TextField buildingUsageField;
+    private TextField otherRoomsField;
     @FXML
     private TextField projectSizeField;
     @FXML
     private TextField projectNameField;
+    @FXML
+    private TextField bathroomsField;
     @FXML
     private TextField priceField;
     @FXML
@@ -29,11 +30,14 @@ public class ViewCommercial {
     @FXML
     private ChoiceBox<String> choiceBoxTrueFalse;
     @FXML
+    private ChoiceBox<String> buildTypeField;
+    @FXML
     private Button cancelButton;
     @FXML
     private Button editButton;
 
-    // Declaration that References to the AppController
+
+    //Declaration that References to the AppController
     private AppController appController;
 
     public void setAppController(AppController appController) {
@@ -41,50 +45,56 @@ public class ViewCommercial {
     }
 
 
-
-    public void loadProjectData(ProjectList selectedProject)
-    {
+    public void loadProjectData(ProjectList selectedProject) {
         projectNameField.setText(selectedProject.getProjectName());
         priceField.setText(String.valueOf(selectedProject.getPrice()));
-        floorsField.setText(String.valueOf(selectedProject.getFloors()));
         projectSizeField.setText(String.valueOf(selectedProject.getProjectSize()));
-        buildingUsageField.setText(selectedProject.getBuildingUsage());
         hoursSpentField.setText(String.valueOf(selectedProject.getHoursSpent()));
         timelineField.setText(String.valueOf(selectedProject.getTimeline()));
+        kitchensField.setText(String.valueOf(selectedProject.getKitchens()));
+        bathroomsField.setText(String.valueOf(selectedProject.getBathrooms()));
+        otherRoomsField.setText(String.valueOf(selectedProject.getOtherRooms()));
 
         choiceBoxTrueFalse.getItems().addAll("True", "False");
         // adds the option to choose between true and false in the choice box
         choiceBoxTrueFalse.setValue(selectedProject.getTrueFalse());
+
+        buildTypeField.getItems().addAll("New", "Renovation");
+        // adds the option to choose between new and renovation in the choice box
+        buildTypeField.setValue(selectedProject.getBuildType());
 
         editButton.setOnAction(event -> editButtonOnAction(selectedProject));
     }
 
     @FXML
     public void editButtonOnAction(ProjectList selectedProject) {
+        // Convert String values to right types
         String editedProjectName = projectNameField.getText();
         double editedPrice = Double.parseDouble(priceField.getText());
-        int editedFloors = Integer.parseInt(floorsField.getText());
         int editedProjectSize = Integer.parseInt(projectSizeField.getText());
-        String editedBuildingUsage = buildingUsageField.getText();
+        int editedKitchens = Integer.parseInt(kitchensField.getText());
+        int editedBathrooms = Integer.parseInt(bathroomsField.getText());
+        int editedOtherRooms = Integer.parseInt(otherRoomsField.getText());
         int editedHoursSpent = Integer.parseInt(hoursSpentField.getText());
         int editedTimeline = Integer.parseInt(timelineField.getText());
         String editedTrueFalse = choiceBoxTrueFalse.getValue();
+        String editedBuildType = buildTypeField.getValue();
 
 
-        ProjectList editedProject = new ProjectList(
+        ProjectList editedProject = new ProjectList(// creates a ProjectList object with the new values
                 editedProjectName,
-                "Commercial",
+                "Residential",
                 editedTrueFalse,
                 editedHoursSpent,
                 editedTimeline,
                 editedPrice,
-                0,
-                0,
+                editedKitchens,
+                editedOtherRooms,
+                editedBathrooms,
+                editedBuildType,
+                editedProjectSize,
                 0,
                 "",
-                editedProjectSize,
-                editedFloors,
-                editedBuildingUsage,
                 "",
                 0,
                 0,
@@ -95,7 +105,6 @@ public class ViewCommercial {
                 ""
         );
 
-
         // Update the project
         appController.editProject(selectedProject, editedProject);
 
@@ -103,15 +112,15 @@ public class ViewCommercial {
         // Closes window once updated
         Stage stage = (Stage) editButton.getScene().getWindow();
         stage.close();
+
     }
 
 
-        // Cancel/close by clicking the cancel button
+    // Cancel/close by clicking the cancel button
     @FXML
     public void cancelButtonOnAction() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         System.out.println("Cancel successful");
         stage.close();
     }
-
 }

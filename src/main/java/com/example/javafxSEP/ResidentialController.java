@@ -30,7 +30,7 @@ public class ResidentialController {
     @FXML
     private ChoiceBox<String> choiceBoxTrueFalse;
     @FXML
-    private ChoiceBox<String>  buildTypeField;
+    private ChoiceBox<String> buildTypeField;
     @FXML
     private Button createButton;
     @FXML

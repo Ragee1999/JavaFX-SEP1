@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AppController {
 
@@ -139,41 +140,61 @@ public class AppController {
                 viewByDoubleClick();
             }
         });
-
+        //
+        //
+        // INITIALIZE STOPS HERE
     }
 
-    private void viewByDoubleClick() {
+    private void viewByDoubleClick() { // If a project has been double-clicked it will show the view
         ProjectList selectedProject = projectList.getSelectionModel().getSelectedItem();
         if (selectedProject != null) {
             showEditView(selectedProject);
         }
     }
 
-    public void editProject(ProjectList originalProject, ProjectList editedProject) {
+    public void editProject(ProjectList originalProject, ProjectList editedProject) {  // Edit project type
         ObservableList<ProjectList> data = projectList.getItems();
 
         int index = data.indexOf(originalProject);
 
-        if (index != -1) {
-            // Replace the previous project with the newly edited project
-            data.set(index, editedProject);
+        if (index != -1) { // Check if the element is actually existing
 
-            // Update the UI by save data method
-            projectList.setItems(data);
-            FileReader.saveData(editedProject);  // Update the data in the JSON file
-            System.out.println("AppController: saved to UI and updated in JSON");
+            data.set(index, editedProject); // Replace the previous project with the newly edited project
+
+            projectList.setItems(data); // Update the UI by saving data method
+            System.out.println("AppController: Updated UI");
+
+            ObservableList<ProjectList> allProjects = FileReader.loadData();
+
+            int allProjectsIndex = -1;
+            for (int i = 0; i < allProjects.size(); i++) {
+                if (allProjects.get(i).getProjectName().equals(originalProject.getProjectName())) {  // Compare projects by name
+                    allProjectsIndex = i;
+                    break;
+                }
+            }
+            if (allProjectsIndex != -1) { // if the element exists
+                allProjects.set(allProjectsIndex, editedProject);  // changes the UI based on changes
+                FileReader.saveData(allProjects); // saves the data into the json
+                System.out.println("AppController: Saved to UI and updated in JSON");
+            } else {
+                System.out.println("AppController: Project not found in UI");
+            }
         }
     }
 
-    private void showEditView(ProjectList selectedProject) {
+    private void showEditView(ProjectList selectedProject) { // Opens project type based on one of the types clicked
         String projectType = selectedProject.getProjectType();
         switch (projectType) {
-            case "Commercial":
-                viewCommercial(selectedProject);
-                break;
+            case "Industrial" -> viewIndustrial(selectedProject);
+            case "Commercial" -> viewCommercial(selectedProject);
+            case "Residential" -> viewResidential(selectedProject);
+            case "Road Construction" -> viewRoadConstruction(selectedProject);
         }
     }
 
+
+    ///////////////  View + edit models  ///////////////
     private void viewCommercial(ProjectList selectedProject) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewCommercial.fxml"));
@@ -191,6 +212,58 @@ public class AppController {
         }
     }
 
+    private void viewIndustrial(ProjectList selectedProject) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewIndustrial.fxml"));
+            Parent root = loader.load();
+
+            ViewIndustrial viewIndustrial = loader.getController();
+            viewIndustrial.setAppController(this); // reference to App
+            viewIndustrial.loadProjectData(selectedProject); // Gets the selected project
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void viewResidential(ProjectList selectedProject) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewResidential.fxml"));
+            Parent root = loader.load();
+
+            ViewResidential viewResidential = loader.getController();
+            viewResidential.setAppController(this); // reference to App
+            viewResidential.loadProjectData(selectedProject); // Gets the selected project
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void viewRoadConstruction(ProjectList selectedProject) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewRoadConstruction.fxml"));
+            Parent root = loader.load();
+
+            ViewRoadConstruction viewRoadConstruction = loader.getController();
+            viewRoadConstruction.setAppController(this); // reference to App
+            viewRoadConstruction.loadProjectData(selectedProject); // Gets the selected project
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /////////////// Create project models ///////////////
 
     private void AddResidential() {
         try {
@@ -397,6 +470,4 @@ public class AppController {
             System.out.println("Invalid price input");
         }
     }
-
-
 }

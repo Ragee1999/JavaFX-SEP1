@@ -8,16 +8,14 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 
-public class ViewCommercial {
+public class ViewIndustrial {
 
     // ATTRIBUTES
 
     @FXML
-    private TextField floorsField;
+    private TextField facilitySizeField;
     @FXML
-    private TextField buildingUsageField;
-    @FXML
-    private TextField projectSizeField;
+    private TextField facilityUsageField;
     @FXML
     private TextField projectNameField;
     @FXML
@@ -33,6 +31,7 @@ public class ViewCommercial {
     @FXML
     private Button editButton;
 
+
     // Declaration that References to the AppController
     private AppController appController;
 
@@ -40,15 +39,12 @@ public class ViewCommercial {
         this.appController = appController; // This is where the reference is set
     }
 
-
-
     public void loadProjectData(ProjectList selectedProject)
     {
         projectNameField.setText(selectedProject.getProjectName());
         priceField.setText(String.valueOf(selectedProject.getPrice()));
-        floorsField.setText(String.valueOf(selectedProject.getFloors()));
-        projectSizeField.setText(String.valueOf(selectedProject.getProjectSize()));
-        buildingUsageField.setText(selectedProject.getBuildingUsage());
+        facilitySizeField.setText(String.valueOf(selectedProject.getFacilitySize()));
+        facilityUsageField.setText(String.valueOf(selectedProject.getFacilityUsage()));
         hoursSpentField.setText(String.valueOf(selectedProject.getHoursSpent()));
         timelineField.setText(String.valueOf(selectedProject.getTimeline()));
 
@@ -63,9 +59,8 @@ public class ViewCommercial {
     public void editButtonOnAction(ProjectList selectedProject) {
         String editedProjectName = projectNameField.getText();
         double editedPrice = Double.parseDouble(priceField.getText());
-        int editedFloors = Integer.parseInt(floorsField.getText());
-        int editedProjectSize = Integer.parseInt(projectSizeField.getText());
-        String editedBuildingUsage = buildingUsageField.getText();
+        int editedFacilitySize = Integer.parseInt(facilitySizeField.getText());
+        String editedFacilityUsage = facilityUsageField.getText();
         int editedHoursSpent = Integer.parseInt(hoursSpentField.getText());
         int editedTimeline = Integer.parseInt(timelineField.getText());
         String editedTrueFalse = choiceBoxTrueFalse.getValue();
@@ -73,7 +68,7 @@ public class ViewCommercial {
 
         ProjectList editedProject = new ProjectList(
                 editedProjectName,
-                "Commercial",
+                "Industrial",
                 editedTrueFalse,
                 editedHoursSpent,
                 editedTimeline,
@@ -82,11 +77,11 @@ public class ViewCommercial {
                 0,
                 0,
                 "",
-                editedProjectSize,
-                editedFloors,
-                editedBuildingUsage,
-                "",
                 0,
+                0,
+                "",
+                editedFacilityUsage,
+                editedFacilitySize,
                 0,
                 0,
                 0,
@@ -94,6 +89,7 @@ public class ViewCommercial {
                 "",
                 ""
         );
+
 
 
         // Update the project
@@ -106,7 +102,7 @@ public class ViewCommercial {
     }
 
 
-        // Cancel/close by clicking the cancel button
+    // Cancel/close by clicking the cancel button
     @FXML
     public void cancelButtonOnAction() {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
