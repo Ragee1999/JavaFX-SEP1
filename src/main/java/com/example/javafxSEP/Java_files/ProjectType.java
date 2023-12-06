@@ -3,7 +3,7 @@ package com.example.javafxSEP.Java_files;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ProjectType {
+public abstract class ProjectType {
     private String owner;
     private String projectName;
     private String projectType;
@@ -78,4 +78,13 @@ public class ProjectType {
     public int hashCode() {
         return Objects.hash(projectName, projectType);
     }
+
+    public abstract int getSquareMeters();
+    public abstract int getNumberOfFloor();
+    public abstract ArrayList<Floor> getAllFloors();
+    public abstract ArrayList<Room> getAllRooms();
+    public abstract int getNumberOfBathroom();
+    public abstract int getNumberOfKitchen();
+    public abstract int getNumberOfOffice();
+    public abstract int getNumberOfOtherRooms();
 }

@@ -58,4 +58,5 @@ public abstract class Room {
         return Objects.hash(roomID);
     }
 
+    public abstract Room copy();
 }

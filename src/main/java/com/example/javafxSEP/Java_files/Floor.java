@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Floor {
-    private String floorID;
+    private final String floorID;
     private int level;
     private String usage;
     private int squareMeters;
@@ -54,6 +54,14 @@ public class Floor {
         this.squareMeters = squareMeters;
     }
 
+    public int getAllRoomsSquareMeters(){
+        int result=0;
+        for (Room r:roomArrayList) {
+            result+=r.getSquareMeters();
+        }
+        return result;
+    }
+
     public void setRoomArrayList(ArrayList<Room> roomArrayList) {
         this.roomArrayList = roomArrayList;
     }
@@ -74,6 +82,19 @@ public class Floor {
     @Override
     public int hashCode() {
         return Objects.hash(floorID);
+    }
+
+    // Copy functions to make a copy by value according to composition declared in class diagram.
+    public Floor copy(){
+        Floor copyFloor = new Floor(this.floorID,this.level,this.squareMeters);
+        copyFloor.setUsage(this.getUsage());
+        //Upholding Composition for Arraylist
+        copyFloor.roomArrayList = new ArrayList<Room>();
+        //Upholding Composition for elements in Arraylist
+        for (Room r: this.roomArrayList) {
+            copyFloor.roomArrayList.add(r.copy());
+        }
+        return copyFloor;
     }
 
     public int spaceRemaining(){
