@@ -60,6 +60,13 @@ public abstract class Log {
     }
 
     public abstract String toJSON();
+
+    //should return the hours for the given period if the log fall between the dates.
+    //Empty value if the log doesn't have hours
     public abstract double hoursSpentBetween(MyDate startDate, MyDate endDate);
+
+    //should return the budget for the given period if the log fall between the dates.
+    //Empty value if the log doesn't have hours
     public abstract double budgetSpentBetween(MyDate startDate, MyDate endDate);
+
 }

@@ -2,7 +2,7 @@ package com.example.javafxSEP.Java_files;
 
 import java.util.Objects;
 
-public class Milestones {
+public class Milestone {
     private String headline;
     private double budget;
     private String supervisor;
@@ -11,13 +11,13 @@ public class Milestones {
     private double hoursEstimated;
     private String description;
 
-    public Milestones(String headline, String supervisor, MyDate startDate) {
+    public Milestone(String headline, String supervisor, MyDate startDate) {
         this.headline = headline;
         this.supervisor = supervisor;
         this.startDate = startDate;
     }
 
-    public Milestones(String jsonText) {
+    public Milestone(String jsonText) {
     }
 
     public String getHeadline() {
@@ -129,7 +129,7 @@ public class Milestones {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Milestones that = (Milestones) o;
+        Milestone that = (Milestone) o;
         return Objects.equals(headline, that.headline);
     }
 
@@ -147,5 +147,25 @@ public class Milestones {
     public void appendDescription(String text){
         this.description += "\n";
         this.description += text;
+    }
+
+    public void insertMilestone(Milestone beforeMilestone, Milestone afterMilestone){
+
+        //Check if starting dated is exceed for beforeMilestone
+        if(this.getStartDate().isBefore(beforeMilestone.getStartDate())){
+            throw new RuntimeException("[Error: insertMilestone()] Milestone being inserted has starting date before beforeMilestone starting date");
+        }
+
+        //Push starting date for afterMilestone
+        //Check if end date is exceed for afterMilestone
+        if(afterMilestone.getEndDate().isBefore(getEndDate())){
+            throw new RuntimeException("[Error: insertMilestone()] Milestone being inserted has ending date after afterMilestone end date");
+        }
+
+        //Push ending date for beforeMilestone
+        beforeMilestone.setEndDate(this.getStartDate());
+
+        //Push starting date for afterMilestone
+        afterMilestone.setStartDate(this.getEndDate());
     }
 }
