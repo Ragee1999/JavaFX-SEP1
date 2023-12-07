@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ResidentialController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ViewResidential">
    <children>
       <TextField fx:id="projectNameField" layoutX="35.0" layoutY="79.0" />
       <TextField fx:id="priceField" layoutX="35.0" layoutY="139.0" />
@@ -15,7 +15,7 @@
       <TextField fx:id="timelineField" layoutX="35.0" layoutY="199.0" />
       <TextField fx:id="kitchensField" layoutX="215.0" layoutY="199.0" />
       <TextField fx:id="hoursSpentField" layoutX="35.0" layoutY="259.0" />
-      <Button fx:id="createButton" layoutX="133.0" layoutY="367.0" mnemonicParsing="false" onAction="#createButtonOnAction" text="Create" />
+      <Button fx:id="editButton" layoutX="133.0" layoutY="367.0" mnemonicParsing="false"  text="Edit" />
       <Button fx:id="cancelButton" layoutX="215.0" layoutY="367.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Cancel" />
       <TextField fx:id="otherRoomsField" layoutX="215.0" layoutY="259.0" />
       <TextField fx:id="projectSizeField" layoutX="35.0" layoutY="319.0" />

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AppController {
 
@@ -130,7 +131,139 @@ public class AppController {
         // Load data from JSON
         allProjects = FileReader.loadData();
         projectList.setItems(allProjects);
+
+
+        // double click to view a project type model
+
+        projectList.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {
+                viewByDoubleClick();
+            }
+        });
+        //
+        //
+        // INITIALIZE STOPS HERE
     }
+
+    private void viewByDoubleClick() { // If a project has been double-clicked it will show the view
+        ProjectList selectedProject = projectList.getSelectionModel().getSelectedItem();
+        if (selectedProject != null) {
+            showEditView(selectedProject);
+        }
+    }
+
+    public void editProject(ProjectList originalProject, ProjectList editedProject) {  // Edit project type
+        ObservableList<ProjectList> data = projectList.getItems();
+
+        int index = data.indexOf(originalProject);
+
+        if (index != -1) { // Check if the element is actually existing
+
+            data.set(index, editedProject); // Replace the previous project with the newly edited project
+
+            projectList.setItems(data); // Update the UI by saving data method
+            System.out.println("AppController: Updated UI");
+
+            ObservableList<ProjectList> allProjects = FileReader.loadData();
+
+            int allProjectsIndex = -1;
+            for (int i = 0; i < allProjects.size(); i++) {
+                if (allProjects.get(i).getProjectName().equals(originalProject.getProjectName())) {  // Compare projects by name
+                    allProjectsIndex = i;
+                    break;
+                }
+            }
+            if (allProjectsIndex != -1) { // if the element exists
+                allProjects.set(allProjectsIndex, editedProject);  // changes the UI based on changes
+                FileReader.saveData(allProjects); // saves the data into the json
+                System.out.println("AppController: Saved to UI and updated in JSON");
+            } else {
+                System.out.println("AppController: Project not found in UI");
+            }
+        }
+    }
+
+    private void showEditView(ProjectList selectedProject) { // Opens project type based on one of the types clicked
+        String projectType = selectedProject.getProjectType();
+        switch (projectType) {
+            case "Industrial" -> viewIndustrial(selectedProject);
+            case "Commercial" -> viewCommercial(selectedProject);
+            case "Residential" -> viewResidential(selectedProject);
+            case "Road Construction" -> viewRoadConstruction(selectedProject);
+        }
+    }
+
+
+    ///////////////  View + edit models  ///////////////
+    private void viewCommercial(ProjectList selectedProject) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewCommercial.fxml"));
+            Parent root = loader.load();
+
+            ViewCommercial viewCommercial = loader.getController();
+            viewCommercial.setAppController(this); // reference to App
+            viewCommercial.loadProjectData(selectedProject); // Gets the selected project
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void viewIndustrial(ProjectList selectedProject) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewIndustrial.fxml"));
+            Parent root = loader.load();
+
+            ViewIndustrial viewIndustrial = loader.getController();
+            viewIndustrial.setAppController(this); // reference to App
+            viewIndustrial.loadProjectData(selectedProject); // Gets the selected project
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void viewResidential(ProjectList selectedProject) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewResidential.fxml"));
+            Parent root = loader.load();
+
+            ViewResidential viewResidential = loader.getController();
+            viewResidential.setAppController(this); // reference to App
+            viewResidential.loadProjectData(selectedProject); // Gets the selected project
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void viewRoadConstruction(ProjectList selectedProject) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewRoadConstruction.fxml"));
+            Parent root = loader.load();
+
+            ViewRoadConstruction viewRoadConstruction = loader.getController();
+            viewRoadConstruction.setAppController(this); // reference to App
+            viewRoadConstruction.loadProjectData(selectedProject); // Gets the selected project
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /////////////// Create project models ///////////////
 
     private void AddResidential() {
         try {
@@ -138,10 +271,10 @@ public class AppController {
             Parent root = loader.load();
 
             ResidentialController residentialController = loader.getController(); // Declares the variable
-                                                                                  // residentialController and gets the
-                                                                                  // ResidentialController
+            // residentialController and gets the
+            // ResidentialController
             residentialController.setAppController(this); // This sets communication between the residential and the
-                                                          // AppController
+            // AppController
             // The reason we did this is that AppController is the main controller of our
             // application, and other classes need information from the AppController
             // This essentially means the ResidentialController now has access to update
@@ -207,7 +340,6 @@ public class AppController {
             stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
-            ;
         }
     }
 
@@ -216,7 +348,7 @@ public class AppController {
         System.out.println("Delete button clicked");
 
         Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION); // JAVAFX has an inbuilt alert system if you want
-                                                                      // to click yes or cancel
+        // to click yes or cancel
         confirmation.setTitle("Confirmation");
         confirmation.setHeaderText("Confirm delete!");
         confirmation.setContentText("Do you want to delete the project?");
@@ -254,7 +386,7 @@ public class AppController {
 
     public void addProject(ProjectList newProject) {
         ObservableList<ProjectList> data = projectList.getItems(); // This is everything we can see in the current APP
-                                                                   // UI
+        // UI
         data.add(newProject); // Adds the new project to the projectList
         projectList.setItems(data); // Adds and updates the data to the actual UI
         FileReader.saveData(newProject); // saves the new project in the JSON file

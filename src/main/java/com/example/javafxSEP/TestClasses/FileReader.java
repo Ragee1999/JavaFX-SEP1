@@ -63,10 +63,5 @@ public class FileReader {
         System.out.println("Data is being written to JSON file");
     }
 
-    // Print the entire list for debugging
-    public static void printEntireList() {
-        List<ProjectList> projectList = loadData();
-        projectList.forEach(System.out::println);
-    }
 }
 
