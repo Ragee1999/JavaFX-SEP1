@@ -1,5 +1,10 @@
 package com.example.javafxSEP.Java_files;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import static com.example.javafxSEP.TestClasses.FileReader.objectMapper;
+
 public class Kitchen extends Room {
     private int sinks;
     private int numberOfStoves;
@@ -39,19 +44,27 @@ public class Kitchen extends Room {
     }
 
     public void setSinks(int sinks) {
+        if(sinks<0){
+            throw new IllegalArgumentException("sinks Value under 0 not valid");
+        }
         this.sinks = sinks;
     }
 
     public void setNumberOfStoves(int numberOfStoves) {
+        if(numberOfStoves<0){
+            throw new IllegalArgumentException("numberOfStoves Value under 0 not valid");
+        }
         this.numberOfStoves = numberOfStoves;
     }
 
     public void setCabinets(int cabinets) {
+        if(cabinets<0){
+            throw new IllegalArgumentException("cabinets Value under 0 not valid");
+        }
         this.cabinets = cabinets;
     }
 
-    public void setDishwasherIncluded(boolean dishwasherIncluded) {
-        this.dishwasherIncluded = dishwasherIncluded;
+    public void setDishwasherIncluded(boolean dishwasherIncluded) {this.dishwasherIncluded = dishwasherIncluded;
     }
 
     public void setInductionStove(boolean inductionStove) {
@@ -63,6 +76,23 @@ public class Kitchen extends Room {
         k1.setCabinets(this.cabinets);
         k1.setInductionStove(this.inductionStove);
         return k1;
+    }
+
+    @Override
+    public void infoFromJSON(String jsonText) throws JsonProcessingException {
+        JsonNode jsonNode = objectMapper.readTree(jsonText);
+        String type = jsonNode.get("roomType").asText();
+        if(!(type.equalsIgnoreCase("kitchen"))){
+            throw new IllegalArgumentException("roomType is different from 'Kitchen'");
+        }
+        setRoomID(jsonNode.get("roomID").asText());
+        setRoomName(jsonNode.get("roomName").asText());
+        setSquareMeters(jsonNode.get("squareMeters").asInt());
+        setSinks(jsonNode.get("sinks").asInt());
+        setNumberOfStoves(jsonNode.get("numberOfStoves").asInt());
+        setCabinets(jsonNode.get("cabinets").asInt());
+        setDishwasherIncluded(jsonNode.get("dishwasher").asBoolean());
+        setInductionStove(jsonNode.get("isInduction").asBoolean());
     }
 
     public static void swap(Kitchen k1,Kitchen k2){
