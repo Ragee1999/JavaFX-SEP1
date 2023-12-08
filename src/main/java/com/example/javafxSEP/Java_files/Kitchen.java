@@ -19,8 +19,9 @@ public class Kitchen extends Room {
         this.dishwasherIncluded = dishwasherIncluded;
     }
 
-    public Kitchen(String roomID, String roomName) {
-        super(roomID, roomName);
+    //minimal Constructor for internal system use in JSON reader
+    public Kitchen() {
+        super("1", "templateKitchen");
     }
 
     public int getSinks() {

@@ -19,8 +19,9 @@ private int waterConnection;
         this.blackWaterDrainage = blackWaterDrainage;
     }
 
-    public OtherRoom(String roomID, String roomName) {
-        super(roomID, roomName);
+    //minimal Constructor for internal system use in JSON reader
+    public OtherRoom() {
+        super("1", "TemplateOtherRoom");
     }
 
     public int getPowerOutlets() {
@@ -72,7 +73,9 @@ private int waterConnection;
 
     @Override
     public void infoFromJSON(String jsonText) throws JsonProcessingException {
+        //create json object from json text
         JsonNode jsonNode = objectMapper.readTree(jsonText);
+        //
         String type = jsonNode.get("roomType").asText();
         if(!(type.equalsIgnoreCase("office"))){
             throw new IllegalArgumentException("roomType is different from 'Office'");

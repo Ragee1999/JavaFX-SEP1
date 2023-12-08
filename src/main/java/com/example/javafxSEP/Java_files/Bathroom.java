@@ -22,9 +22,9 @@ public class Bathroom extends Room{
         this.toilets = toilets;
     }
 
-    //minimal Constructor for internal system use
-    public Bathroom(String roomID, String roomName) {
-        super(roomID, roomName);
+    //minimal Constructor for internal system use in JSON reader
+    public Bathroom() {
+        super("1", "templateBathroom");
     }
 
     public int getSinks() {
@@ -48,6 +48,7 @@ public class Bathroom extends Room{
     }
 
     public void setSinks(int sinks) {
+        //check for illegal values
         if(sinks<0){
             throw new IllegalArgumentException("Sink Value under 0 not valid");
         }
@@ -55,6 +56,7 @@ public class Bathroom extends Room{
     }
 
     public void setToilets(int toilets) {
+        //check for illegal values
         if(toilets<0){
             throw new IllegalArgumentException("toilets Value under 0 not valid");
         }
@@ -66,6 +68,7 @@ public class Bathroom extends Room{
     }
 
     public void setBathtubs(int bathtubs) {
+        //check for illegal values
         if(bathtubs<0){
             throw new IllegalArgumentException("bathtubs Value under 0 not valid");
         }
@@ -73,6 +76,7 @@ public class Bathroom extends Room{
     }
 
     public void setShowers(int showers) {
+        //check for illegal values
         if(showers<0){
             throw new IllegalArgumentException("showers Value under 0 not valid");
         }

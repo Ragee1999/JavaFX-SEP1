@@ -18,8 +18,9 @@ public class Office extends Room{
         this.numberOfWorkers = numberOfWorkers;
     }
 
-    public Office(String roomID, String roomName) {
-        super(roomID, roomName);
+    //minimal Constructor for internal system use in JSON reader
+    public Office() {
+        super("1", "templateOffice");
     }
 
     public int getPowerOutlets() {
