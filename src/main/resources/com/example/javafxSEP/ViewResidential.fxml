@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ViewResidential">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ViewResidential">
    <children>
       <TextField fx:id="projectNameField" layoutX="35.0" layoutY="79.0" />
       <TextField fx:id="priceField" layoutX="35.0" layoutY="139.0" />
@@ -15,7 +15,7 @@
       <TextField fx:id="timelineField" layoutX="35.0" layoutY="199.0" />
       <TextField fx:id="kitchensField" layoutX="215.0" layoutY="199.0" />
       <TextField fx:id="hoursSpentField" layoutX="35.0" layoutY="259.0" />
-      <Button fx:id="editButton" layoutX="133.0" layoutY="367.0" mnemonicParsing="false"  text="Edit" />
+      <Button fx:id="editButton" layoutX="133.0" layoutY="367.0" mnemonicParsing="false" text="Edit" />
       <Button fx:id="cancelButton" layoutX="215.0" layoutY="367.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Cancel" />
       <TextField fx:id="otherRoomsField" layoutX="215.0" layoutY="259.0" />
       <TextField fx:id="projectSizeField" layoutX="35.0" layoutY="319.0" />
@@ -36,5 +36,10 @@
       <Label layoutX="222.0" layoutY="235.0" prefHeight="17.0" prefWidth="159.0" text="Other rooms with plumbing" />
       <Label layoutX="222.0" layoutY="294.0" prefHeight="17.0" prefWidth="135.0" text="Build type" />
       <ChoiceBox fx:id="buildTypeField" layoutX="215.0" layoutY="319.0" prefWidth="150.0" />
+      <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="48.0" layoutY="404.0" prefHeight="25.0" prefWidth="306.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

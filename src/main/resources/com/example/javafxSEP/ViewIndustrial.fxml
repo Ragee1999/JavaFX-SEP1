@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ViewIndustrial">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="393.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ViewIndustrial">
    <children>
       <TextField fx:id="projectNameField" layoutX="35.0" layoutY="79.0" />
       <TextField fx:id="priceField" layoutX="35.0" layoutY="139.0" />
       <TextField fx:id="timelineField" layoutX="35.0" layoutY="199.0" />
       <TextField fx:id="facilityUsageField" layoutX="215.0" layoutY="199.0" promptText="e.g manufacturing plant" />
       <TextField fx:id="hoursSpentField" layoutX="35.0" layoutY="259.0" />
-      <Button fx:id="editButton" layoutX="133.0" layoutY="309.0" mnemonicParsing="false"  text="Edit" />
+      <Button fx:id="editButton" layoutX="133.0" layoutY="309.0" mnemonicParsing="false" text="Edit" />
       <Button fx:id="cancelButton" layoutX="215.0" layoutY="309.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Cancel" />
       <TextField fx:id="facilitySizeField" layoutX="215.0" layoutY="139.0" />
       <Label fx:id="projectTypeLabel" layoutX="147.0" layoutY="22.0" text="Industrial project">
@@ -30,5 +30,10 @@
       <Label layoutX="221.0" layoutY="115.0" prefHeight="17.0" prefWidth="135.0" text="Facility size" />
       <Label layoutX="222.0" layoutY="56.0" prefHeight="17.0" prefWidth="135.0" text="Completed" />
       <Label layoutX="222.0" layoutY="175.0" prefHeight="17.0" prefWidth="135.0" text="Facility usage" />
+      <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="58.0" layoutY="346.0" prefHeight="25.0" prefWidth="306.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

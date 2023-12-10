@@ -3,6 +3,7 @@ package com.example.javafxSEP;
 import com.example.javafxSEP.TestClasses.ProjectList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
@@ -31,6 +32,8 @@ public class CommercialController {
     private Button createButton;
     @FXML
     private Button cancelButton;
+    @FXML
+    private Label exceptionLabel;
 
     // Declaration that References to the AppController
     private AppController appController;
@@ -52,6 +55,13 @@ public class CommercialController {
     }
 
     @FXML
+    public void cancelButtonOnAction() {  // Cancel/close by clicking the cancel button
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        System.out.println("Cancel successful");
+        stage.close();
+    }
+
+    @FXML
     public void createButtonOnAction() {
 
         String projectType = "Commercial";
@@ -64,49 +74,56 @@ public class CommercialController {
         String buildingUsage = buildingUsageField.getText();
         String trueFalse = choiceBoxTrueFalse.getValue();
 
-        // Convert String values to the right types
-        int hoursSpentValue = Integer.parseInt(hoursSpent);
-        int timelineValue = Integer.parseInt(timeline);
-        double priceValue = Double.parseDouble(price);
-        int projectSizeValue = Integer.parseInt(projectSize);
-        int floorsValue = Integer.parseInt(floors);
+        try {
+            // Convert String values to the right types
+            int hoursSpentValue = ExceptionHandler.parseInt(hoursSpent);
+            int timelineValue = ExceptionHandler.parseInt(timeline);
+            double priceValue = ExceptionHandler.parseDouble(price);
+            int projectSizeValue = ExceptionHandler.parseInt(projectSize);
+            int floorsValue = ExceptionHandler.parseInt(floors);
 
-        ProjectList newProject = new ProjectList(
-                projectName,
-                projectType,
-                trueFalse,
-                hoursSpentValue,
-                timelineValue,
-                priceValue,
-                0,
-                0,
-                0,
-                "",
-                projectSizeValue,
-                floorsValue,
-                buildingUsage,
-                "",
-                0,
-                0,
-                0,
-                0,
-                0,
-                "",
-                ""
-        );
+            if (projectName.isEmpty() || buildingUsage.isEmpty() || trueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+                throw new IllegalArgumentException("Please fill in all fields");
+            }
 
-        appController.addProject(newProject); // This adds the newProject to the appController (Main UI)
-        // Closes the ResidentialController after adding newProject
-        Stage stage = (Stage) createButton.getScene().getWindow();
-        stage.close();
-        System.out.println("Closed the pop-up window");
-    }
+            ProjectList newProject = new ProjectList(
+                    projectName,
+                    projectType,
+                    trueFalse,
+                    hoursSpentValue,
+                    timelineValue,
+                    priceValue,
+                    0,
+                    0,
+                    0,
+                    "",
+                    projectSizeValue,
+                    floorsValue,
+                    buildingUsage,
+                    "",
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    "",
+                    ""
+            );
 
-    // Cancel/close by clicking the cancel button
-    @FXML
-    public void cancelButtonOnAction() {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        System.out.println("Cancel successful");
-        stage.close();
+            appController.addProject(newProject); // This adds the newProject to the appController (Main UI)
+
+            // Closes the ResidentialController after adding newProject
+            Stage stage = (Stage) createButton.getScene().getWindow();
+            stage.close();
+            System.out.println("Closed the pop-up window");
+
+        } catch (Exception e) {
+            if (e instanceof NumberFormatException) {
+                exceptionLabel.setText("Please fill in all fields"); // For the integers/doubles
+
+            } else if (e instanceof IllegalArgumentException) {
+                exceptionLabel.setText(e.getMessage()); // gets message from IllegalArgumentsException check above the constructor
+            }
+        }
     }
 }
