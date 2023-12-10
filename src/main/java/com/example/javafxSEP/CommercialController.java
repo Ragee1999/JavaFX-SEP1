@@ -76,14 +76,14 @@ public class CommercialController {
 
         try {
             // Convert String values to the right types
-            int hoursSpentValue = ExceptionHandler.parseInt(hoursSpent);
-            int timelineValue = ExceptionHandler.parseInt(timeline);
-            double priceValue = ExceptionHandler.parseDouble(price);
-            int projectSizeValue = ExceptionHandler.parseInt(projectSize);
-            int floorsValue = ExceptionHandler.parseInt(floors);
+            int hoursSpentValue = Integer.parseInt(hoursSpent);
+            int timelineValue = Integer.parseInt(timeline);
+            double priceValue = Double.parseDouble(price);
+            int projectSizeValue = Integer.parseInt(projectSize);
+            int floorsValue = Integer.parseInt(floors);
 
             if (projectName.isEmpty() || buildingUsage.isEmpty() || trueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
-                throw new IllegalArgumentException("Please fill in all fields");
+                throw new IllegalArgumentException();
             }
 
             ProjectList newProject = new ProjectList(
@@ -117,13 +117,13 @@ public class CommercialController {
             stage.close();
             System.out.println("Closed the pop-up window");
 
-        } catch (Exception e) {
-            if (e instanceof NumberFormatException) {
-                exceptionLabel.setText("Please fill in all fields"); // For the integers/doubles
+            // this exception handles number errors or general errors.
+        } catch (NumberFormatException e) {
+            exceptionLabel.setText("Please enter number values in the required fields.");
+        } catch (Exception e) { // this exception specifically throws any other exception that's not NumberFormat
+            exceptionLabel.setText("An error occurred, please check your inputs.");
 
-            } else if (e instanceof IllegalArgumentException) {
-                exceptionLabel.setText(e.getMessage()); // gets message from IllegalArgumentsException check above the constructor
-            }
+            // since we only have 2 types of errors, either strings or numbers, we decided to make all string errors to general errors.
         }
     }
 }

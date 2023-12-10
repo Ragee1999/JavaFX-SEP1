@@ -79,7 +79,7 @@ public class IndustrialController {
             int facilitySizeValue = Integer.parseInt(facilitySize);
 
             if (projectName.isEmpty() || facilityUsage.isEmpty() || trueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
-                throw new IllegalArgumentException("Please fill in all fields");
+                throw new IllegalArgumentException();
             }
 
             ProjectList newProject = new ProjectList(
@@ -113,13 +113,13 @@ public class IndustrialController {
             stage.close();
             System.out.println("Closed the pop-up window");
 
-        } catch (Exception e) {
-            if (e instanceof NumberFormatException) {
-                exceptionLabel.setText("Please fill in all fields"); // For the integers/doubles
+            // this exception handles number errors or general errors.
+        } catch (NumberFormatException e) {
+            exceptionLabel.setText("Please enter number values in the required fields.");
+        } catch (Exception e) { // this exception specifically throws any other exception that's not NumberFormat
+            exceptionLabel.setText("An error occurred, please check your inputs.");
 
-            } else if (e instanceof IllegalArgumentException) {
-                exceptionLabel.setText(e.getMessage()); // gets message from IllegalArgumentsException check above the constructor
-            }
+            // since we only have 2 types of errors, either strings or numbers, we decided to make all string errors to general errors.
         }
     }
 }
