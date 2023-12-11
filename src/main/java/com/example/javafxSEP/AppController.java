@@ -49,7 +49,6 @@ public class AppController {
     @FXML
     Button completedSort;
 
-
     // DROPDOWN MENU
     @FXML
     private MenuItem addResidential;
@@ -59,7 +58,6 @@ public class AppController {
     private MenuItem addIndustrial;
     @FXML
     private MenuItem addRoadConstruction;
-
 
     private ObservableList<ProjectList> allProjects = FXCollections.observableArrayList();
 
@@ -132,7 +130,6 @@ public class AppController {
         allProjects = FileReader.loadData();
         projectList.setItems(allProjects);
 
-
         // double click to view a project type model
 
         projectList.setOnMouseClicked(event -> {
@@ -152,7 +149,7 @@ public class AppController {
         }
     }
 
-    public void editProject(ProjectList originalProject, ProjectList editedProject) {  // Edit project type
+    public void editProject(ProjectList originalProject, ProjectList editedProject) { // Edit project type
         ObservableList<ProjectList> data = projectList.getItems();
 
         int index = data.indexOf(originalProject);
@@ -168,13 +165,14 @@ public class AppController {
 
             int allProjectsIndex = -1;
             for (int i = 0; i < allProjects.size(); i++) {
-                if (allProjects.get(i).getProjectName().equals(originalProject.getProjectName())) {  // Compare projects by name
+                if (allProjects.get(i).getProjectName().equals(originalProject.getProjectName())) { // Compare projects
+                                                                                                    // by name
                     allProjectsIndex = i;
                     break;
                 }
             }
             if (allProjectsIndex != -1) { // if the element exists
-                allProjects.set(allProjectsIndex, editedProject);  // changes the UI based on changes
+                allProjects.set(allProjectsIndex, editedProject); // changes the UI based on changes
                 FileReader.saveData(allProjects); // saves the data into the json
                 System.out.println("AppController: Saved to UI and updated in JSON");
             } else {
@@ -193,8 +191,7 @@ public class AppController {
         }
     }
 
-
-    ///////////////  View + edit models  ///////////////
+    /////////////// View + edit models ///////////////
     private void viewCommercial(ProjectList selectedProject) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewCommercial.fxml"));
@@ -439,14 +436,15 @@ public class AppController {
     // Search by project name
     private void searchByProjectName() {
         // Retrieve the search text from the searchField
-        String searchText = searchField.getText();
+        String searchText = searchField.getText().toLowerCase();
 
         if (searchText.isEmpty()) {
             // If the search text is empty, display all projects
             projectList.setItems(allProjects);
         } else {
             // Otherwise, display only the projects that match the search text
-            projectList.setItems(allProjects.filtered(project -> project.getProjectName().contains(searchText)));
+            projectList.setItems(
+                    allProjects.filtered(project -> project.getProjectName().toLowerCase().contains(searchText)));
         }
     }
 
