@@ -52,6 +52,8 @@ public class AppController {
     @FXML
     Button completedSort;
 
+
+    // DROPDOWN MENU
     @FXML
     private MenuItem addResidential;
     @FXML
@@ -60,6 +62,7 @@ public class AppController {
     private MenuItem addIndustrial;
     @FXML
     private MenuItem addRoadConstruction;
+
 
     private ObservableList<ProjectList> allProjects = FXCollections.observableArrayList();
 
