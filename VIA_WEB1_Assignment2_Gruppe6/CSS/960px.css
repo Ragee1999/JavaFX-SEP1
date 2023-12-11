@@ -1,0 +1,266 @@
+@media only screen and (max-width: 960px) and (min-width: 577px) {
+
+/*Weird error with margin making blank space in the top*/
+/*Cause overlapping media query adds 56px of margin-top at certain size*/
+.navbar-space{
+  margin-top: 0px;
+  min-height: 0px;
+}
+
+.full_info_container_services{
+    padding: 15px 15px 0px 15px;
+    text-align: left;
+    position: relative;
+    float: left;
+    height: 80vh;
+}
+
+.line{
+    border-bottom: 5px solid black;
+
+}
+
+.dropdown{
+    display: none;
+}
+
+.Services_mobilecontent{
+    width: 80%;
+    position: relative;
+    float: right;
+
+}
+
+.alternativeServicesMenu{
+    background-position-x: center;
+    position:relative;
+    width: 20%;
+    height: 100%;
+    float:left;
+    background-color: var(--main-color-LighterOpacity50);
+}
+
+
+.alternativeServicesMenu label{
+    width: 100%;
+    height: 20vh;
+    float:left;
+    text-align: center;
+}
+
+.collapse_Services p{
+  font-size: 1em;
+}
+
+.collapse_Services:hover{
+    background-color: var(--main-color-Lighter);
+}
+
+input + div{
+    display:none;
+  }
+input:checked + div{
+    display:block;
+  }
+
+    /*Images CSS Services page*/
+    #BackgroundImageRB_Services{
+        background-image: url(../Images/LejlighedsKompleks2.jpg);
+        height: 80vh;
+        min-width: 80vw;
+        background-size: cover;
+        position: absolute;
+        background-position-x: center;
+        background-position-y:center;
+        overflow:hidden;
+        z-index: -1;
+        opacity: 0.2;
+        display: inherit;
+        background-repeat: no-repeat;
+      }
+    
+      #BackgroundImageCB_Services{
+        background-image: url(../Images/KontorByggeri1.jpg);
+        height: 80vh;
+        min-width: 80vw;
+        background-size: cover;
+        position: absolute;
+        background-position-x: center;
+        background-position-y:center;
+        overflow: hidden;
+        z-index: -1;
+        opacity: 0.2;
+        display: inherit;
+        background-repeat: no-repeat;
+      }
+    
+      #BackgroundImageIC_Services{
+        background-image: url(../Images/FabriksByggeri2.jpg);
+        height: 80vh;
+        min-width: 80vw;
+        background-size: cover;
+        position: absolute;
+        background-position-x: left;
+        background-position-y:bottom;
+        overflow: hidden;
+        z-index: -1;
+        opacity: 0.2;
+        display: inherit;  
+        background-repeat: no-repeat;
+      }
+    
+      #BackgroundImageRC_Services{
+        background-image: url(../Images/Vejbyggeri1.jpg);
+        height: 80vh;
+        min-width: 80vw;
+        background-size: cover;
+        position: absolute;
+        background-position-x: left;
+        background-position-y:center;
+        overflow: hidden;
+        z-index: -1;
+        opacity: 0.2;
+        display: inherit; 
+        background-repeat: no-repeat;
+      }
+
+
+}
+
+/*Larger than */
+
+@media only screen and (min-width: 961px) {
+
+.navbar-space{
+  margin-top: 56PX;
+  min-height: 0px;
+}
+
+.full_info_container_services{
+  padding: 15px 15px 0px 15px;
+  text-align: left;
+  position: relative;
+  float: left;
+  height: 80vh;
+}
+
+/*Weird error with margin making blank space in the top*/
+
+.line{
+    border-bottom: 5px solid black;
+}
+
+.dropdown{
+    display: none;
+}
+
+.alternativeServicesMenu{
+  order: 2;
+  position:relative;
+  width: 100%;
+  height: 20vh;
+  float:right;
+  background-color: var(--main-color-LighterOpacity50);
+}
+
+
+.alternativeServicesMenu label{
+  height: 20vh;
+  float:left;
+  text-align: center;
+}
+
+.collapse_Services p{
+display: inline;
+font-size: 1em;
+height: 20vh;
+}
+
+.Services_mobilecontent{
+  position: relative;
+  float: left;
+  height: calc(80vh-56px);
+}
+
+.collapse_Services{
+  display: inline;
+  width: 25%;
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.collapse_Services:hover{
+    background-color: var(--main-color-Lighter);
+}
+
+input + div{
+  display:none;
+}
+input:checked + div{
+  display:block;
+}
+
+    /*Images CSS Services page*/
+    #BackgroundImageRB_Services{
+      background-image: url(../Images/LejlighedsKompleks2.jpg);
+      height: 80vh;
+      min-width: 100vw;
+      background-size: cover;
+      position: absolute;
+      background-position-x: center;
+      background-position-y:center;
+      overflow:hidden;
+      z-index: -1;
+      opacity: 0.2;
+      display: inherit;
+      background-repeat: no-repeat;
+      float: top;
+    }
+  
+    #BackgroundImageCB_Services{
+      background-image: url(../Images/KontorByggeri1.jpg);
+      height: 80vh;
+      min-width: 100vw;
+      background-size: cover;
+      position: absolute;
+      background-position-x: center;
+      background-position-y:center;
+      overflow: hidden;
+      z-index: -1;
+      opacity: 0.2;
+      display: inherit;
+      background-repeat: no-repeat;
+    }
+  
+    #BackgroundImageIC_Services{
+      background-image: url(../Images/FabriksByggeri2.jpg);
+      height: 80vh;
+      min-width: 100vw;
+      background-size: cover;
+      position: absolute;
+      background-position-x: left;
+      background-position-y:bottom;
+      overflow: hidden;
+      z-index: -1;
+      opacity: 0.2;
+      display: inherit;  
+      background-repeat: no-repeat;
+    }
+  
+    #BackgroundImageRC_Services{
+      background-image: url(../Images/Vejbyggeri1.jpg);
+      height: 80vh;
+      min-width: 100vw;
+      background-size: cover;
+      position: absolute;
+      background-position-x: left;
+      background-position-y:center;
+      overflow: hidden;
+      z-index: -1;
+      opacity: 0.2;
+      display: inherit; 
+      background-repeat: no-repeat;
+    }
+
+
+}

@@ -1,0 +1,198 @@
+@media only screen and (max-width: 576px) {
+/* Services CSS*/
+/*Overwrite of the main.css .navbar-space{} which makes whitespace */
+.navbar-space{
+  margin-top: 0px;
+  min-height: 0px;
+}
+
+.collapse_Services{
+    cursor: pointer;
+    display: flex;
+    background: var(--main-color-Lighter);
+    height: 5vh;
+    text-align: center;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  .Services_mobilecontent{
+    position: relative;
+    float: left;
+  }
+
+  .categoryText_Services{
+    position: relative;
+    float: left;
+    width: 100vw;
+    z-index: 0;
+  }
+
+  .full_info_container_services{
+    padding: 0px 10px 0px 10px;
+    height: 80vh;
+  }
+
+  .showElementAt576{
+    display: block;
+  }
+
+  /*Hide large menu labels when in small version*/
+  .alternativeServicesMenu{
+    display: none;
+  }
+  /**/
+
+
+/*Dropdown menu buttons Services*/ 
+.btn{
+    padding: 0 0 0 0 !important;
+    margin: 0 0 0 0 !important;
+    border: 0 0 0 0 !important;
+    background-color: var(--main-color-Lighter);
+}
+
+.btn:hover{
+  background-color: var(--main-color-Lighter);
+}
+
+.btn-primary{
+    background-color: var(--main-color-Lighter);
+}
+
+.dropbtn {
+    background-color: var(--main-color-Lighter);
+    width: 100vw;
+    color: rgb(132, 58, 58);
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown_services {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 100vw;
+    background-color: var(--main-color-Lighter);
+  }
+
+  .dropdown_services::after{
+    background-color: var(--main-color-Lighter) !important;
+  }
+
+  .dropdown_services h1{
+    position: relative;
+    float:left;
+  }
+
+  .dropdown-toggle{
+    background-color: var(--main-color-Lighter);
+  }
+
+  .dropdown_Services{
+    width: 100vw;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: relative;
+    background-color: #f1f1f1;
+    height: 100%;
+    width: 100vw;
+    z-index: 5;
+    font-size: 1.5em;
+  }
+  
+  .dropdown-content label {
+    text-align: center;
+    width: 100vw;
+    color: black;
+    text-decoration: none;
+    display: block;
+  }
+  
+  input + div{
+    display:none;
+  }
+  input:checked + div{
+    display:block;
+  }
+
+  .Services_mobilecontent:hover .dropdown-content{display: none;}
+
+  .dropdown .dropdown-content {display: none;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  .dropdown:hover .dropbtn {background-color: var(--main-color-Lighter);}
+
+  /*Images CSS Services page*/
+  #BackgroundImageRB_Services{
+    background-image: url(../Images/LejlighedsKompleks2.jpg);
+    height: 80vh;
+    min-width: 100vw;
+    background-size: cover;
+    position: absolute;
+    background-position-x: left;
+    background-position-y:bottom;
+    overflow:hidden;
+    z-index: -1;
+    opacity: 0.2;
+    display: inherit;
+    background-repeat: no-repeat;
+  }
+
+  #BackgroundImageCB_Services{
+    background-image: url(../Images/KontorByggeri1.jpg);
+    height: 80vh;
+    min-width: 100vw;
+    background-size: cover;
+    position: absolute;
+    background-position-x: center;
+    background-position-y:center;
+    overflow: hidden;
+    z-index: -1;
+    opacity: 0.2;
+    display: inherit;
+    background-repeat: no-repeat;
+  }
+
+  #BackgroundImageIC_Services{
+    background-image: url(../Images/FabriksByggeri2.jpg);
+    height: 80vh;
+    min-width: 100vw;
+    background-size: cover;
+    position: absolute;
+    background-position-x: center;
+    background-position-y:center;
+    overflow: hidden;
+    z-index: -1;
+    opacity: 0.2;
+    display: inherit;  
+    background-repeat: no-repeat;
+  }
+
+  #BackgroundImageRC_Services{
+    background-image: url(../Images/Vejbyggeri1.jpg);
+    height: 80vh;
+    min-width: 100vw;
+    background-size: cover;
+    position: absolute;
+    background-position-x: center;
+    background-position-y:center;
+    overflow: hidden;
+    z-index: -1;
+    opacity: 0.2;
+    display: inherit; 
+    background-repeat: no-repeat;
+  }
+
+
+  /*
+
+
+
+  */    
+    
+
+}
