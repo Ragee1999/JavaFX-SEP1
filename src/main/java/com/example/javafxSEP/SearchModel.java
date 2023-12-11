@@ -1,7 +1,5 @@
 package com.example.javafxSEP;
 
-import com.example.javafxSEP.TestClasses.ProjectList;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

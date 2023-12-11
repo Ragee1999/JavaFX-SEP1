@@ -1,5 +1,6 @@
-package com.example.javafxSEP.TestClasses;
+package com.example.javafxSEP;
 
+import com.example.javafxSEP.ProjectList;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.collections.FXCollections;

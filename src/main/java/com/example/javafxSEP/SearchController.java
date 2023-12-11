@@ -2,7 +2,6 @@ package com.example.javafxSEP;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import com.example.javafxSEP.TestClasses.ProjectList;
 
 import java.util.List;
 // import java.util.stream.Collectors;

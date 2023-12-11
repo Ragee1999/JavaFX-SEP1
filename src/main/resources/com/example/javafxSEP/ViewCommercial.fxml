@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ViewCommercial">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="398.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxSEP.ViewCommercial">
    <children>
       <TextField fx:id="projectNameField" layoutX="35.0" layoutY="79.0" />
       <TextField fx:id="priceField" layoutX="35.0" layoutY="139.0" />
@@ -28,13 +28,18 @@
       <Label layoutX="42.0" layoutY="115.0" prefHeight="17.0" prefWidth="135.0" text="Price in dollars" />
       <Label layoutX="42.0" layoutY="175.0" prefHeight="17.0" prefWidth="135.0" text="Timeline in months" />
       <Label layoutX="42.0" layoutY="235.0" prefHeight="17.0" prefWidth="135.0" text="Hours spent" />
-      <Label layoutX="222.0" layoutY="235.0" prefHeight="17.0" prefWidth="135.0" text="Project size" />
       <Label layoutX="222.0" layoutY="56.0" prefHeight="17.0" prefWidth="135.0" text="Completed" />
       <Label layoutX="222.0" layoutY="115.0" prefHeight="17.0" prefWidth="135.0" text="Floors" />
       <Label layoutX="222.0" layoutY="175.0" prefHeight="17.0" prefWidth="135.0" text="Building usage" />
       <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="47.0" layoutY="350.0" prefHeight="25.0" prefWidth="306.0" textFill="RED">
          <font>
             <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="222.0" layoutY="235.0" prefHeight="17.0" prefWidth="89.0" text="Project size in m" />
+      <Label layoutX="308.0" layoutY="235.0" prefHeight="10.0" prefWidth="5.0" text="2">
+         <font>
+            <Font size="8.0" />
          </font>
       </Label>
    </children>

@@ -1,7 +1,5 @@
 package com.example.javafxSEP;
 
-import com.example.javafxSEP.TestClasses.ProjectList;
-import com.example.javafxSEP.TestClasses.FileReader;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class AppController {
 

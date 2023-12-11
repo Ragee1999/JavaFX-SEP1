@@ -1,4 +1,4 @@
-package com.example.javafxSEP.TestClasses;
+package com.example.javafxSEP;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

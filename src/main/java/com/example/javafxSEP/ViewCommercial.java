@@ -1,6 +1,5 @@
 package com.example.javafxSEP;
 
-import com.example.javafxSEP.TestClasses.ProjectList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
