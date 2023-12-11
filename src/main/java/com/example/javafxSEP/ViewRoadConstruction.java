@@ -32,7 +32,7 @@ public class ViewRoadConstruction {
     @FXML
     private TextField timelineField;
     @FXML
-    private ChoiceBox<String> choiceBoxTrueFalse;
+    private ChoiceBox<String> choiceBoxcompleted;
     @FXML
     private Button cancelButton;
     @FXML
@@ -60,9 +60,9 @@ public class ViewRoadConstruction {
         environmentalField.setText(String.valueOf(selectedProject.getEnvironmental()));
         geographicalField.setText(String.valueOf(selectedProject.getGeographical()));
 
-        choiceBoxTrueFalse.getItems().addAll("True", "False");
+        choiceBoxcompleted.getItems().addAll("True", "False");
         // adds the option to choose between true and false in the choice box
-        choiceBoxTrueFalse.setValue(selectedProject.getTrueFalse());
+        choiceBoxcompleted.setValue(selectedProject.getCompleted());
 
         editButton.setOnAction(event -> editButtonOnAction(selectedProject));
     }
@@ -91,16 +91,16 @@ public class ViewRoadConstruction {
             String editedGeographical = geographicalField.getText();
             int editedHoursSpent = Integer.parseInt(hoursSpentField.getText());
             int editedTimeline = Integer.parseInt(timelineField.getText());
-            String editedTrueFalse = choiceBoxTrueFalse.getValue();
+            String editedcompleted = choiceBoxcompleted.getValue();
 
-            if (editedProjectName.isEmpty() || editedEnvironmental.isEmpty() || editedGeographical.isEmpty() || editedTrueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+            if (editedProjectName.isEmpty() || editedEnvironmental.isEmpty() || editedGeographical.isEmpty() || editedcompleted.isEmpty()) { // these are exceptions for the strings/choice-box options
                 throw new IllegalArgumentException(); // this will be shown as the general error
             }
 
             ProjectList editedProject = new ProjectList(
                     editedProjectName,
                     "Road Construction",
-                    editedTrueFalse,
+                    editedcompleted,
                     editedHoursSpent,
                     editedTimeline,
                     editedPrice,

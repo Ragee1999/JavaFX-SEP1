@@ -28,7 +28,7 @@ public class ViewCommercial {
     @FXML
     private TextField timelineField;
     @FXML
-    private ChoiceBox<String> choiceBoxTrueFalse;
+    private ChoiceBox<String> choiceBoxcompleted;
     @FXML
     private Button cancelButton;
     @FXML
@@ -52,9 +52,9 @@ public class ViewCommercial {
         hoursSpentField.setText(String.valueOf(selectedProject.getHoursSpent()));
         timelineField.setText(String.valueOf(selectedProject.getTimeline()));
 
-        choiceBoxTrueFalse.getItems().addAll("True", "False");
+        choiceBoxcompleted.getItems().addAll("True", "False");
         // adds the option to choose between true and false in the choice box
-        choiceBoxTrueFalse.setValue(selectedProject.getTrueFalse());
+        choiceBoxcompleted.setValue(selectedProject.getCompleted());
 
         editButton.setOnAction(event -> editButtonOnAction(selectedProject));
     }
@@ -81,16 +81,16 @@ public class ViewCommercial {
             String editedBuildingUsage = buildingUsageField.getText();
             int editedHoursSpent = Integer.parseInt(hoursSpentField.getText());
             int editedTimeline = Integer.parseInt(timelineField.getText());
-            String editedTrueFalse = choiceBoxTrueFalse.getValue();
+            String editedcompleted = choiceBoxcompleted.getValue();
 
-            if (editedProjectName.isEmpty() || editedBuildingUsage.isEmpty() || editedTrueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+            if (editedProjectName.isEmpty() || editedBuildingUsage.isEmpty() || editedcompleted.isEmpty()) { // these are exceptions for the strings/choice-box options
                 throw new IllegalArgumentException(); // this will be shown as the general error
             }
 
             ProjectList editedProject = new ProjectList(
                     editedProjectName,
                     "Commercial",
-                    editedTrueFalse,
+                    editedcompleted,
                     editedHoursSpent,
                     editedTimeline,
                     editedPrice,

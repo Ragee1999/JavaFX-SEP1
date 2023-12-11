@@ -13,7 +13,7 @@ public class ProjectList {
     // These JavaFX properties allows for binding the data with the UI components.
     private StringProperty projectName;
     private StringProperty projectType;
-    private StringProperty trueFalse;
+    private StringProperty completed;
     private IntegerProperty hoursSpent;
     private IntegerProperty timeline;
     private DoubleProperty price;
@@ -42,7 +42,7 @@ public class ProjectList {
             // Basically this constructor creates these instances from the JSON Data like giving the owner a name
             @JsonProperty("projectName") String projectName,
             @JsonProperty("projectType") String projectType,
-            @JsonProperty("trueFalse") String trueFalse,
+            @JsonProperty("completed") String completed,
             @JsonProperty("hoursSpent") int hoursSpent,
             @JsonProperty("timeline") int timeline,
             @JsonProperty("price") double price,
@@ -67,7 +67,7 @@ public class ProjectList {
         // this is the initialize section where properties are given default values or set values
         this.projectName = new SimpleStringProperty(projectName);
         this.projectType = new SimpleStringProperty(projectType);
-        this.trueFalse = new SimpleStringProperty(trueFalse);
+        this.completed = new SimpleStringProperty(completed);
         this.hoursSpent = new SimpleIntegerProperty(hoursSpent);
         this.timeline = new SimpleIntegerProperty(timeline);
         this.price = new SimpleDoubleProperty(price);
@@ -116,16 +116,16 @@ public class ProjectList {
         this.projectType.set(projectType);
     }
 
-    public String getTrueFalse() {
-        return trueFalse.get();
+    public String getCompleted() {
+        return completed.get();
     }
 
-    public StringProperty trueFalseProperty() {
-        return trueFalse;
+    public StringProperty completedProperty() {
+        return completed;
     }
 
-    public void setTrueFalse(String trueFalse) {
-        this.trueFalse.set(trueFalse);
+    public void setCompleted(String completed) {
+        this.completed.set(completed);
     }
 
     public int getHoursSpent() {

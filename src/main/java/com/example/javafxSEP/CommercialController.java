@@ -27,7 +27,7 @@ public class CommercialController {
     @FXML
     private TextField timelineField;
     @FXML
-    private ChoiceBox<String> choiceBoxTrueFalse;
+    private ChoiceBox<String> choiceBoxcompleted;
     @FXML
     private Button createButton;
     @FXML
@@ -45,12 +45,12 @@ public class CommercialController {
     private void setDefaultValues2() {
         timelineField.setText("18");
         floorsField.setText("1");
-        choiceBoxTrueFalse.setValue("False");
+        choiceBoxcompleted.setValue("False");
     }
 
     @FXML
     private void initialize() {
-        choiceBoxTrueFalse.getItems().addAll("True", "False");
+        choiceBoxcompleted.getItems().addAll("True", "False");
         setDefaultValues2();
     }
 
@@ -72,7 +72,7 @@ public class CommercialController {
         String floors = floorsField.getText();
         String projectSize = projectSizeField.getText();
         String buildingUsage = buildingUsageField.getText();
-        String trueFalse = choiceBoxTrueFalse.getValue();
+        String completed = choiceBoxcompleted.getValue();
 
         try {
             // Convert String values to the right types
@@ -82,14 +82,14 @@ public class CommercialController {
             int projectSizeValue = Integer.parseInt(projectSize);
             int floorsValue = Integer.parseInt(floors);
 
-            if (projectName.isEmpty() || buildingUsage.isEmpty() || trueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+            if (projectName.isEmpty() || buildingUsage.isEmpty() || completed.isEmpty()) { // these are exceptions for the strings/choice-box options
                 throw new IllegalArgumentException();
             }
 
             ProjectList newProject = new ProjectList(
                     projectName,
                     projectType,
-                    trueFalse,
+                    completed,
                     hoursSpentValue,
                     timelineValue,
                     priceValue,

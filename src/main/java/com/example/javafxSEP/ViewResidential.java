@@ -29,7 +29,7 @@ public class ViewResidential {
     @FXML
     private TextField timelineField;
     @FXML
-    private ChoiceBox<String> choiceBoxTrueFalse;
+    private ChoiceBox<String> choiceBoxcompleted;
     @FXML
     private ChoiceBox<String> buildTypeField;
     @FXML
@@ -58,9 +58,9 @@ public class ViewResidential {
         bathroomsField.setText(String.valueOf(selectedProject.getBathrooms()));
         otherRoomsField.setText(String.valueOf(selectedProject.getOtherRooms()));
 
-        choiceBoxTrueFalse.getItems().addAll("True", "False");
+        choiceBoxcompleted.getItems().addAll("True", "False");
         // adds the option to choose between true and false in the choice box
-        choiceBoxTrueFalse.setValue(selectedProject.getTrueFalse());
+        choiceBoxcompleted.setValue(selectedProject.getCompleted());
 
         buildTypeField.getItems().addAll("New", "Renovation");
         // adds the option to choose between new and renovation in the choice box
@@ -91,17 +91,17 @@ public class ViewResidential {
             int editedOtherRooms = Integer.parseInt(otherRoomsField.getText());
             int editedHoursSpent = Integer.parseInt(hoursSpentField.getText());
             int editedTimeline = Integer.parseInt(timelineField.getText());
-            String editedTrueFalse = choiceBoxTrueFalse.getValue();
+            String editedcompleted = choiceBoxcompleted.getValue();
             String editedBuildType = buildTypeField.getValue();
 
-            if (editedProjectName.isEmpty() || editedBuildType.isEmpty() || editedTrueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+            if (editedProjectName.isEmpty() || editedBuildType.isEmpty() || editedcompleted.isEmpty()) { // these are exceptions for the strings/choice-box options
                 throw new IllegalArgumentException(); // this will be shown as the general error
             }
 
             ProjectList editedProject = new ProjectList(// creates a ProjectList object with the new values
                     editedProjectName,
                     "Residential",
-                    editedTrueFalse,
+                    editedcompleted,
                     editedHoursSpent,
                     editedTimeline,
                     editedPrice,

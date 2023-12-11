@@ -25,7 +25,7 @@ public class IndustrialController {
     @FXML
     private TextField timelineField;
     @FXML
-    private ChoiceBox<String> choiceBoxTrueFalse;
+    private ChoiceBox<String> choiceBoxcompleted;
     @FXML
     private Button createButton;
     @FXML
@@ -42,12 +42,12 @@ public class IndustrialController {
 
     private void setDefaultValues3() {
         timelineField.setText("30");
-        choiceBoxTrueFalse.setValue("False");
+        choiceBoxcompleted.setValue("False");
     }
 
     @FXML
     private void initialize() {
-        choiceBoxTrueFalse.getItems().addAll("True", "False");
+        choiceBoxcompleted.getItems().addAll("True", "False");
         setDefaultValues3();
     }
 
@@ -69,7 +69,7 @@ public class IndustrialController {
         String timeline = timelineField.getText();
         String facilitySize = facilitySizeField.getText();
         String facilityUsage = facilityUsageField.getText();
-        String trueFalse = choiceBoxTrueFalse.getValue();
+        String completed = choiceBoxcompleted.getValue();
 
         try {
             // Convert String values to the right types
@@ -78,14 +78,14 @@ public class IndustrialController {
             double priceValue = Double.parseDouble(price);
             int facilitySizeValue = Integer.parseInt(facilitySize);
 
-            if (projectName.isEmpty() || facilityUsage.isEmpty() || trueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+            if (projectName.isEmpty() || facilityUsage.isEmpty() || completed.isEmpty()) { // these are exceptions for the strings/choice-box options
                 throw new IllegalArgumentException();
             }
 
             ProjectList newProject = new ProjectList(
                     projectName,
                     projectType,
-                    trueFalse,
+                    completed,
                     hoursSpentValue,
                     timelineValue,
                     priceValue,

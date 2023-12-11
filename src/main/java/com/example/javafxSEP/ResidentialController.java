@@ -29,7 +29,7 @@ public class ResidentialController {
     @FXML
     private TextField timelineField;
     @FXML
-    private ChoiceBox<String> choiceBoxTrueFalse;
+    private ChoiceBox<String> choiceBoxcompleted;
     @FXML
     private ChoiceBox<String> buildTypeField;
     @FXML
@@ -52,12 +52,12 @@ public class ResidentialController {
         bathroomsField.setText("1");
         otherRoomsField.setText("1");
         buildTypeField.setValue("New");
-        choiceBoxTrueFalse.setValue("False");
+        choiceBoxcompleted.setValue("False");
     }
 
     @FXML
     private void initialize() {
-        choiceBoxTrueFalse.getItems().addAll("True", "False");
+        choiceBoxcompleted.getItems().addAll("True", "False");
         buildTypeField.getItems().addAll("New", "Renovation");
         setDefaultValues();
     }
@@ -84,7 +84,7 @@ public class ResidentialController {
         String bathrooms = bathroomsField.getText();
         String projectSize = projectSizeField.getText();
         String buildType = buildTypeField.getValue();
-        String trueFalse = choiceBoxTrueFalse.getValue();
+        String completed = choiceBoxcompleted.getValue();
 
         try {
             // Convert String values to right types
@@ -96,14 +96,14 @@ public class ResidentialController {
             int bathroomsValue = Integer.parseInt(bathrooms);
             int projectSizeValue = Integer.parseInt(projectSize);
 
-            if (projectName.isEmpty() || buildType.isEmpty() || trueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+            if (projectName.isEmpty() || buildType.isEmpty() || completed.isEmpty()) { // these are exceptions for the strings/choice-box options
                 throw new IllegalArgumentException();
             }
 
             ProjectList newProject = new ProjectList(// creates a ProjectList object with the new values
                     projectName,
                     projectType,
-                    trueFalse,
+                    completed,
                     hoursSpentValue,
                     timelineValue,
                     priceValue,

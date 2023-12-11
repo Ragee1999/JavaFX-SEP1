@@ -24,7 +24,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="choiceBoxTrueFalse" layoutX="215.0" layoutY="79.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceBoxcompleted" layoutX="215.0" layoutY="79.0" prefWidth="150.0" />
       <Label layoutX="42.0" layoutY="56.0" prefHeight="17.0" prefWidth="135.0" text="Project name:" />
       <Label layoutX="42.0" layoutY="115.0" prefHeight="17.0" prefWidth="135.0" text="Price in dollars" />
       <Label layoutX="42.0" layoutY="175.0" prefHeight="17.0" prefWidth="135.0" text="Timeline in months" />

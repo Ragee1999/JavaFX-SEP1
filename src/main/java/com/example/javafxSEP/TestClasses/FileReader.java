@@ -14,6 +14,7 @@ import java.util.List;
 public class FileReader {
     private static final String JSON_FILE_PATH = "project_data.json";
     private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static ObservableList<ProjectList> projectLists;
 
     public static void saveData(ProjectList newProject) {
         try {
@@ -53,7 +54,7 @@ public class FileReader {
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error loading data, empty list returned");
-            return FXCollections.observableArrayList();
+            return projectLists;
         }
     }
 

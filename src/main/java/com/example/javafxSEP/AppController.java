@@ -114,7 +114,7 @@ public class AppController {
         hoursSpentCol.setCellValueFactory(cellData -> cellData.getValue().hoursSpentProperty().asObject());
         priceCol.setCellValueFactory(cellData -> cellData.getValue().priceProperty().asObject());
         timelineCol.setCellValueFactory(cellData -> cellData.getValue().timelineProperty().asObject());
-        completedCol.setCellValueFactory(cellData -> cellData.getValue().trueFalseProperty());
+        completedCol.setCellValueFactory(cellData -> cellData.getValue().completedProperty());
 
         this.searchUtility = new SearchController();
 
@@ -416,7 +416,7 @@ public class AppController {
         ObservableList<ProjectList> filteredData = FXCollections.observableArrayList();
 
         for (ProjectList project : data) {
-            if (project.getTrueFalse().equalsIgnoreCase(selectedStatus)) {
+            if (project.getCompleted().equalsIgnoreCase(selectedStatus)) {
                 filteredData.add(project);
             }
         }

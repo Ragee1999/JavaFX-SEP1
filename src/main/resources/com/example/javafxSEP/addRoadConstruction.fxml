@@ -37,7 +37,7 @@
       <Label layoutX="42.0" layoutY="357.0" prefHeight="17.0" prefWidth="149.0" text="Geographical challenges" />
       <TextField fx:id="tunnelsField" layoutX="216.0" layoutY="322.0" />
       <Label layoutX="222.0" layoutY="298.0" prefHeight="17.0" prefWidth="135.0" text="Tunnels" />
-      <ChoiceBox fx:id="choiceBoxTrueFalse" layoutX="216.0" layoutY="79.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceBoxcompleted" layoutX="216.0" layoutY="79.0" prefWidth="150.0" />
       <Label fx:id="exceptionLabel" alignment="CENTER" layoutX="52.0" layoutY="458.0" prefHeight="25.0" prefWidth="306.0" textFill="RED">
          <font>
             <Font name="System Bold" size="13.0" />

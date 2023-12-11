@@ -34,7 +34,7 @@ public class RoadConstructionController {
     @FXML
     private TextField timelineField;
     @FXML
-    private ChoiceBox<String> choiceBoxTrueFalse;
+    private ChoiceBox<String> choiceBoxcompleted;
     @FXML
     private Button createButton;
     @FXML
@@ -55,12 +55,12 @@ public class RoadConstructionController {
         bridgesField.setText("0");
         geographicalField.setText("none");
         environmentalField.setText("none");
-        choiceBoxTrueFalse.setValue("False");
+        choiceBoxcompleted.setValue("False");
     }
 
     @FXML
     private void initialize() {
-        choiceBoxTrueFalse.getItems().addAll("True", "False");
+        choiceBoxcompleted.getItems().addAll("True", "False");
         setDefaultValues4();
     }
 
@@ -86,7 +86,7 @@ public class RoadConstructionController {
         String width = widthField.getText();
         String geographical = geographicalField.getText();
         String environmental = environmentalField.getText();
-        String trueFalse = choiceBoxTrueFalse.getValue();
+        String completed = choiceBoxcompleted.getValue();
 
 
         try {
@@ -99,14 +99,14 @@ public class RoadConstructionController {
             int lengthValue = Integer.parseInt(length);
             int widthValue = Integer.parseInt(width);
 
-            if (projectName.isEmpty() || geographical.isEmpty() || environmental.isEmpty() || trueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+            if (projectName.isEmpty() || geographical.isEmpty() || environmental.isEmpty() || completed.isEmpty()) { // these are exceptions for the strings/choice-box options
                 throw new IllegalArgumentException();
             }
 
             ProjectList newProject = new ProjectList(// creates a ProjectList object with the new values
                     projectName,
                     projectType,
-                    trueFalse,
+                    completed,
                     hoursSpentValue,
                     timelineValue,
                     priceValue,
