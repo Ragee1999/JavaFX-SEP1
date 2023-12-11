@@ -19,7 +19,7 @@ public class ProjectFilterController {
     }
 
     private void updateProjectTypeFilter(String selectedProjectType) {
-        // Call the method in AppController to handle the filter update
+        // Calls the method in AppController to handle the filter update
         appController.updateProjectTypeFilter(selectedProjectType);
     }
 

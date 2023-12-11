@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 
@@ -30,6 +31,8 @@ public class ViewIndustrial {
     private Button cancelButton;
     @FXML
     private Button editButton;
+    @FXML
+    private Label exceptionLabel;
 
 
     // Declaration that References to the AppController
@@ -39,8 +42,7 @@ public class ViewIndustrial {
         this.appController = appController; // This is where the reference is set
     }
 
-    public void loadProjectData(ProjectList selectedProject)
-    {
+    public void loadProjectData(ProjectList selectedProject) {
         projectNameField.setText(selectedProject.getProjectName());
         priceField.setText(String.valueOf(selectedProject.getPrice()));
         facilitySizeField.setText(String.valueOf(selectedProject.getFacilitySize()));
@@ -55,53 +57,6 @@ public class ViewIndustrial {
         editButton.setOnAction(event -> editButtonOnAction(selectedProject));
     }
 
-    @FXML
-    public void editButtonOnAction(ProjectList selectedProject) {
-        String editedProjectName = projectNameField.getText();
-        double editedPrice = Double.parseDouble(priceField.getText());
-        int editedFacilitySize = Integer.parseInt(facilitySizeField.getText());
-        String editedFacilityUsage = facilityUsageField.getText();
-        int editedHoursSpent = Integer.parseInt(hoursSpentField.getText());
-        int editedTimeline = Integer.parseInt(timelineField.getText());
-        String editedTrueFalse = choiceBoxTrueFalse.getValue();
-
-
-        ProjectList editedProject = new ProjectList(
-                editedProjectName,
-                "Industrial",
-                editedTrueFalse,
-                editedHoursSpent,
-                editedTimeline,
-                editedPrice,
-                0,
-                0,
-                0,
-                "",
-                0,
-                0,
-                "",
-                editedFacilityUsage,
-                editedFacilitySize,
-                0,
-                0,
-                0,
-                0,
-                "",
-                ""
-        );
-
-
-
-        // Update the project
-        appController.editProject(selectedProject, editedProject);
-
-
-        // Closes window once updated
-        Stage stage = (Stage) editButton.getScene().getWindow();
-        stage.close();
-    }
-
-
     // Cancel/close by clicking the cancel button
     @FXML
     public void cancelButtonOnAction() {
@@ -110,4 +65,65 @@ public class ViewIndustrial {
         stage.close();
     }
 
+    @FXML
+    public void editButtonOnAction(ProjectList selectedProject) {
+
+        try {
+
+            // Convert String values to right types
+            String editedProjectName = projectNameField.getText();
+            double editedPrice = Double.parseDouble(priceField.getText());
+            int editedFacilitySize = Integer.parseInt(facilitySizeField.getText());
+            String editedFacilityUsage = facilityUsageField.getText();
+            int editedHoursSpent = Integer.parseInt(hoursSpentField.getText());
+            int editedTimeline = Integer.parseInt(timelineField.getText());
+            String editedTrueFalse = choiceBoxTrueFalse.getValue();
+
+            if (editedProjectName.isEmpty() || editedFacilityUsage.isEmpty() || editedTrueFalse.isEmpty()) { // these are exceptions for the strings/choice-box options
+                throw new IllegalArgumentException(); // this will be shown as the general error
+            }
+
+            ProjectList editedProject = new ProjectList(
+                    editedProjectName,
+                    "Industrial",
+                    editedTrueFalse,
+                    editedHoursSpent,
+                    editedTimeline,
+                    editedPrice,
+                    0,
+                    0,
+                    0,
+                    "",
+                    0,
+                    0,
+                    "",
+                    editedFacilityUsage,
+                    editedFacilitySize,
+                    0,
+                    0,
+                    0,
+                    0,
+                    "",
+                    ""
+            );
+
+
+            // Update the project
+            appController.editProject(selectedProject, editedProject);
+
+
+            // Closes window once updated
+            Stage stage = (Stage) editButton.getScene().getWindow();
+            stage.close();
+
+
+            // this exception handles number errors or general errors.
+        } catch (NumberFormatException e) {
+            exceptionLabel.setText("Please enter number values in the required fields.");
+        } catch (Exception e) { // this exception specifically throws any other exception that's not NumberFormat
+            exceptionLabel.setText("An error occurred, please check your inputs.");
+
+            // since we only have 2 types of errors, either strings or numbers, we decided to make all string errors to general errors.
+        }
+    }
 }
