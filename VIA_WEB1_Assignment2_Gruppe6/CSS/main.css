@@ -29,6 +29,8 @@ html {
 
 /* NAVBAR */
 
+/* NAVBAR */
+
 .navbar-custom {
   position: fixed;
   top: 0;
@@ -112,6 +114,10 @@ html {
 .navbar-space {
   margin-top: 80px;
   min-height: 100vh;
+}
+
+.active-page {
+  background-color: #dededef9;
 }
 
 /* FOOTER */

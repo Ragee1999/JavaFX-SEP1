@@ -1,12 +1,13 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Igangværende projekter</title>
+  <title>Kontakt</title>
   <link rel="stylesheet" href="./CSS/bootstrap.css" />
   <link rel="stylesheet" href="./CSS/main.css" />
-  <link rel="stylesheet" href="./CSS/projekter.css" />
+  <link rel="stylesheet" href="./CSS/contact.css" />
 </head>
 
 <body>
@@ -19,8 +20,8 @@
         <a href="hjem.html" class="nav-link-desktop">Hjem</a>
         <a href="Services.html" class="nav-link-desktop">Services</a>
         <a href="Portfolio.html" class="nav-link-desktop">Portfolio</a>
-        <a href="Projekter.html" class="nav-link-desktop active-page">Vores Projekter</a>
-        <a href="kontakt.html" class="nav-link-desktop">Kontakt</a>
+        <a href="Projekter.html" class="nav-link-desktop">Vores Projekter</a>
+        <a href="kontakt.html" class="nav-link-desktop active-page">Kontakt</a>
       </div>
     </div>
   </nav>
@@ -44,7 +45,7 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="hjem.html">Home</a>
+            <a class="nav-link" href="hjem.html">Hjem</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="Services.html">Services</a>
@@ -53,57 +54,65 @@
             <a class="nav-link" href="Portfolio.html">Portfolio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="Projekter.html">Vores Projekter</a>
+            <a class="nav-link" href="Projekter.html">Vores Projekter</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="kontakt.html">Kontakt</a>
+            <a class="nav-link" aria-current="page" href="kontakt.html">Kontakt</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
-  <section>
-    <div class="container">
-      <h1 class="container-title">Igangværende projekter</h1>
-      <div class="projects-container">
-        <div class="individual-project">
-          <img class="project-img" src="Images/fabriksbyggeri1cropped.png" alt="Project Image" />
-          <div class="textbox">
-            <div>
-              <div>projectType: XXXXXXXX</div>
-              <div>manHoursUsed: XXXX</div>
-              <div>expectedPrice: X,XXX.XXX</div>
-              <div>estimatedHoursTotal: XXXXXXXX</div>
-            </div>
-          </div>
+  <main>
+    <!-- CONTACT PAGE -->
+    <section>
+      <div class="container">
+        <div class="kontakt-wrapper">
+          <h1 class="section-title">Kontakt os</h1>
+          <form action="mailto:290750@via.dk" method="post" class="kontakt-form" required>
+            <input type="text" name="name" class="kontakt-input" placeholder="Navn" required />
+            <input type="email" name="email" class="kontakt-input" placeholder="Email" required />
+            <textarea cols="30" rows="10" name="message" class="kontakt-besked" placeholder="Besked"
+              required></textarea>
+            <input type="submit" class="kontakt-submit" value="SUBMIT" />
+          </form>
         </div>
-        <div class="individual-project">
-          <img class="project-img" src="Images/fabriksbyggeri2cropped.png" alt="Project Image" />
-          <div class="textbox">
-            <div>
-              <div>projectType: XXXXXXXX</div>
-              <div>manHoursUsed: XXXX</div>
-              <div>expectedPrice: X,XXX.XXX</div>
-              <div>estimatedHoursTotal: XXXXXXXX</div>
+        <div class="employees">
+          <h2>Vores Medarbejdere</h2>
+          <div class="employees-container">
+            <div class="individual-employee">
+              <img src="Images/avatar.png" alt="Employee picture" height="75px" />
+              <div class="employee-info">
+                <p class="employee-name">Daniel Faaborg Vesterdal</p>
+                <a href="mailto:344850@via.dk" class="employee-mail">344850@via.dk</a>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="individual-project">
-          <img class="project-img" src="Images/fabriksbyggeri3cropped.png" alt="Project Image" />
-          <div class="textbox">
-            <div>
-              <div>projectType: XXXXXXXX</div>
-              <div>manHoursUsed: XXXX</div>
-              <div>expectedPrice: X,XXX.XXX</div>
-              <div>estimatedHoursTotal: XXXXXXXX</div>
+            <div class="individual-employee">
+              <img src="Images/avatar.png" alt="Employee picture" height="75px" />
+              <div class="employee-info">
+                <p class="employee-name">Rageevan Ramesh Erambamoorthy</p>
+                <a href="mailto:346486@via.dk" class="employee-mail">344143@via.dk</a>
+              </div>
+            </div>
+            <div class="individual-employee">
+              <img src="Images/avatar.png" alt="Employee picture" height="75px" />
+              <div class="employee-info">
+                <p class="employee-name">Frederik Handberg</p>
+                <a href="mailto:290750@via.dk" class="employee-mail">290750@via.dk</a>
+              </div>
+            </div>
+            <div class="individual-employee">
+              <img src="Images/avatar.png" alt="Employee picture" height="75px" />
+              <div class="employee-info">
+                <p class="employee-name">Thomas David Lynge Barasinski</p>
+                <a href="mailto:346486@via.dk" class="employee-mail">346486@via.dk</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
+    </section>
+  </main>
   <!-- FOOTER -->
   <div class="footer">
     <div class="footer-container">
@@ -111,9 +120,9 @@
       <div class="footer-wrapper">
         <p class="footer-title">MENU</p>
         <a href="index.html" class="footer-menu-link">Hjem</a>
-        <a href="#" class="footer-menu-link">Services</a>
-        <a href="#" class="footer-menu-link">Portfolio</a>
-        <a href="#" class="footer-menu-link">Vores Projekter</a>
+        <a href="Services.html" class="footer-menu-link">Services</a>
+        <a href="Portfolio.html" class="footer-menu-link">Portfolio</a>
+        <a href="Projekter.html" class="footer-menu-link">Vores Projekter</a>
         <a href="contact.html" class="footer-menu-link">Kontakt</a>
       </div>
       <!-- FOOTER CONTACT INFO -->
