@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hjem</title>
+    <link rel="stylesheet" href="./CSS/bootstrap.css" />
+    <link rel="stylesheet" href="./CSS/main.css" />
+  </head>
+  <body class="hjem-bg">
+    <!-- DESKTOP NAVBAR -->
+    <nav class="navbar-custom">
+      <div class="navbar-container">
+        <a href="hjem.html" class="brand-logo"
+          ><img src="./Images/bob_the_builder.png" alt="Brand logo"
+        /></a>
+        <!-- MENU -->
+        <div class="d-none d-md-flex navbar-menu">
+          <a href="hjem.html" class="nav-link-desktop">Hjem</a>
+          <a href="Services.html" class="nav-link-desktop">Services</a>
+          <a href="Portfolio.html" class="nav-link-desktop">Portfolio</a>
+          <a href="Projekter.html" class="nav-link-desktop">Vores Projekter</a>
+          <a href="contact.html" class="nav-link-desktop">Kontakt</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MOBILE NAV MENU -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary d-md-none">
+      <div class="container-fluid">
+        <a class="navbar-brand brand-logo" href="hjem.html"
+          ><img src="./Images/bob_the_builder.png" alt="Brand logo"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <svg
+            width="35"
+            height="35"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g fill="none">
+              <path
+                d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z"
+              />
+              <path
+                fill="#000000"
+                d="M20 17.5a1.5 1.5 0 0 1 .144 2.993L20 20.5H4a1.5 1.5 0 0 1-.144-2.993L4 17.5h16Zm0-7a1.5 1.5 0 0 1 0 3H4a1.5 1.5 0 0 1 0-3h16Zm0-7a1.5 1.5 0 0 1 0 3H4a1.5 1.5 0 1 1 0-3h16Z"
+              />
+            </g>
+          </svg>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="hjem.html">Hjem</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Services.html">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Portfolio.html">Portfolio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Projekter.html">Vores Projekter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="contact.html"
+                >Kontakt</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="carouselExampleDark" class="carousel carousel-white slide">
+      <div class="carousel-indicators">
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="1"
+          aria-label="Slide 2"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="2"
+          aria-label="Slide 3"
+        ></button>
+        <button
+          type="button"
+          data-bs-target="#carouselExampleDark"
+          data-bs-slide-to="3"
+          aria-label="Slide 4"
+        ></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="10000">
+          <img
+            src="./Images/via-horsens.jpg"
+            class="d-block w-100 carousel-img"
+            alt="Government Projects"
+          />
+          <div class="carousel-caption d-none d-md-block carousel-text">
+            <h5>Government Projects</h5>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+              neque lorem, congue rutrum condimentum vitae, blandit eu ipsum.
+              Mauris feugiat est vitae tincidunt laoreet. Donec eleifend lacinia
+              tempus. Vestibulum rutrum semper aliquet.
+            </p>
+          </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+          <img
+            src="./Images/road-construction.jpeg"
+            class="d-block w-100 carousel-img"
+            alt="Road Construction"
+          />
+          <div class="carousel-caption d-none d-md-block carousel-text">
+            <h5>Road Construction</h5>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="./Images/industry-projects.jpg"
+            class="d-block w-100 carousel-img"
+            alt="Indsutry Projects"
+          />
+          <div class="carousel-caption d-none d-md-block carousel-text">
+            <h5>Indsutry Projects</h5>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img
+            src="./Images//residential-buildings.jpg"
+            class="d-block w-100 carousel-img"
+            alt="Residential Projects"
+          />
+          <div class="carousel-caption d-none d-md-block carousel-text">
+            <h5>Residential Projects</h5>
+          </div>
+        </div>
+      </div>
+      <button
+        class="carousel-control-prev"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="prev"
+      >
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Forrige</span>
+      </button>
+      <button
+        class="carousel-control-next"
+        type="button"
+        data-bs-target="#carouselExampleDark"
+        data-bs-slide="next"
+      >
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Næste</span>
+      </button>
+    </div>
+    <script src="./js/bootstrap.js"></script>
+  </body>
+</html>

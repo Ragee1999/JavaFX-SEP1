@@ -1,0 +1,76 @@
+section {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.projects-container {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.project-img {
+  max-width: 100%;
+  display: block;
+}
+
+.textbox {
+  background-color: #f1f1f1;
+  padding: 15px;
+}
+
+@media screen and (min-width: 600px) {
+  .projects-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .projects-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Allows flexible layout */
+/* .row {
+  display: flex;
+  flex-wrap: wrap;
+} */
+
+/* Picture spaceing */
+/* .image-container {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  text-align: center;
+  margin: 10px;
+  position: relative;
+  justify-content: center;
+} */
+
+/* Size */
+/* .image {
+  width: 600px;
+  height: 450px;
+  object-fit: cover;
+} */
+
+/*text boxes */
+/* .description {
+  position: absolute;
+  background-color: var(--main-color);
+  color: black;
+  width: 600px;
+  text-align: center;
+  padding: 10px 0px 10px 0px;
+  bottom: 0;
+} */
