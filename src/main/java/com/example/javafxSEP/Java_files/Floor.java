@@ -3,11 +3,10 @@ package com.example.javafxSEP.Java_files;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.Objects;
-
-import static com.example.javafxSEP.TestClasses.FileReader.objectMapper;
 
 public class Floor {
     private String floorID;
@@ -177,6 +176,7 @@ public class Floor {
 
     public void infoFromJSON(String jsonText) throws JsonProcessingException {
         //create json object from json text
+        ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(jsonText);
         //TODO: Check if the next line is the correct way to get sub array of a JsonNode type
         ArrayList<String> listRooms = objectMapper.readValue(jsonNode.get("rooms").asText(), new TypeReference<ArrayList<String>>(){});

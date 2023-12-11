@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
-
-import static com.example.javafxSEP.TestClasses.FileReader.objectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class Bathroom extends Room{
     private int sinks=0;
@@ -92,6 +91,7 @@ public class Bathroom extends Room{
 
     @Override
     public void infoFromJSON(String jsonText) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(jsonText);
         String type = jsonNode.get("roomType").asText();
         if(!(type.equalsIgnoreCase("bathroom"))){

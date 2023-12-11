@@ -2,8 +2,8 @@ package com.example.javafxSEP.Java_files;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-import static com.example.javafxSEP.TestClasses.FileReader.objectMapper;
 
 public class OtherRoom extends Room{
 private int powerOutlets;
@@ -74,6 +74,7 @@ private int waterConnection;
     @Override
     public void infoFromJSON(String jsonText) throws JsonProcessingException {
         //create json object from json text
+        ObjectMapper objectMapper = new ObjectMapper();
         JsonNode jsonNode = objectMapper.readTree(jsonText);
         //
         String type = jsonNode.get("roomType").asText();
