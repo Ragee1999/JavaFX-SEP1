@@ -71,8 +71,8 @@
           <img class="project-img" src="Images/fabriksbyggeri1cropped.png" alt="Project Image" />
           <div class="textbox">
             <div>
-              <div>projectType: XXXXXXXX</div>
-              <div>manHoursUsed: XXXX</div>
+              <div>Project type: XXXXXXXX</div>
+              <div>Est. timeline (months): XXXX</div>
               <div>expectedPrice: X,XXX.XXX</div>
               <div>estimatedHoursTotal: XXXXXXXX</div>
             </div>
@@ -104,22 +104,24 @@
     </div>
   </section>
 
-  <section>
+  <section class="table-container">
     <table class="table">
       <thead>
         <tr>
+          <th scope="col">Project name</th>
           <th scope="col">Project type</th>
           <th scope="col">Manhours used</th>
           <th scope="col">Est. price</th>
-          <th scope="col">Est. total hours</th>
+          <th scope="col">Est. timeline (months)</th>
         </tr>
       </thead>
       <tbody>
         <tr>
+          <td id="project-name"></td>
           <td id="project-type"></td>
           <td id="expectedHours"></td>
           <td id="estimatedPrice"></td>
-          <td class="estimatedTotalHours"></td>
+          <td id="estimatedTotalHours"></td>
         </tr>
       </tbody>
     </table>
@@ -193,52 +195,7 @@
 
   <script src="./js/bootstrap.js"></script>
 
-  <script>
-    fetch('../project_data.json')
-      .then(response => response.json())
-      .then(allProjects => {
-        const ongoingProjects = allProjects.filter(project => project.completed === "False");
-
-        const projectsContainer = document.querySelector('.projects-container');
-        const tableBody = document.querySelector('.table tbody');
-
-        projectsContainer.innerHTML = '';
-        tableBody.innerHTML = '';
-
-        const createProjectDivHTML = (project, imagePath) => `
-            <div class="individual-project">
-                <img class="project-img" src="${imagePath}" alt="Project Image" />
-                <div class="textbox">
-                    <div>
-                        <div>projectType: ${project.projectType}</div>
-                        <div>manHoursUsed: ${project.hoursSpent}</div>
-                        <div>expectedPrice: ${project.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</div>
-                        <div>estimatedHoursTotal: ${project.timeline}</div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        const createTableRowHTML = (project, index) => `
-            <tr>
-                <td>${project.projectType}</td>
-                <td>${project.hoursSpent}</td>
-                <td>${project.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
-                <td>${project.timeline}</td>
-            </tr>
-        `;
-
-        ongoingProjects.slice(0, 3).forEach((project, index) => {
-          const imagePath = `Images/fabriksbyggeri${index + 1}cropped.png`;
-          projectsContainer.innerHTML += createProjectDivHTML(project, imagePath);
-        });
-
-        ongoingProjects.slice(3).forEach((project, index) => {
-          tableBody.innerHTML += createTableRowHTML(project, index + 3);
-        });
-      })
-      .catch(error => console.error('Error:', error));
-  </script>
+  <script src="./js/filereader.js"></script>
 </body>
 
 </html>
