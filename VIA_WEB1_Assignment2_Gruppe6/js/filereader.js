@@ -6,6 +6,21 @@ fetch('../project_data.json')
         const projectsContainer = document.querySelector('.projects-container');
         const tableBody = document.querySelector('.table tbody');
 
+        const getImagePath = (projectType, index) => {
+            switch (projectType) {
+                case 'Industrial':
+                    return `Images/industrial${index + 1}cropped.png`;
+                case 'Road Construction':
+                    return `Images/road${index + 1}cropped.png`;
+                case 'Residential':
+                    return `Images/residential${index + 1}cropped.png`;
+                case 'Commercial':
+                    return `Images/commercial${index + 1}cropped.png`;
+                default:
+                    return 'Images/default-image.png';
+            }
+        };
+
         projectsContainer.innerHTML = '';
         tableBody.innerHTML = '';
 
@@ -35,7 +50,7 @@ fetch('../project_data.json')
         `;
 
         ongoingProjects.slice(0, 3).forEach((project, index) => {
-            const imagePath = `Images/industrial${index + 1}cropped.png`;
+            const imagePath = getImagePath(project.projectType, index);
             projectsContainer.innerHTML += createProjectDivHTML(project, imagePath);
         });
 
