@@ -1,5 +1,7 @@
 package com.example.javafxSEP.Java_files;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import java.util.Objects;
 
 public abstract class Room {
@@ -29,18 +31,18 @@ public abstract class Room {
         return squareMeters;
     }
 
-    //public mutator not wanted as this is unique throughout the whole system
-/*
     public void setRoomID(String roomID) {
         this.roomID = roomID;
     }
- */
     //Public mutator
     public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
     //Public mutator
     public void setSquareMeters(int squareMeters) {
+        if(squareMeters<0){
+            throw new IllegalArgumentException("squareMeters Value under 0 not valid");
+        }
         this.squareMeters = squareMeters;
     }
 
@@ -59,4 +61,6 @@ public abstract class Room {
     }
 
     public abstract Room copy();
+
+    public abstract void infoFromJSON(String jsonText) throws JsonProcessingException;
 }

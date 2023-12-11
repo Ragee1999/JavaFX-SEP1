@@ -1,10 +1,16 @@
 package com.example.javafxSEP.Java_files;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.javafxSEP.TestClasses.FileReader.objectMapper;
+
 public class Floor {
-    private final String floorID;
+    private String floorID;
     private int level;
     private String usage;
     private int squareMeters;
@@ -36,11 +42,10 @@ public class Floor {
         return roomArrayList;
     }
 
-    /* The unique ID shouldn't be changed after instantiation
     public void setFloorID(String floorID) {
         this.floorID = floorID;
     }
-     */
+
 
     public void setLevel(int level) {
         this.level = level;
@@ -147,5 +152,61 @@ public class Floor {
         }
         return result;
     }
+
+    public Room getType(String classType){
+        //return correct type fo room
+        if(classType.equalsIgnoreCase("bathroom")){
+            return new Bathroom();
+        }
+        if (classType.equalsIgnoreCase("kitchen")) {
+            return new Kitchen();
+        }
+        if (classType.equalsIgnoreCase("office")) {
+            return new Office();
+        }
+        if (classType.equalsIgnoreCase("otherroom")) {
+            return new OtherRoom();
+        }
+            throw new IllegalArgumentException("rooms node contains invalid data - roomType not found");
+    }
+
+    public boolean doesRoomExist(Room newRoom){
+        //contains() use overwritten equal function and checks if roomID exists
+        return roomArrayList.contains(newRoom);
+    }
+
+    public void infoFromJSON(String jsonText) throws JsonProcessingException {
+        //create json object from json text
+        JsonNode jsonNode = objectMapper.readTree(jsonText);
+        //TODO: Check if the next line is the correct way to get sub array of a JsonNode type
+        ArrayList<String> listRooms = objectMapper.readValue(jsonNode.get("rooms").asText(), new TypeReference<ArrayList<String>>(){});
+        for (String s:listRooms)
+        {
+            Room tempRoom;
+            String classType = objectMapper.readTree(jsonText).get("roomType").asText();
+            tempRoom = getType(classType);
+            //let the type call the correct implementation of the pure virtual function to handle JSON Data
+            tempRoom.infoFromJSON(s);
+            if(!doesRoomExist(tempRoom)){
+                //copy() necessary for composition? - no other variable have access to it
+                roomArrayList.add(tempRoom.copy());
+            }
+        }
+        setFloorID(jsonNode.get("floorID").asText());
+        setLevel(jsonNode.get("level").asInt());
+        setUsage(jsonNode.get("usage").asText());
+        setSquareMeters(jsonNode.get("squareMeters").asInt());
+    }
+
+        /*
+        setRoomID(jsonNode.get("roomID").asText());
+        setRoomName(jsonNode.get("roomName").asText());
+        setSquareMeters(jsonNode.get("squareMeters").asInt());
+        setPowerOutlets(jsonNode.get("powerOutlets").asInt());
+        setUtilityRoom(jsonNode.get("utilityRoom").asBoolean());
+        setGreyWaterDrainage(jsonNode.get("greyWaterDrainage").asBoolean());
+        setBlackWaterDrainage(jsonNode.get("blackWaterDrainage").asBoolean());
+        setWaterConnection(jsonNode.get("waterConnections").asInt());
+        */
 
 }

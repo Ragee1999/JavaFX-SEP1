@@ -1,5 +1,10 @@
 package com.example.javafxSEP.Java_files;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import static com.example.javafxSEP.TestClasses.FileReader.objectMapper;
+
 public class Office extends Room{
     private int powerOutlets;
     private boolean networkHub;
@@ -13,8 +18,9 @@ public class Office extends Room{
         this.numberOfWorkers = numberOfWorkers;
     }
 
-    public Office(String roomID, String roomName) {
-        super(roomID, roomName);
+    //minimal Constructor for internal system use in JSON reader
+    public Office() {
+        super("1", "templateOffice");
     }
 
     public int getPowerOutlets() {
@@ -38,6 +44,9 @@ public class Office extends Room{
     }
 
     public void setPowerOutlets(int powerOutlets) {
+        if(powerOutlets<0){
+            throw new IllegalArgumentException("powerOutlets Value under 0 not valid");
+        }
         this.powerOutlets = powerOutlets;
     }
 
@@ -54,6 +63,9 @@ public class Office extends Room{
     }
 
     public void setNumberOfWorkers(int numberOfWorkers) {
+        if(numberOfWorkers<0){
+            throw new IllegalArgumentException("numberOfWorkers Value under 0 not valid");
+        }
         this.numberOfWorkers = numberOfWorkers;
     }
 
@@ -63,6 +75,23 @@ public class Office extends Room{
         o1.setOpenFloor(this.openFloor);
         o1.setPrivateOffice(this.privateOffice);
         return o1;
+    }
+
+    @Override
+    public void infoFromJSON(String jsonText) throws JsonProcessingException {
+        JsonNode jsonNode = objectMapper.readTree(jsonText);
+        String type = jsonNode.get("roomType").asText();
+        if(!(type.equalsIgnoreCase("office"))){
+            throw new IllegalArgumentException("roomType is different from 'Office'");
+        }
+        setRoomID(jsonNode.get("roomID").asText());
+        setRoomName(jsonNode.get("roomName").asText());
+        setSquareMeters(jsonNode.get("squareMeters").asInt());
+        setPowerOutlets(jsonNode.get("powerOutlets").asInt());
+        setNetworkHub(jsonNode.get("networkHub").asBoolean());
+        setOpenFloor(jsonNode.get("openFloor").asBoolean());
+        setPrivateOffice(jsonNode.get("privateOffice").asBoolean());
+        setNumberOfWorkers(jsonNode.get("numberOfWorkers").asInt());
     }
 
     public static void swap(Office o1,Office o2){

@@ -1,5 +1,10 @@
 package com.example.javafxSEP.Java_files;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+
+import static com.example.javafxSEP.TestClasses.FileReader.objectMapper;
+
 public class OtherRoom extends Room{
 private int powerOutlets;
 private boolean utilityRoom;
@@ -14,8 +19,9 @@ private int waterConnection;
         this.blackWaterDrainage = blackWaterDrainage;
     }
 
-    public OtherRoom(String roomID, String roomName) {
-        super(roomID, roomName);
+    //minimal Constructor for internal system use in JSON reader
+    public OtherRoom() {
+        super("1", "TemplateOtherRoom");
     }
 
     public int getPowerOutlets() {
@@ -63,6 +69,25 @@ private int waterConnection;
         or1.setUtilityRoom(this.utilityRoom);
         or1.setWaterConnection(this.waterConnection);
         return or1;
+    }
+
+    @Override
+    public void infoFromJSON(String jsonText) throws JsonProcessingException {
+        //create json object from json text
+        JsonNode jsonNode = objectMapper.readTree(jsonText);
+        //
+        String type = jsonNode.get("roomType").asText();
+        if(!(type.equalsIgnoreCase("office"))){
+            throw new IllegalArgumentException("roomType is different from 'Office'");
+        }
+        setRoomID(jsonNode.get("roomID").asText());
+        setRoomName(jsonNode.get("roomName").asText());
+        setSquareMeters(jsonNode.get("squareMeters").asInt());
+        setPowerOutlets(jsonNode.get("powerOutlets").asInt());
+        setUtilityRoom(jsonNode.get("utilityRoom").asBoolean());
+        setGreyWaterDrainage(jsonNode.get("greyWaterDrainage").asBoolean());
+        setBlackWaterDrainage(jsonNode.get("blackWaterDrainage").asBoolean());
+        setWaterConnection(jsonNode.get("waterConnections").asInt());
     }
 
     public static void swap(OtherRoom or1,OtherRoom or2){
