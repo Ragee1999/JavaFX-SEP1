@@ -1,11 +1,17 @@
-fetch('../project_data.json')
+fetch('../../project_data.json')
     .then(response => response.json())
     .then(allProjects => {
-        const ongoingProjects = allProjects.filter(project => project.completed === "False");
 
-        const projectsContainer = document.querySelector('.projects-container');
+        // Filter projects based on completion status
+        const ongoingProjects = allProjects.filter(project => project.completed === "False");
+        const completedProjects = allProjects.filter(project => project.completed === "True");
+
+        // Containers for ongoing and completed projects
+        const ongoingProjectsContainer = document.querySelector('.ongoing-projects-container');
+        const completedProjectsContainer = document.querySelector('.completed-projects-container');
         const tableBody = document.querySelector('.table tbody');
 
+        // Function to determine the image path based on project type
         const getImagePath = (projectType, index) => {
             switch (projectType) {
                 case 'Industrial':
@@ -21,9 +27,7 @@ fetch('../project_data.json')
             }
         };
 
-        projectsContainer.innerHTML = '';
-        tableBody.innerHTML = '';
-
+        // Function to create project div HTML
         const createProjectDivHTML = (project, imagePath) => `
             <div class="individual-project">
                 <img class="project-img" src="${imagePath}" alt="Project Image" />
@@ -39,6 +43,7 @@ fetch('../project_data.json')
             </div>
         `;
 
+        // Function to create table row HTML
         const createTableRowHTML = (project, index) => `
             <tr>
                 <td>${project.projectName}</td>
@@ -49,13 +54,30 @@ fetch('../project_data.json')
                 </tr>
         `;
 
-        ongoingProjects.slice(0, 3).forEach((project, index) => {
-            const imagePath = getImagePath(project.projectType, index);
-            projectsContainer.innerHTML += createProjectDivHTML(project, imagePath);
-        });
+        if (ongoingProjectsContainer) {
+            ongoingProjectsContainer.innerHTML = '';
 
-        ongoingProjects.slice(3).forEach((project, index) => {
-            tableBody.innerHTML += createTableRowHTML(project, index + 3);
-        });
+            ongoingProjects.slice(0, 3).forEach((project, index) => {
+                const imagePath = getImagePath(project.projectType, index);
+                ongoingProjectsContainer.innerHTML += createProjectDivHTML(project, imagePath);
+            });
+
+            ongoingProjects.slice(3).forEach((project, index) => {
+                tableBody.innerHTML += createTableRowHTML(project, index + 3);
+            });
+        }
+
+        if (completedProjectsContainer) {
+            completedProjectsContainer.innerHTML = '';
+
+            completedProjects.slice(0, 3).forEach((project, index) => {
+                const imagePath = getImagePath(project.projectType, index);
+                completedProjectsContainer.innerHTML += createProjectDivHTML(project, imagePath);
+            });
+
+            completedProjects.slice(3).forEach((project, index) => {
+                tableBody.innerHTML += createTableRowHTML(project, index + 3);
+            });
+        }
     })
     .catch(error => console.error('Error:', error));

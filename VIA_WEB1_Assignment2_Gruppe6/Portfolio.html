@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./CSS/bootstrap.css" />
   <link rel="stylesheet" href="./CSS/main.css" />
   <link rel="stylesheet" href="./CSS/portfolio.css" />
+  <link rel="stylesheet" href="./CSS/projekter.css">
 </head>
 
 <body>
@@ -18,9 +19,9 @@
       <!-- MENU -->
       <div class="d-none d-md-flex navbar-menu">
         <a href="hjem.html" class="nav-link-desktop">Hjem</a>
-        <a href="Services.html" class="nav-link-desktop">Services</a>
-        <a href="Portfolio.html" class="nav-link-desktop active-page">Portfolio</a>
-        <a href="Projekter.html" class="nav-link-desktop">Vores Projekter</a>
+        <a href="services.html" class="nav-link-desktop">Services</a>
+        <a href="portfolio.html" class="nav-link-desktop active-page">Portfolio</a>
+        <a href="projekter.html" class="nav-link-desktop">Vores Projekter</a>
         <a href="kontakt.html" class="nav-link-desktop">Kontakt</a>
       </div>
     </div>
@@ -48,13 +49,13 @@
             <a class="nav-link" href="hjem.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Services.html">Services</a>
+            <a class="nav-link" href="services.html">Services</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="Portfolio.html">Portfolio</a>
+            <a class="nav-link active" aria-current="page" href="portfolio.html">Portfolio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="Projekter.html">Vores Projekter</a>
+            <a class="nav-link" href="projekter.html">Vores Projekter</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="kontakt.html">Kontakt</a>
@@ -67,71 +68,61 @@
   <section>
     <div class="container">
       <h1 class="container-title">Portfolio</h1>
-      <div class="projects-container">
+      <div class="projects-container completed-projects-container">
         <div class="individual-project">
-          <img class="project-img" src="./images/Portfolio1.jpg" alt="Project Image" />
+          <img class="project-img" src="Images/industrial1cropped.png" alt="Project Image" />
           <div class="textbox">
             <div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-                consequat tempus nisi ut luctus. Nunc sit amet tincidunt
-                libero. Fusce.
-              </p>
+              <div>Project type: XXXXXXXX</div>
+              <div>Est. timeline (months): XXXX</div>
+              <div>expectedPrice: X,XXX.XXX</div>
+              <div>estimatedHoursTotal: XXXXXXXX</div>
             </div>
           </div>
         </div>
         <div class="individual-project">
-          <img class="project-img" src="./Images/Portfolio2.jpg" alt="Project Image" />
+          <img class="project-img" src="Images/industrial2cropped.png" alt="Project Image" />
           <div class="textbox">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              consequat tempus nisi ut luctus. Nunc sit amet tincidunt libero.
-              Fusce.
-            </p>
+            <div>
+              <div>projectType: XXXXXXXX</div>
+              <div>manHoursUsed: XXXX</div>
+              <div>expectedPrice: X,XXX.XXX</div>
+              <div>estimatedHoursTotal: XXXXXXXX</div>
+            </div>
           </div>
         </div>
         <div class="individual-project">
-          <img class="project-img" src="./Images/Portfolio3.jpg" alt="Project Image" />
+          <img class="project-img" src="Images/industrial3cropped.png" alt="Project Image" />
           <div class="textbox">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              consequat tempus nisi ut luctus. Nunc sit amet tincidunt libero.
-              Fusce.
-            </p>
-          </div>
-        </div>
-        <div class="individual-project">
-          <img class="project-img" src="./Images/Portfolio4.jpg" alt="Project Image" />
-          <div class="textbox">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              consequat tempus nisi ut luctus. Nunc sit amet tincidunt libero.
-              Fusce.
-            </p>
-          </div>
-        </div>
-        <div class="individual-project">
-          <img class="project-img" src="./Images/Portfolio5.jpg" alt="Project Image" />
-          <div class="textbox">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              consequat tempus nisi ut luctus. Nunc sit amet tincidunt libero.
-              Fusce.
-            </p>
-          </div>
-        </div>
-        <div class="individual-project">
-          <img class="project-img" src="./Images/Portfolio6.jpg" alt="Project Image" />
-          <div class="textbox">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla
-              consequat tempus nisi ut luctus. Nunc sit amet tincidunt libero.
-              Fusce.
-            </p>
+            <div>
+              <div>projectType: XXXXXXXX</div>
+              <div>manHoursUsed: XXXX</div>
+              <div>expectedPrice: X,XXX.XXX</div>
+              <div>estimatedHoursTotal: XXXXXXXX</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+  </section>
+
+  <section class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Project name</th>
+          <th scope="col">Project type</th>
+          <th scope="col">Manhours used</th>
+          <th scope="col">Est. price</th>
+          <th scope="col">Est. timeline (months)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- Display the elements here -->
+        </tr>
+      </tbody>
+    </table>
   </section>
 
   <!-- FOOTER -->
@@ -199,7 +190,9 @@
     </div>
     <p class="copyright">Copyright &copy; 2023. All rights reserved.</p>
   </div>
+
   <script src="./js/bootstrap.js"></script>
+  <script src="./js/filereader.js"></script>
 </body>
 
 </html>
