@@ -80,4 +80,23 @@ fetch('../../project_data.json')
             });
         }
     })
-    .catch(error => console.error('Error:', error));
+    // Eror handling
+    .catch(error => {
+        // Log the error to the console
+        console.error('Error:', error);
+
+        // Select an element on the page to display the error message
+        const errorContainer = document.querySelector('.error-container');
+
+        // Check if the error container exists
+        if (errorContainer) {
+            // Create an error message
+            const errorMessage = `En fejl er opstået: ${error.message}`;
+
+            // Update the error container with the error message
+            errorContainer.textContent = errorMessage;
+
+            errorContainer.style.display = 'block';
+            errorContainer.style.color = 'red';
+        }
+    });

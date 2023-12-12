@@ -30,6 +30,12 @@ html {
   width: 90%;
 }
 
+.error-container {
+  display: none;
+  text-align: center;
+  margin: 50px 0;
+}
+
 /*General CSS styling */
 
 .hideElement {
