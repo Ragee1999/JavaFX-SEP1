@@ -11,17 +11,17 @@ fetch('../../project_data.json')
         const completedProjectsContainer = document.querySelector('.completed-projects-container');
         const tableBody = document.querySelector('.table tbody');
 
-        // Function to determine the image path based on project type
+        // Function to determine the image path based on project type and index
         const getImagePath = (projectType, index) => {
             switch (projectType) {
                 case 'Industrial':
-                    return `Images/industrial${index + 1}cropped.png`;
+                    return `Images/industrial${index}cropped.png`;
                 case 'Road Construction':
-                    return `Images/road${index + 1}cropped.png`;
+                    return `Images/road${index}cropped.png`;
                 case 'Residential':
-                    return `Images/residential${index + 1}cropped.png`;
+                    return `Images/residential${index}cropped.png`;
                 case 'Commercial':
-                    return `Images/commercial${index + 1}cropped.png`;
+                    return `Images/commercial${index}cropped.png`;
                 default:
                     return 'Images/default-image.png';
             }

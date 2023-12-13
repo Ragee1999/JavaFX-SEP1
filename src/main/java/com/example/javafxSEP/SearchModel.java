@@ -19,25 +19,17 @@ public class SearchModel {
      */
 
     public List<ProjectList> searchByProjectName(List<ProjectList> data, String searchText) {
-        // Convert searchText to lower case to enable case-insensitive search.
-        // This is a constant time operation: O(1).
-        String lowerSearchText = searchText.toLowerCase();
-
         // Stream the data and filter based on whether the owner's name contains the
         // searchText.
         // The filter operation checks each element in the list, making it a linear time
         // operation: O(n).
         // Convert the collection 'data' into a stream for processing
         return data.stream()
-                // Convert the owner's name of each project to lowercase and check if it
-                // contains the search text
-                .filter(project -> project.getProjectName().toLowerCase().contains(lowerSearchText))
+                // Check if the project's name contains the search text
+                .filter(project -> project.getProjectName().contains(searchText))
                 // Keep only the projects that match the filter condition
                 .collect(Collectors.toList());
     }
-
-    // The overall time complexity of the searchByProjectName method is O(n) where n is
-    // the number of elements in the data list.
 
     public List<ProjectList> searchByPriceRange(List<ProjectList> data, double minPrice, double maxPrice) {
         // Convert the collection 'data' into a stream for processing
@@ -49,4 +41,8 @@ public class SearchModel {
                 // Collect the filtered projects into a new List and return it
                 .collect(Collectors.toList());
     }
+
+    // The overall time complexity of the searchByProjectName and searchByPriceRange
+    // method are O(n) where n
+    // is the number of elements in the data list.
 }
