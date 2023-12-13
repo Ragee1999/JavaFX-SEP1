@@ -44,14 +44,14 @@ fetch('../../project_data.json')
         `;
 
         // Function to create table row HTML
-        const createTableRowHTML = (project, index) => `
+        const createTableRowHTML = (project) => `
             <tr>
                 <td>${project.projectName}</td>
                 <td>${project.projectType}</td>
                 <td>${project.hoursSpent}</td>
                 <td>${project.price.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</td>
                 <td>${project.timeline}</td>
-                </tr>
+            </tr>
         `;
 
         if (ongoingProjectsContainer) {
