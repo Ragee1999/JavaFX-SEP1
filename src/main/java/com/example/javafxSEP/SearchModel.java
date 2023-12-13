@@ -25,14 +25,11 @@ public class SearchModel {
         // operation: O(n).
         // Convert the collection 'data' into a stream for processing
         return data.stream()
-                // Checks if if contains the search text
+                // Check if the project's name contains the search text
                 .filter(project -> project.getProjectName().contains(searchText))
                 // Keep only the projects that match the filter condition
                 .collect(Collectors.toList());
     }
-
-    // The overall time complexity of the searchByProjectName method is O(n) where n
-    // is the number of elements in the data list.
 
     public List<ProjectList> searchByPriceRange(List<ProjectList> data, double minPrice, double maxPrice) {
         // Convert the collection 'data' into a stream for processing
@@ -44,4 +41,8 @@ public class SearchModel {
                 // Collect the filtered projects into a new List and return it
                 .collect(Collectors.toList());
     }
+
+    // The overall time complexity of the searchByProjectName and searchByPriceRange
+    // method are O(n) where n
+    // is the number of elements in the data list.
 }
