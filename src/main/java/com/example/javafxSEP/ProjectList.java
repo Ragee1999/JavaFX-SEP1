@@ -88,7 +88,7 @@ public class ProjectList {
         this.geographical = new SimpleStringProperty(geographical);
 
         //  This is deserialization, so it is able to load the json.file from the start of application and then making it into the ProjectList as objects
-        // This code does not serialize, that happens in the writeData in the ProjectTestStorage class
+        // This code does not serialize, that happens in the writeData in the FileReader class
     }
 
 

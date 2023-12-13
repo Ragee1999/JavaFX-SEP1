@@ -128,7 +128,7 @@ public class RoadConstructionController {
 
             appController.addProject(newProject); // This adds the newProject to the appController (Main UI)
 
-            //Closes the ResidentialController after adding newProject
+            //Closes the RoadConstructionController after adding newProject
             Stage stage = (Stage) createButton.getScene().getWindow();
             stage.close();
             System.out.println("Closed the pop-up window");

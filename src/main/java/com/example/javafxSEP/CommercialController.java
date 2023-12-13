@@ -111,7 +111,7 @@ public class CommercialController {
 
             appController.addProject(newProject); // This adds the newProject to the appController (Main UI)
 
-            // Closes the ResidentialController after adding newProject
+            // Closes the CommercialController after adding newProject
             Stage stage = (Stage) createButton.getScene().getWindow();
             stage.close();
             System.out.println("Closed the pop-up window");
@@ -121,7 +121,6 @@ public class CommercialController {
             exceptionLabel.setText("Please enter number values in the required fields.");
         } catch (Exception e) { // this exception specifically throws any other exception that's not NumberFormat
             exceptionLabel.setText("An error occurred, please check your inputs.");
-
             // since we only have 2 types of errors, either strings or numbers, we decided to make all string errors to general errors.
         }
     }
