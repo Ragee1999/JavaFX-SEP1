@@ -128,7 +128,6 @@ public class AppController {
         projectList.setItems(allProjects);
 
         // double click to view a project type model
-
         projectList.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 viewByDoubleClick();
