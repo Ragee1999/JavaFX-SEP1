@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 // SearchModel class handles the logic for searching through lists of ProjectList objects.
 public class SearchModel {
 
-    // Searches a list of ProjectList objects for entries where the owner's name
+    // Searches a list of ProjectList objects for entries where the project's name
     // contains the specified search text.
 
     /*
@@ -28,6 +28,8 @@ public class SearchModel {
                 // Check if the project's name contains the search text
                 .filter(project -> project.getProjectName().contains(searchText))
                 // Keep only the projects that match the filter condition
+                // Collecting the filtered projects is also O(n) because it has to process each
+                // element that passes through the filter
                 .collect(Collectors.toList());
     }
 

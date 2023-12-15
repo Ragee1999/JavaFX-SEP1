@@ -4,7 +4,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.List;
-// import java.util.stream.Collectors;
 
 // The Search class serves as an interface to the search functionalities provided by the SearchModel class.
 public class SearchController {
@@ -18,7 +17,7 @@ public class SearchController {
 
     // Method to search by owner and return an ObservableList
     public ObservableList<ProjectList> searchByProjectName(ObservableList<ProjectList> data, String searchText) {
-        // Call the searchByOwner method of SearchModel and store the results in a list.
+        // Call the searchByProjectName method of SearchModel
         List<ProjectList> searchResults = searchModel.searchByProjectName(data, searchText);
 
         // Convert the list of search results into an ObservableList for use with JavaFX
