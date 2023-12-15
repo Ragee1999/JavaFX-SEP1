@@ -91,8 +91,7 @@ public class AppController {
 
         projectList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-        // AddNewProject Menu bar clicked and their individual controller method is
-        // called.
+        // AddNewProject Menu bar clicked and their individual controller method is called.
         addResidential.setOnAction(event -> AddResidential());
         addCommercial.setOnAction(event -> AddCommercial());
         addIndustrial.setOnAction(event -> AddIndustrial());
@@ -100,9 +99,7 @@ public class AppController {
 
         ObservableList<ProjectList> data = FileReader.loadData(); // Load data from JSON
 
-        // This entire section is the property settings for all the current values, need
-        // to update here + ProjectList Class if we want to create new values for
-        // projects.
+        // This entire section is the binding settings for all the current values, need
         projectList.setItems(data);
         nameCol.setCellValueFactory(cellData -> cellData.getValue().projectNameProperty());
         projectTypeCol.setCellValueFactory(cellData -> cellData.getValue().projectTypeProperty());
@@ -419,8 +416,6 @@ public class AppController {
     }
 
     public void showAllProjects() {
-        ObservableList<ProjectList> data = FileReader.loadData(); // Load JSON
-        projectList.setItems(data); // Update UI with all projects
 
         // When the 'Show All' button is clicked, clear the TextFields for search and
         // price range
